@@ -1,71 +1,79 @@
 <template>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
+		<nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light border" >
 		    <div class="navbar-header">
-		      <router-link to="/" class="navbar-brand">Stock Trader</router-link>
+		      <span class="navbar-brand text-success">Glutenous! 
+						<small class="font-weight-light text-black-50 align-center w-25 text-wrap"><small> 
+							<span class="d-sm-none" style="font-size:.8em">Crowdmapping Gluten</span>
+							<span class="d-none d-sm-inline">Crowdmapping Gluten</span>
+						</small>
+						</small>
+					</span>
+		    </div>
+		    <div class="collapse navbar-collapse clearfix mr-3 border-right" id="navCollapse">
+		      	<ul class="nav navbar-nav justify-content-end col-12">
+		      		<router-link to="/" class="nav-link" activeClass="active" tag="li">
+								<a class="nav-item text-muted font-weight-lighter"><small>About</small></a>
+							</router-link>
+		      		<router-link to="/" class="nav-link" activeClass="active" tag="li">
+								<a class="nav-item text-muted font-weight-lighter"><small>Learn</small></a>
+							</router-link>
+		      	</ul>
 		    </div>
 
-		    <div class="collapse navbar-collapse">
-		      	<ul class="nav navbar-nav">
-		      		<router-link to="/portfolio" activeClass="active" tag="li"><a>Portfolio</a></router-link>
-		      		<router-link to="/stocks" activeClass="active" tag="li"><a>Stocks</a></router-link>
-		      	</ul>
-
-		      	<strong class="navbar-text navbar-right">Funds: {{ funds }}</strong>
-
-		        <ul class="nav navbar-nav navbar-right">
-			        <li><a href="#" @click="endDay">End Day</a></li>
-			        <li class="dropdown" :class="{open: isDropdownOpen}" @click="isDropdownOpen = !isDropdownOpen">
-			          <a 
-			          			href="#" 
-			          			class="dropdown-toggle" 
-			          			data-toggle="dropdown" 
-			          			role="button" 
-			          			aria-haspopup="true" 
-			          			aria-expanded="false">Save & Load <span class="caret"></span></a>
-			            <ul class="dropdown-menu">
-				            <li><a href="#" @click="saveData">Save Data</a></li>
-				            <li><a href="#" @click="loadData">Load Data</a></li>
-			            </ul>
-			        </li>
-		        </ul>
-		    </div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
-	</nav>
+				<button class="navbar-toggler p-0  position-absolute" type="button" data-toggle="collapse" data-target="#navCollapse" 
+					aria-controls="navCollapse" aria-expanded="false" aria-label="Toggle navigation" style="right:68px;">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				
+				<span class="navbar-text float-left pl-1">
+					<a href="#" id="loginBtn" class="btn-link text-primary" v-show="!isLoggedIn" @click="doLogin"><small>Sign in</small></a>
+					<a id="LoginIcon" href="#" v-show="isLoggedIn" @click="toggleProfile" class="align-middle"
+							:class="{ active: showProfile }"	:style="{ backgroundImage: 'url('+photoUrl+')' }">
+					</a>
+				</span>
+		</nav>
 </template>
 
 <script>
-	import {mapActions} from 'vuex'
+	import {mapActions, mapGetters} from 'vuex'
     export default {
+			...mapGetters,
     	data() {
     		return {
-    			isDropdownOpen: false
     		}
     	},
 		computed: {
-			funds(){
-				return this.$store.getters.funds
-			}
+			isLoggedIn(){
+				return this.$store.state.auth != false
+			},
+			photoUrl(){
+				return this.$store.state.auth != false ? this.$store.state.user.profile.photoURL : "";
+			},
+			showProfile(){
+				return this.$store.state.showProfile && this.$store.state.auth != false
+			},
 		},
 		methods: {
-			...mapActions({
-					randomizeStocks: 'randomizeStocks',
-					fetchData: 'loadData'
-			}),
-			endDay(){
-				this.randomizeStocks()
-			},
-			saveData(){
-				const data = {
-					funds: this.$store.getters.funds,
-					stockPortfolio: this.$store.getters.stockPortfolio,
-					stocks: this.$store.getters.stocks
-				}
-				this.$http.put('data.json', data)
-			},
-			loadData(){
-				this.fetchData();
+			...mapActions([
+				'toggleProfile',
+			]),
+			doLogin() {
+				this.$store.dispatch("doLogin")
 			}
 		}
 	}
 </script>
+<style>
+	#LoginIcon{
+		border: 2px #ddd solid;
+		border-radius: 100%;
+		display: inline-block;
+		width: 34px;
+		height: 34px;
+		margin: -4px 0px -3px 0px;
+		background-size:contain;
+	}
+	#LoginIcon:hover,#LoginIcon.active{
+		border: 2px #337ab7 solid;
+	}
+</style>

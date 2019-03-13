@@ -4,17 +4,13 @@ import VueResource from 'vue-resource'
 
 import App from './App.vue'
 import { routes } from './routes'
+import firebase from 'firebase'
 import store from './store/store'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
-Vue.http.options.root = 'https://vuejs-stock-trader-2f34c.firebaseio.com/'
-
-const router = new VueRouter({
-	mode: 'history',
-	routes
-})
+const router = new VueRouter({ routes })
 
 new Vue({
 	el: '#app',

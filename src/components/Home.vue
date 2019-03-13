@@ -1,18 +1,33 @@
 <template>
-	<div>
-		<h1>Trade or View your portfolio</h1>
-		<h6>You may save and load your data</h6>
-		<h6>Click on 'End Day' to begin new day</h6>
-		<hr>
-		<p>Your Funds: {{ funds }}</p>
-	</div>
+
+    <div class="vw-100" id="map"></div>
+
 </template>
+	
+
 <script>
-	export default {
-		computed: {
-			funds() {
-				return this.$store.getters.funds
+export default {
+		data() {
+			return {
 			}
+		},
+		created(){
+			
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+			}
+			
 		}
 	}
+
 </script>
+
+<style scoped>
+	#map{
+		height: 62%;
+	}
+</style>

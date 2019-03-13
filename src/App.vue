@@ -1,32 +1,71 @@
 <template>
-    <div class="container">
-    	<app-header></app-header>
-    	<div class="row">
-    		<div class="col-xs-12">
-                <transition name="slide" mode="out-in">
-                    <router-view></router-view>
-                </transition>
-    		</div>
+    <div class="container-fluid">
+    	<app-header id="Header" class="row"></app-header>
+    	<div class="row vh-100" id="Home">
+            <transition name="slide" mode="out-in" class="position-absolute">
+                <router-view class=""></router-view>
+            </transition>
+            <place-vue></place-vue>
+            <profile-vue id="ProfileBox" class="position-absolute col col-sm-7 col-md-4 col-12"></profile-vue>
     	</div>
+        <br>
+    	<div class="row clearfix">
+    	</div>
+        <div class="row no-gutters">
+            <div v-show="error" class="col-12 text-center text-white fixed-bottom error bg-danger">{{error}}</div>
+        </div>
     </div>
 </template>
 
 <script>
+	import {mapActions, mapGetters} from 'vuex'
 	import Header from './components/Header.vue'
+    import Profile from './components/Profile.vue'
+    import Place from './components/Place.vue'
     export default {
     	components: {
-    		appHeader: Header
-    	},
+    		appHeader: Header,
+			profileVue: Profile,
+			placeVue: Place
+        },
+		computed: {
+			...mapGetters([
+				'loading',
+				'msg',
+			]),
+			error(){
+				return this.$store.state.error
+			}
+		},
+		methods: {
+			...mapActions([
+				'setLoading',
+			]),
+		},
     	created() {
-    		this.$store.dispatch('initStocks')
     	}
     }
 </script>
 
 <style>
 	body {
-		padding: 30px;
+		padding: 0;
 	}
+    #Header{
+        padding: 0 24px;
+    }
+	#ProfileBox{
+		right: 0;
+	}
+    #Home{
+		padding-top: 42px;
+        margin-bottom: -42px;
+    }
+
+    .error{
+        padding:9px;
+    }
+
     .slide-enter-active{
         animation: slide-in 200ms ease-out forwards;
     }

@@ -1,17 +1,90 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import firebase from 'firebase'
 
-import stocks from './modules/stocks'
-import portfolio from './modules/portfolio'
-
-import * as actions from './actions'
+import user from './modules/user'
+import places from './modules/places'
 
 Vue.use(Vuex)
 
+//firebase init
+const db = firebase.initializeApp({
+	apiKey: "AIzaSyAkl-CZ-sBxtpzN-zrB80Efn2zKMBI-bTc",
+	authDomain: "glu-base.firebaseapp.com",
+	databaseURL: "https://glu-base.firebaseio.com",
+	projectId: "glu-base",
+	storageBucket: "glu-base.appspot.com",
+	messagingSenderId: "940963835002"
+}).firestore()
+
 export default new Vuex.Store({
-	actions,
+	state: {
+		usersRef: db.collection("users"),
+		conditionsRef: db.collection("conditions"),
+		placesRef: db.collection("places"),
+		placeTypesRef: db.collection("place-types"),
+		reportsRef: db.collection("reports"),
+	  itemsRef: db.collection("items"),
+		auth: false,
+		msg: null,
+		error: null,
+		showProfile: false,
+		showPlace: false,
+		loading: false
+	},
+	mutations: {
+		setAuth (state, x) {
+		  state.auth = x
+		},
+		setError (state, x) {
+		  state.error = x
+		},
+		setLoading (state, x) {
+		  state.loading = x
+		},
+		toggleProfile (state) {
+		  state.showProfile = !state.showProfile
+		},
+		togglePlace (state) {
+		  state.showPlace = !state.showPlace
+		},
+	},
+	actions: {
+		setAuth ({commit}, x){
+			commit("setAuth", x)
+		},
+		errorMsg ({commit}, x){
+			commit("setError", x)
+			setTimeout(() => {
+				commit("setError", "")
+			}, 10000);
+		},
+		loading1 ({commit}){
+			commit("setLoading", true)
+		},
+		loading0 ({commit}){
+			commit("setLoading", false)
+		},
+		toggleProfile ({commit}){
+			commit("toggleProfile")
+		},
+		togglePlace ({commit}){
+			commit("togglePlace")
+		},
+	},
+	getters:{
+		showProfile: state => {
+			return state.showProfile
+		},
+		showPlace: state => {
+			return state.showPlace
+		},
+		error: state => {
+			return state.error
+		},
+	},
 	modules: {
-		stocks,
-		portfolio
+		user,
+		places,
 	}
 })

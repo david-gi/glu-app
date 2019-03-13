@@ -1,6 +1,6 @@
 # glu-app
 
-> A Vue.js, Google Maps and Firebase project
+> A Vue.js, Google Maps and Firebase
 
 ## Build Setup
 

@@ -6,8 +6,12 @@ const state = {
 }
 
 const mutations = {
-	'setCurrentPlace' (state, x) {
+	'setCurrentPlace' (state, {x, id}) {
+		x["id"] = id
 		state.currentPlace = x
+	},
+	'clearCurrentPlace' (state) {
+		state.currentPlace = null
 	},
 	'setReports' (state, x) {
 		state.reports = x
@@ -15,18 +19,29 @@ const mutations = {
 }
 
 const actions = {
-	getPlace: (context, pid) => {
+	clearPlace: (context) => {
+		context.commit("clearCurrentPlace")
+	},
+	getPlace: (context, {pid, pname, pcity, pprovince, pcountry}) => {
 		var id = pid.trim()
 		if(id != null && id != ""){
 			var placeRef = context.rootState.placesRef.doc(id)
 			placeRef.get()
 				.then(res => {
 					if(res.exists){
-						context.commit("setCurrentPlace", res.data())
+						context.commit("setCurrentPlace", {x: res.data(), id: id})
 						context.dispatch("getReports", placeRef)
 					} else {
-						//context.dispatch("newPlace", id)
-						context.commit("setCurrentPlace", {})
+						var newPlace = {
+							name: "DEV*** "+pname,
+							city: pcity,
+							province: pprovince,
+							country: pcountry,
+							rating: 0
+						}
+						placeRef.set(newPlace).then(()=>{
+							context.commit("setCurrentPlace", {x: newPlace, id: id})
+						})
 					}
 				})
 				.catch(e => console.log(e+""))

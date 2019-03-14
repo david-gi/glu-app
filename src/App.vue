@@ -5,7 +5,7 @@
             <transition name="slide" mode="out-in" class="position-absolute">
                 <router-view class=""></router-view>
             </transition>
-            <place-vue></place-vue>
+            <place-vue class=""></place-vue>
             <profile-vue id="ProfileBox" class="position-absolute col col-sm-7 col-md-4 col-12"></profile-vue>
     	</div>
         <br>

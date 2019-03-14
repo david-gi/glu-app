@@ -31,7 +31,7 @@ const actions = {
 							if(p.data().condition == null){ context.commit('toggleProfile') }
 						} else{
 							var newProfile = { email: res.user.email, name: res.user.displayName, photoURL: res.user.photoURL, condition: null }
-							context.rootState.usersRef.doc(res.user.uid).set(newProfile)
+							docRef.set(newProfile)
 							console.log("New user created")
 							context.commit('setProfile', newProfile)
 							context.commit('toggleProfile')

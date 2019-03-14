@@ -1,5 +1,5 @@
 <template>
-	<div id="PlaceMain" v-if="showPlace" :class="{ expanded: isExpanded }" 
+	<div id="PlaceMain" v-if="currentPlace != null" :class="{ expanded: isExpanded }" 
 		class="bg-success text-white vw-100 border-top">
 		<div class="card-body">
 				<form>
@@ -8,27 +8,27 @@
 							<p @click="toggleExpand" class="mx-auto" title="toggle expand" :class="{expander: true, down: isExpanded}"></p>
 						</div>
 						<div class="col-12 col-sm-8">
-							<h5 class="text-break float-left pr-2" :title="placeName.length > 16 ? currentPlace.name : ''">
-								{{placeName}}
+							<h5 class="text-break w-75 float-left pr-2 text-truncate" :title="currentPlace.name">
+								{{currentPlace.name}}
 							</h5>
 							<span class="d-none d-sm-inline-block text-break location">{{currentPlace.city}}, {{currentPlace.province}}</span>
 						</div>
 						<div class="d-none d-sm-block col-sm-4 text-right">
 							<span class="d-inline-block align-baseline">
-								<i v-for="(x, index) in currentPlace.rating" :key="index"><span class="star a"></span></i><i v-for="(x, index) in (5 - currentPlace.rating)" :key="index"><span class="star b"></span></i>
+								<i v-for="(x, index) in Number(currentPlace.rating)" :key="index"><span class="star a"></span></i><i v-for="(x, index) in (5 - currentPlace.rating)" :key="index"><span class="star b"></span></i>
 							</span>
 						</div>
 						<div class="d-sm-none col-12 mt-n1">
 							<span class="d-inline-block pr-2 mt-n2 text-break location ">{{currentPlace.city}}, {{currentPlace.province}}</span>
 							<span class="d-inline-block float-right">
-								<i v-for="(x, index) in currentPlace.rating" :key="index"><span class="star a"></span></i><i v-for="(x, index) in (5 - currentPlace.rating)" :key="index"><span class="star b"></span></i>
+								<i v-for="(x, index) in Number(currentPlace.rating)" :key="index"><span class="star a"></span></i><i v-for="(x, index) in (5 - currentPlace.rating)" :key="index"><span class="star b"></span></i>
 							</span>
 						</div>
 					</div>
 					<hr style="margin:0 0 4px 0">
 					<h5 class="clearfix m-0 mt-n2 pb-1">
-						<div class="mt-3 p-0 text-middle col-12 col-sm-4 float-left"><small>Glutening Reports:</small></div>
-						<div  class="input-group mt-2 p-0 col-12 col-sm-6 float-right ">
+						<div class="mt-3 p-0 text-middle col-12 col-sm-4 float-left"><small>Reports:</small></div>
+						<div v-show="reports != null" class="input-group mt-2 p-0 col-12 col-sm-6 float-right ">
 							<input id="SearchBox" type="text" class="form-control form-control-sm border-primary border" 
 								placeholder="Search reports..." aria-label="Search reports..." aria-describedby="rsearch">
 							<div class="input-group-append">
@@ -39,6 +39,7 @@
 					<div class="card bg-light text-dark pb-1">
 
             			<areport class=""></areport>
+						<small class="text-muted pl-3 pb-2 mt-n4" v-if="reports == null">No reports yet.</small>
 
 						<div class="border-bottom bg-white pt-1 pb-1" v-for="report in reports" :key="report.created">
 							<span class="col-12">
@@ -51,7 +52,7 @@
 								<span class="d-inline-block float-right mr-2 ml-3">
 									<small class="align-top font-italic text-muted mr-2">{{ getTSDate(report.created) }}</small>
 									<span class="d-inline-block">
-										<i v-for="(x, index) in report.rating" :key="index"><span class="star a ssmall"></span></i><i v-for="(x, index) in (5 - report.rating)" :key="index"><span class="star b ssmall"></span></i>
+										<i v-for="(x, index) in Number(report.rating)" :key="index"><span class="star a ssmall"></span></i><i v-for="(x, index) in (5 - report.rating)" :key="index"><span class="star b ssmall"></span></i>
 									</span>
 								</span>
 							</span>
@@ -80,20 +81,14 @@
 		},
 		computed: {
 			...mapGetters([
-				'currentPlace',,
+				'currentPlace',
+				'clearPlace',
 				'reports',
 				'placeTypes',
 				'conditions',
 			]),
-			placeName(){
-				var _this = this
-				if(this.showPlace){
-					if(this.currentPlace.name.length > 16){  return _this.currentPlace.name.substring(0, 16) + "..." } 
-					else { return _this.currentPlace.name }
-				}
-			},
-			showPlace(){
-				return this.$store.state.showPlace && this.currentPlace != null
+			isPlaceShown(){
+				this.placeShown
 			},
 			isExpanded(){
 				return this.expanded
@@ -103,7 +98,6 @@
 			...mapActions([
 				'getPlace',
 				'getReports',
-				'togglePlace',
 				'errorMsg',
 			]),
 			getConditionName(id){
@@ -113,9 +107,6 @@
 				} else{ 
 					return "-"
 				}
-			},
-			reloadPlace(){
-				this.getPlace()
 			},
 			getTSDate(ts){
 				var d = new Date(ts.seconds * 1000)
@@ -131,14 +122,7 @@
 		},
 		created(){
 		},
-		beforeMount(){
-			var _this = this
-			this.getPlace("123")
-					.then(() => { 
-						_this.togglePlace()
-					})
-					.catch(e => { _this.errorMsg(e+"") } )
-		}
+			
 	}
 
 </script>

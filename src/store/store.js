@@ -24,12 +24,12 @@ export default new Vuex.Store({
 		placesRef: db.collection("places"),
 		placeTypesRef: db.collection("place-types"),
 		reportsRef: db.collection("reports"),
-	  itemsRef: db.collection("items"),
+		itemsRef: db.collection("items"),
+		
 		auth: false,
 		msg: null,
 		error: null,
 		showProfile: false,
-		showPlace: false,
 		loading: false
 	},
 	mutations: {
@@ -44,9 +44,6 @@ export default new Vuex.Store({
 		},
 		toggleProfile (state) {
 		  state.showProfile = !state.showProfile
-		},
-		togglePlace (state) {
-		  state.showPlace = !state.showPlace
 		},
 	},
 	actions: {
@@ -68,16 +65,10 @@ export default new Vuex.Store({
 		toggleProfile ({commit}){
 			commit("toggleProfile")
 		},
-		togglePlace ({commit}){
-			commit("togglePlace")
-		},
 	},
 	getters:{
 		showProfile: state => {
 			return state.showProfile
-		},
-		showPlace: state => {
-			return state.showPlace
 		},
 		error: state => {
 			return state.error

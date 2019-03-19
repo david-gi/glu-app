@@ -16,8 +16,8 @@
 							</select>
 						</div>
 						<br>
-						<button type="button" class="btn btn-success" @click="save">Save</button>
-						<button type="button" class="btn btn-primary float-right" @click="signOff">Logout</button>
+						<button type="button" class="btn btn-primary" @click="signOff">Logout</button>
+						<button type="button" class="btn btn-success float-right" @click="save">Save</button>
 					</form>
 			    </div>
 		</div>

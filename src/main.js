@@ -11,8 +11,7 @@ Vue.use(VueRouter)
 Vue.use(VueResource)
 
 const router = new VueRouter({ routes })
-
-new Vue({
+window.app = new Vue({
 	el: '#app',
 	router,
 	store,

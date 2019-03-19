@@ -1,6 +1,9 @@
 <template>
-	<div id="PlaceMain" v-if="currentPlace != null" :class="{ expanded: isExpanded }" 
-		class="bg-success text-white vw-100 border-top">
+	<div v-if="currentPlace != null" :class="{ expanded: isExpanded }" 
+		class="PlaceMain bg-success text-white vw-100 border-top">
+		<button type="button" class="close text-white p-1 mt-n1" @click="close" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
 		<div class="card-body">
 				<form>
 					<div class="row">
@@ -8,40 +11,43 @@
 							<p @click="toggleExpand" class="mx-auto" title="toggle expand" :class="{expander: true, down: isExpanded}"></p>
 						</div>
 						<div class="col-12 col-sm-8">
-							<h5 class="text-break w-75 float-left pr-2 text-truncate" :title="currentPlace.name">
-								{{currentPlace.name}}
+							<h5 class="text-break float-left ml-n3 pr-2 text-truncate" style="max-width:70%" >
+								<a title="Click to Open in Google Maps" class="text-white" target="blank" :href="'https://www.google.com/maps/place/?q=place_id:' + currentPlace.id">
+									{{currentPlace.name}}
+								</a>
 							</h5>
 							<span class="d-none d-sm-inline-block text-break location">{{currentPlace.city}}, {{currentPlace.province}}</span>
 						</div>
 						<div class="d-none d-sm-block col-sm-4 text-right">
 							<span class="d-inline-block align-baseline">
-								<i v-for="(x, index) in Number(currentPlace.rating)" :key="index"><span class="star a"></span></i><i v-for="(x, index) in (5 - currentPlace.rating)" :key="index"><span class="star b"></span></i>
+								<i v-for="(x, index) in Number(currentPlace.rating)" :key="index"><span class="star a">★</span></i><i v-for="(x, index) in (5 - currentPlace.rating)" :key="index"><span class="star b">★</span></i>
 							</span>
 						</div>
 						<div class="d-sm-none col-12 mt-n1">
-							<span class="d-inline-block pr-2 mt-n2 text-break location ">{{currentPlace.city}}, {{currentPlace.province}}</span>
+							<span class="d-inline-block ml-n3 pr-2 mt-n2 text-break location ">{{currentPlace.city}}, {{currentPlace.province}}</span>
 							<span class="d-inline-block float-right">
-								<i v-for="(x, index) in Number(currentPlace.rating)" :key="index"><span class="star a"></span></i><i v-for="(x, index) in (5 - currentPlace.rating)" :key="index"><span class="star b"></span></i>
+								<i v-for="(x, index) in Number(currentPlace.rating)" :key="index"><span class="star a">★</span></i><i v-for="(x, index) in (5 - currentPlace.rating)" :key="index"><span class="star b">★</span></i>
 							</span>
 						</div>
 					</div>
 					<hr style="margin:0 0 4px 0">
 					<h5 class="clearfix m-0 mt-n2 pb-1">
-						<div class="mt-3 p-0 text-middle col-12 col-sm-4 float-left"><small>Reports:</small></div>
-						<div v-show="reports != null" class="input-group mt-2 p-0 col-12 col-sm-6 float-right ">
-							<input id="SearchBox" type="text" class="form-control form-control-sm border-primary border" 
-								placeholder="Search reports..." aria-label="Search reports..." aria-describedby="rsearch">
+						<div class="mt-3 p-0 text-middle col-12 col-sm-4 float-left"><small>Reports</small></div>
+						<div v-show="reports != null && reports.length > 6" class="input-group mt-2 p-0 col-12 col-sm-6 float-right ">
+							<input id="SearchBox" v-model="filterQuery" v-on:keydown="clearQuery" v-on:keyup.enter="queryReports"  type="text" 
+								class="form-control form-control-sm border-primary border" 
+								placeholder="Ex: 'Soup' or '5 stars'" aria-label="Filter reports..." aria-describedby="rsearch">
 							<div class="input-group-append">
-								<button class="btn btn-sm btn-primary text-top" type="button" id="rsearch"><small>Search</small></button>
+								<button @click="queryReports" class="btn btn-sm btn-primary text-top" type="button" id="rsearch"><small>Filter</small></button>
 							</div>
 						</div>
 					</h5>
 					<div class="card bg-light text-dark pb-1">
 
-            			<areport class=""></areport>
-						<small class="text-muted pl-3 pb-2 mt-n4" v-if="reports == null">No reports yet.</small>
+						<areport ref="areport"></areport>
+						<small class="text-muted pl-3 w-50 pb-2 mt-n4" v-if="reports == null">Be the first to make a report  &rarr;</small>
 
-						<div class="border-bottom bg-white pt-1 pb-1" v-for="report in reports" :key="report.created">
+						<div class="border bg-white pt-2 pb-2" v-for="report in reportsFiltered" :key="report.created">
 							<span class="col-12">
 								<span class="d-inline-block">
 									<small>
@@ -52,11 +58,11 @@
 								<span class="d-inline-block float-right mr-2 ml-3">
 									<small class="align-top font-italic text-muted mr-2">{{ getTSDate(report.created) }}</small>
 									<span class="d-inline-block">
-										<i v-for="(x, index) in Number(report.rating)" :key="index"><span class="star a ssmall"></span></i><i v-for="(x, index) in (5 - report.rating)" :key="index"><span class="star b ssmall"></span></i>
+										<i v-for="(x, index) in Number(report.rating)" :key="index"><span class="star a small">★</span></i><i v-for="(x, index) in (5 - report.rating)" :key="index"><span class="star b small">★</span></i>
 									</span>
 								</span>
 							</span>
-							<span class="col-12 d-inline-block">
+							<span class="col-12 d-inline-block text-truncate note" @click="toggleMore">
 								{{report.note}}
 							</span>
 						</div>
@@ -76,28 +82,31 @@
         },
 		data() {
 			return {
+				filterQuery: "",
 				expanded: false
 			}
 		},
 		computed: {
 			...mapGetters([
 				'currentPlace',
-				'clearPlace',
 				'reports',
+				'reportsFiltered',
 				'placeTypes',
 				'conditions',
 			]),
-			isPlaceShown(){
-				this.placeShown
-			},
 			isExpanded(){
 				return this.expanded
+			},
+			nameWatch(){
+				return this.currentPlace
 			}
 		},
 		methods: {
 			...mapActions([
 				'getPlace',
+				'clearPlace',
 				'getReports',
+				'filterReports',
 				'errorMsg',
 			]),
 			getConditionName(id){
@@ -116,26 +125,62 @@
     			var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 				return months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear()+' @ '+(hours > 12 ? hours - 12 : hours)+':'+minutes+ampm
 			},
-			toggleExpand(){
-				this.expanded = !this.expanded;
+			toggleExpand(e){
+					this.expanded = !this.expanded;
+			},
+			toggleMore(e){
+				$(e.target).toggleClass('text-truncate').toggleClass('less')
+			},
+			showMore(){
+				$(".note").each(() => {
+					console.log(this.scrollHeight);
+					if(this.scrollHeight > this.clientHeight || this.scrollWidth > this.clientWidth){
+						$(this.target).addClass('more')
+					}
+				});
+			},
+			queryReports(){
+				this.filterReports(this.filterQuery)
+			},
+			clearQuery(){
+				if(this.filterQuery.length < 1){
+					this.filterReports("")
+				}
+			},
+			close(){
+				this.clearPlace()
+				this.filterQuery = "";
+				this.rating = 0;
+				this.note = "";
 			}
 		},
-		created(){
+		mounted(){
+			var tthis = this
+			$(window).on("resize", function(){ tthis.showMore() })
 		},
-			
+		watch: {
+			nameWatch(x,y){
+				if(this.$refs.areport){
+					this.$refs.areport.close()
+					this.filterQuery = "";
+					this.rating = 0;
+					this.note = "";
+				}
+			}
+		}
 	}
 
 </script>
 
 <style scoped>
-	#PlaceMain{
+	.PlaceMain{
 		position: fixed;
 		min-height: 35%;
 		max-height: 35%;
         overflow-y: auto;
 		bottom:0;
 	}
-	#PlaceMain.expanded{
+	.PlaceMain.expanded{
 		max-height: 100%;
 		top:42px;
 	}
@@ -160,22 +205,38 @@
 	.expander.down{
 		background-image: url("~/src/assets/chev0.svg");
 	}
+	.note{
+		padding-right: 50px;
+		font-size: .9em;
+	}
+	.note.more{
+		cursor: pointer;
+	}
+	.note.more::before{
+		content: "[more]";
+		float:right;
+		font-size: .7em;
+		color:#0056b3;
+		margin: 4px -30px 0 0;
+	}
+	.note.more.less::before{
+		content: "[less]";
+	}
 	.star{
-		background-size: cover;
 		display: inline-block;
-		width: 24px;
-		height: 24px;
-		background-image: url("~/src/assets/star1.svg");
+		font-style: normal;
+		font-size: 30px;
+		line-height: 25px;
+		overflow: visible;
 	}
 	.star.a{
-		background-image: url("~/src/assets/star1.svg");
+		color: yellow;
 	}
 	.star.b{
-		background-image: url("~/src/assets/star0.svg");
+		color: #ddd;
 	}
-	.star.a.small, .star.b.small{
-		margin-right: 0px;
-		width: 12px;
-		height: 12px;
+	.star.small{
+		font-size: 24px;
+		line-height: 18px;
 	}
 </style>

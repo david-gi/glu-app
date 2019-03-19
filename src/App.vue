@@ -23,6 +23,13 @@
     import Profile from './components/Profile.vue'
     import Place from './components/Place.vue'
     export default {
+        directives:{
+            'focus': {
+                inserted: function (el) {
+                    el.focus()
+                }
+            }
+        },
     	components: {
     		appHeader: Header,
 			profileVue: Profile,
@@ -50,6 +57,7 @@
 <style>
 	body {
 		padding: 0;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
 	}
     #Header{
         padding: 0 24px;
@@ -93,5 +101,12 @@
             opacity: 0;
         }
     }
-
+    
+    input[type="range"] {
+    -webkit-appearance: none;
+    background-color: #fff;
+    }
+    input[type="range"]:focus {
+    outline: none;
+    }
 </style>

@@ -3,6 +3,8 @@ import firebase from 'firebase'
 const state = {
 	currentPlace: null,
 	reports: null,
+	reportsFiltered: null,
+	placeTypes: null
 }
 
 const mutations = {
@@ -15,6 +17,16 @@ const mutations = {
 	},
 	'setReports' (state, x) {
 		state.reports = x
+		state.reportsFiltered = x
+	},
+	'setReportsFiltered' (state, x) {
+		state.reportsFiltered = x
+	},
+	'pushReport' (state, x) {
+		state.reports.push(x)
+	},
+	'setPlaceTypes' (state, x) {
+		state.placeTypes = x
 	},
 }
 
@@ -50,13 +62,16 @@ const actions = {
 	getReports: (context, placeRef) => {
 		context.rootState.reportsRef.where("place", "==", placeRef).orderBy("created", "desc").get()
 			.then(ss => {
+				context.commit("setReports", null)
 				var reports = []
 				var i = ss.size
 				ss.forEach(doc => {
 					var r = doc.data()
-					context.rootState.usersRef.doc(r.user.id).get()
+				context.rootState.usersRef.doc(r.user.id).get()
 						.then(u => { 
-							reports.push({rating: r.rating, note: r.note, created: r.created, user: u.data()})
+							var user = u.data()
+							reports.push({rating: r.rating, note: r.note, created: r.created, 
+								user: { name: user.name, condition: user.condition, photoURL: user.photoURL } })
 							if(--i == 0){
 								context.commit("setReports", reports)
 							}
@@ -65,22 +80,79 @@ const actions = {
 			})
 			.catch(e => console.log(e+""))
 	},
-	// loadPlaceTypes: (context) => {
-	// 	if(state.placeTypes == null){
-	// 		context.rootState.placeTypesRef.get()
-	// 		.then(res => {
-	// 			context.commit('setPlaceTypes', res.docs)
-	// 		})
-	// 	}
-	// },
+	filterReports:(context, query) => {
+		var q = query.trim().toLowerCase()
+		var filtered = context.state.reports.filter(r => {
+			if(q.indexOf(" star") != -1){
+				switch (q){
+					case "1 star":
+						return r.rating == 1;
+					case "2 star":
+						return r.rating == 2;
+					case "3 star":
+						return r.rating == 3;
+					case "4 star":
+						return r.rating == 4;
+					case "5 star":
+						return r.rating == 5;
+					case "1 stars":
+						return r.rating == 1;
+					case "2 stars":
+						return r.rating == 2;
+					case "3 stars":
+						return r.rating == 3;
+					case "4 stars":
+						return r.rating == 4;
+					case "5 stars":
+						return r.rating == 5;
+				}
+			} else{
+				return r.note.toLowerCase().indexOf(q) != -1
+			}
+		})
+		context.commit("setReportsFiltered", filtered)
+	},
+	addReport: (context, report) => {
+		var uid = firebase.auth().currentUser.uid
+		var repRef = context.rootState.reportsRef
+
+		var place = context.rootState.placesRef.doc(report.place)
+		var user = context.rootState.placesRef.doc(uid)
+			
+		var newReport = {
+			note: report.note,
+			rating: report.rating,
+			place: place,
+			user: user,
+			created: firebase.firestore.FieldValue.serverTimestamp()
+		}
+		repRef.add(newReport)
+		.catch(e => console.log(e))
+		
+		//context.commit("pushReport", newReport)
+	},
+	loadPlaceTypes: (context) => {
+		if(state.placeTypes == null){
+			context.rootState.placeTypesRef.get()
+			.then(res => {
+				context.commit('setPlaceTypes', res.docs)
+			})
+		}
+	},
 }
 
 const getters = {
 	currentPlace: state => {
 		return state.currentPlace
 	},
+	placeTypes: state => {
+		return state.placeTypes
+	},
 	reports: state => {
 		return state.reports
+	},
+	reportsFiltered: state => {
+		return state.reportsFiltered
 	}
 }
 

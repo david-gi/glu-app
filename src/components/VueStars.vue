@@ -1,3 +1,4 @@
+<!-- Richard Tallent 2018 https://github.com/richardtallent/vue-stars -->
 <template>
 	<div
 		ref="ratingEl"
@@ -5,7 +6,6 @@
 		:class="{readonly:readonly,notouch:notouch}"
 		:style="mapCssProps"
 	>
-		<input :id="name+'0'" type="radio" :checked="value===0" :name="name" value="0">
 		<template v-for="x in max">
 			<label :key="'l'+x" :for="name+x">
 				<span class="active">
@@ -23,7 +23,7 @@
 				:name="name"
 				:disabled="readonly"
 				:value="x"
-				@click="updateInput($event.target.value)"
+				@change="updateInput($event.target.value)"
 			>
 		</template>
 	</div>
@@ -33,7 +33,7 @@ export default {
 	name: "VueStars",
 	props: {
 		max: { type: Number, required: false, default: 5 },
-		value: { type: Number, required: false, default: 9 },
+		value: { type: Number, required: false, default: 1 },
 		name: { type: String, required: false, default: "rating" },
 		char: { type: String, required: false, default: "★" },
 		inactiveChar: { type: String, required: false, default: null },
@@ -68,7 +68,8 @@ export default {
 	},
 	methods: {
 		updateInput(v) {
-			this.$emit("input", parseInt(v, 10))
+			var i = parseInt(v, 10)
+			this.$emit("input", i)
 		},
 		getActiveLabel(x) {
 			const s = this.ratingChars

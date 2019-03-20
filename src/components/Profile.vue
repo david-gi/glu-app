@@ -9,7 +9,7 @@
 						</button>
 							<span class="font-weight-bold">{{profile.name}}</span><br>
 							<span class="text-white-50">{{profile.email}}</span><br><br>
-							<label for="cndInp">Gluten Condition:</label>
+							<label for="cndInp">Gluten-related disorder:</label>
 							<select class="form-control" id="cndInp" :value="cId" @input="cId = $event.target.value">
 								<option value=" ">- None -</option>
 								<option v-for="cnd in conditions" :key="cnd.id" :value="cnd.id">{{cnd.data().name}}</option>

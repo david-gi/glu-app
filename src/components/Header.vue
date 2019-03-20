@@ -1,7 +1,7 @@
 <template>
 		<nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light border" >
 		    <div class="navbar-header">
-		      <span class="navbar-brand text-success">Glutenous! 
+		      <span class="navbar-brand text-success"><i class="glu-font">Glutenous!</i> 
 						<small class="font-weight-light text-black-50 d-inline-block w-75 text-wrap align-text-top">
 							<small> 
 								<span class="d-sm-none" style="font-size:.8em">Gluten Maps</span>

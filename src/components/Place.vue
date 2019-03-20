@@ -45,7 +45,7 @@
 					<div class="card bg-light text-dark pb-1">
 
 						<areport ref="areport"></areport>
-						<small class="text-muted pl-3 w-50 pb-2 mt-n4" v-if="reports == null">Be the first to make a report  &rarr;</small>
+						<small class="text-muted pl-3 w-50 pb-2 mt-n4" v-if="reports == null || reports.length < 1">Be the first to make a report  &rarr;</small>
 
 						<div class="border bg-white pt-2 pb-2" v-for="report in reportsFiltered" :key="report.created">
 							<span class="col-12">
@@ -161,7 +161,7 @@
 		watch: {
 			nameWatch(x,y){
 				if(this.$refs.areport){
-					this.$refs.areport.close()
+					this.$refs.areport.closeAdd()
 					this.filterQuery = "";
 					this.rating = 0;
 					this.note = "";

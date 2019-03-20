@@ -1,5 +1,6 @@
 <template>
 	<div>
+	<input v-model="errz" :value="errz" type="text" @change="err1"/>
 		<aboutModal></aboutModal>
 		<div class="vw-100" :class="{full: !placeShown, short: placeShown}" id="map"></div>
 		<input id="search-input" class="controls d-absolute mt-1 ml-1 border border-success" type="text" placeholder="Search map...">
@@ -17,6 +18,7 @@ export default {
 		},
 		data() {
 			return {
+				errz: this.error
 			}
 		},
 		created(){
@@ -150,6 +152,7 @@ export default {
 			...mapGetters([
 				'currentPlace',
 				'placeTypes',
+				'error'
 			]),
 			placeShown(){
 				return this.currentPlace != null
@@ -162,6 +165,9 @@ export default {
 				'clearPlace',
 				'errorMsg',
 			]),
+			err1(){
+				this.errorMsg(this.errz)
+			}
 		}
 	}
 </script>

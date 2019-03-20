@@ -62,12 +62,13 @@ const actions = {
 	getReports: (context, placeRef) => {
 		context.rootState.reportsRef.where("place", "==", placeRef).orderBy("created", "desc").get()
 			.then(ss => {
-				context.commit("setReports", null)
+				context.commit("setReports", [])
 				var reports = []
 				var i = ss.size
+				(e => console.log(ss.size))
 				ss.forEach(doc => {
 					var r = doc.data()
-				context.rootState.usersRef.doc(r.user.id).get()
+					context.rootState.usersRef.doc(r.user.id).get()
 						.then(u => { 
 							var user = u.data()
 							reports.push({rating: r.rating, note: r.note, created: r.created, 

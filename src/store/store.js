@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from 'firebase'
+import VuexPersist from 'vuex-persist';
 
 import user from './modules/user'
 import places from './modules/places'
@@ -17,7 +18,7 @@ const db = firebase.initializeApp({
 	messagingSenderId: "940963835002"
 }).firestore()
 
-export default new Vuex.Store({
+var store = new Vuex.Store({
 	state: {
 		usersRef: db.collection("users"),
 		conditionsRef: db.collection("conditions"),
@@ -28,7 +29,7 @@ export default new Vuex.Store({
 		
 		auth: false,
 		msg: null,
-		error: null,
+		error: "!",
 		showProfile: false,
 		loading: false
 	},
@@ -77,5 +78,12 @@ export default new Vuex.Store({
 	modules: {
 		user,
 		places,
-	}
+	},
+	plugins: [
+		new VuexPersist({
+			key: 'vuex',
+			storage: window.localStorage
+		}).plugin
+	]
 })
+export default store

@@ -57,8 +57,12 @@
 <style>
 	body {
 		padding: 0;
-        font-family:Verdana, Geneva, Tahoma, sans-serif;
+	    font-family: Verdana, Geneva, Tahoma, sans-serif;
 	}
+    .glu-font{
+        font-size: 1.1em;
+        font-family: Georgia, 'Times New Roman', Times, serif !important;
+    }
     #Header{
         padding: 0 24px;
     }

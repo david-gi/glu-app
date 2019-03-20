@@ -1,24 +1,27 @@
 <template>
 	<div>
 		<div class="p-1 ">			
-			<button v-show="!isOpen" :disabled="!isLoggedIn" :title="btnTitle" @click="open" :class="{'btn-outline-primary': isLoggedIn, 'btn-outline-secondary': !isLoggedIn}"
-			class="float-right btn btn-sm pl-4 pr-4 mb-1 font-weight-bold"><small>Add a Report</small></button>
+			<button v-show="!isOpen" :disabled="!isLoggedIn" :title="btnTitle" @click="openAdd" 
+				:class="{'btn-outline-primary': isLoggedIn, 'btn-outline-secondary': !isLoggedIn}"
+				class="float-right btn btn-sm pl-4 pr-4 mb-1 font-weight-bold">
+				<small>Add a Report</small>
+			</button>
 		</div>
 		<div v-show="isOpen" class="m-x1 mt-n1 pt-2 pb-3 pl-3 pr-3 border-bottom" style="border-width:9px !important">
-			<h6 class="mt-1">
-				<button type="button" class="close text-white" @click="close" aria-label="Close">
+			<h6 class="m-n1 pb-3">
+				<button type="button" class="close text-dark" @click="closeAdd" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</h6>
 			<div class="form-group row">
 				<div class="col-5">
-					<vue-stars :max="5" v-model="rating" shadowColor="none" inactiveColor="#ddd"></vue-stars>
+					<vue-stars v-model="rating" :value="1" shadowColor="none" inactiveColor="#ddd"></vue-stars>
 				</div>
 				<div class="col-12">
 					<textarea @input="autoHeight" type="text" class="inputLine w-100 p-2" v-model="note" placeholder=" Share your gluten experience"></textarea>
 				</div>
 				<div class="col-12 mb-n3">
-						<button type="button" class="btn btn-link text-muted pl-2 pr-2" @click="close">cancel</button>
+						<button type="button" class="btn btn-link text-muted pl-2 pr-2" @click="closeAdd">cancel</button>
 					<button type="button" class="btn btn-sm btn-success mt-1 pl-5 pr-5 float-right" :disabled="rating < 1" @click="add">Submit</button>
 				</div>
 			</div>
@@ -73,10 +76,10 @@
 					})
 					.catch(e => { _this.errorMsg(e+"") } )
 			},
-			open(){
+			openAdd(){
 				this.opened = true
 			},
-			close(){
+			closeAdd(){
 				this.rating = 0
 				this.note = ""
 				this.opened = false

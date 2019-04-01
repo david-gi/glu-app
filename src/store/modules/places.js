@@ -4,7 +4,8 @@ const state = {
 	currentPlace: null,
 	reports: null,
 	reportsFiltered: null,
-	placeTypes: null
+	placeTypes: null,
+	reportedPlaceIds: []
 }
 
 const mutations = {
@@ -23,16 +24,44 @@ const mutations = {
 		state.reportsFiltered = x
 	},
 	'pushReport' (state, x) {
-		state.reports.push(x)
+		if(state.reports){ state.reports.unshift(x) }
+		else { state.reports = [x] }
+		state.reports = state.reports
 	},
 	'setPlaceTypes' (state, x) {
 		state.placeTypes = x
 	},
+	'addReportedPlaceId' (state, x){
+		state.reportedPlaceIds.push({id: x, date: Date.now()})
+	}
 }
 
 const actions = {
 	clearPlace: (context) => {
 		context.commit("clearCurrentPlace")
+	},
+	getPlaceRatings: (context, ratingDict) => {
+		var res = { }
+		var count = 0;
+		var length = ratingDict.length
+		return new Promise((resolve, reject) => {
+			ratingDict.forEach(function(key){
+				context.rootState.placesRef.doc(key).get()
+					.then(p => {
+						count++;
+						if(p.exists){
+							res[key] = p.data().rating
+						} else {
+							res[key] = 0 //Math.round(Math.random() * 10 /2)
+						}
+						if(count == length){
+							resolve(res)
+						}
+					})
+					.catch(e =>{ console.log(e+""); reject(e);})
+			})
+		})
+		.catch(e =>{ console.log(e+""); })
 	},
 	getPlace: (context, {pid, pname, pcity, pprovince, pcountry}) => {
 		var id = pid.trim()
@@ -40,18 +69,19 @@ const actions = {
 			var placeRef = context.rootState.placesRef.doc(id)
 			placeRef.get()
 				.then(res => {
-					if(res.exists){
+					if(res.exists){ 
 						context.commit("setCurrentPlace", {x: res.data(), id: id})
 						context.dispatch("getReports", placeRef)
 					} else {
 						var newPlace = {
-							name: "DEV*** "+pname,
+							name: pname,
 							city: pcity,
 							province: pprovince,
 							country: pcountry,
 							rating: 0
 						}
 						placeRef.set(newPlace).then(()=>{
+							context.commit("setReports", [])
 							context.commit("setCurrentPlace", {x: newPlace, id: id})
 						})
 					}
@@ -64,8 +94,7 @@ const actions = {
 			.then(ss => {
 				context.commit("setReports", [])
 				var reports = []
-				var i = ss.size
-				(e => console.log(ss.size))
+				var i = ss.size;
 				ss.forEach(doc => {
 					var r = doc.data()
 					context.rootState.usersRef.doc(r.user.id).get()
@@ -118,7 +147,7 @@ const actions = {
 		var repRef = context.rootState.reportsRef
 
 		var place = context.rootState.placesRef.doc(report.place)
-		var user = context.rootState.placesRef.doc(uid)
+		var user = context.rootState.usersRef.doc(uid)
 			
 		var newReport = {
 			note: report.note,
@@ -127,10 +156,12 @@ const actions = {
 			user: user,
 			created: firebase.firestore.FieldValue.serverTimestamp()
 		}
-		repRef.add(newReport)
-		.catch(e => console.log(e))
-		
-		//context.commit("pushReport", newReport)
+		repRef.add(newReport).then(()=>{
+			context.commit('addReportedPlaceId', place.id)
+			context.dispatch("getReports", place)
+			context.commit('setMsg', 'Report added!')
+		})
+		.catch(e => console.log(e));
 	},
 	loadPlaceTypes: (context) => {
 		if(state.placeTypes == null){
@@ -154,6 +185,15 @@ const getters = {
 	},
 	reportsFiltered: state => {
 		return state.reportsFiltered
+	},
+	reportedPlaceIds: state => {
+		var ids = []
+		state.reportedPlaceIds.forEach(x => {
+			if(x.date - Date.now() < 86400000){
+				ids.push(x.id)
+			}
+		});
+		return ids;
 	}
 }
 

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from 'firebase'
-import VuexPersist from 'vuex-persist';
 
 import user from './modules/user'
 import places from './modules/places'
@@ -29,7 +28,7 @@ var store = new Vuex.Store({
 		
 		auth: false,
 		msg: null,
-		error: "!",
+		error: null,
 		showProfile: false,
 		loading: false
 	},
@@ -37,8 +36,17 @@ var store = new Vuex.Store({
 		setAuth (state, x) {
 		  state.auth = x
 		},
+		setMsg (state, x) {
+		  state.msg = x
+		  setTimeout(() => {
+			state.msg = null
+		  }, 2000);
+		},
 		setError (state, x) {
 		  state.error = x
+		  setTimeout(() => {
+			state.error = null
+		  }, 8000);
 		},
 		setLoading (state, x) {
 		  state.loading = x
@@ -51,11 +59,11 @@ var store = new Vuex.Store({
 		setAuth ({commit}, x){
 			commit("setAuth", x)
 		},
+		setMsg ({commit}, x){
+			commit("setMsg", x)
+		},
 		errorMsg ({commit}, x){
 			commit("setError", x)
-			setTimeout(() => {
-				commit("setError", "")
-			}, 10000);
 		},
 		loading1 ({commit}){
 			commit("setLoading", true)
@@ -79,11 +87,5 @@ var store = new Vuex.Store({
 		user,
 		places,
 	},
-	plugins: [
-		new VuexPersist({
-			key: 'vuex',
-			storage: window.localStorage
-		}).plugin
-	]
 })
 export default store

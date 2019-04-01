@@ -22,12 +22,11 @@ const actions = {
                 var docRef = context.rootState.usersRef.doc(res.user.uid)
 				docRef.get()
 					.then(p => {
-						console.log("Logging in")
-						context.commit('setAuth', true)
 						if(p.exists){
 							var refreshProfile = { email: res.user.email, name: res.user.displayName, photoURL: res.user.photoURL, condition: p.data().condition }
 							docRef.set(refreshProfile, { merge: true })
 							context.commit('setProfile', refreshProfile)
+							context.commit('setAuth', true)
 							if(p.data().condition == null){ context.commit('toggleProfile') }
 						} else{
 							var newProfile = { email: res.user.email, name: res.user.displayName, photoURL: res.user.photoURL, condition: null }
@@ -35,17 +34,36 @@ const actions = {
 							console.log("New user created")
 							context.commit('setProfile', newProfile)
 							context.commit('toggleProfile')
+							context.commit('setAuth', true)
 						}
 					})
             })
 			.catch(e => { console.log("Auth Failed: " + e) })			
 	},
+	autoLogin: (context, uid) => {
+		firebase.auth().onAuthStateChanged(function(user) {
+			if (user) {
+				console.log('autologin...')
+				var docRef = context.rootState.usersRef.doc(user.uid)
+				docRef.get()
+					.then(p => {
+						if(p.exists){
+							var refreshProfile = { email: user.email, name: user.displayName, photoURL: user.photoURL, condition: p.data().condition }
+							docRef.set(refreshProfile, { merge: true })
+							context.commit('setProfile', refreshProfile)
+							context.commit('setAuth', true)
+							if(p.data().condition == null){ context.commit('toggleProfile') }
+						}
+					})
+			}
+		})
+	},
 	loadConditions: (context) => {
 		if(state.conditions == null){
 			context.rootState.conditionsRef.get()
-			.then(cnds => {
-				context.commit('setConditions', cnds.docs.reverse())
-			})
+				.then(cnds => {
+					context.commit('setConditions', cnds.docs.reverse())
+				})
 		}
 	},
 	saveProfile: (context, cndId) => {
@@ -57,6 +75,7 @@ const actions = {
 					context.state.profile.condition = cnd
 					docRef.set({condition: cnd}, { merge: true })
 					context.commit("setProfile", context.state.profile)
+					context.commit('setMsg', 'Saved!')
 				} else {
 					throw "User does not exist!"
 				}
@@ -69,6 +88,7 @@ const actions = {
 			context.commit('setAuth', false)
 			context.commit('toggleProfile')
 			context.commit("setProfile", { id: null, email: "", name: "", condition: null })
+			context.commit('setMsg', 'Signed out!')
 		})
 	}
 }
@@ -88,3 +108,29 @@ export default {
 	actions, 
 	getters
 }
+
+
+		//**Clear Firestore** CANNOT BE UNDONE!
+		// context.rootState.reportsRef.get()
+		// 	.then(x => {
+		// 		console.log("reports"+x.docs.length)
+		// 		x.docs.forEach(d => {
+		// 			context.rootState.reportsRef.doc(d.id).delete()
+		// 		})
+		// 		context.rootState.placesRef.get()
+		// 			.then(y => {
+		// 				console.log("places"+y.docs.length)
+		// 				y.docs.forEach(d => {
+		// 					context.rootState.placesRef.doc(d.id).delete()
+		// 				})
+		// 				context.rootState.usersRef.get()
+		// 					.then(z => {
+		// 						console.log("users"+z.docs.length)
+		// 						z.docs.forEach(d => {
+		// 							context.rootState.usersRef.doc(d.id).delete()
+		// 						})
+		// 					})
+		// 			})
+		// 	})
+		// 	.catch(e => { console.log(e) })
+		//////////////////////////////////////

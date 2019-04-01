@@ -12,7 +12,10 @@
     	<div class="row clearfix">
     	</div>
         <div class="row no-gutters">
-            <div v-show="error" class="col-12 text-center text-white fixed-bottom error bg-danger">{{error}}</div>
+            <div v-show="msg" class="w-25 rounded-top text-center p-2 pt-4 pb-4 text-white fixed-bottom msg bg-primary">{{msg}}</div>
+        </div>
+        <div class="row no-gutters">
+            <div v-show="error" class="col-12x text-center text-white fixed-bottom error bg-danger">{{error}}</div>
         </div>
     </div>
 </template>
@@ -23,12 +26,11 @@
     import Profile from './components/Profile.vue'
     import Place from './components/Place.vue'
     export default {
-        directives:{
-            'focus': {
-                inserted: function (el) {
-                    el.focus()
-                }
+		data() {
+			return {
             }
+        },
+        mounted(){
         },
     	components: {
     		appHeader: Header,
@@ -37,11 +39,15 @@
         },
 		computed: {
 			...mapGetters([
-				'loading',
-				'msg',
 			]),
 			error(){
 				return this.$store.state.error
+			},
+			msg(){
+				return this.$store.state.msg
+			},
+			loading(){
+				return this.$store.state.loading
 			}
 		},
 		methods: {
@@ -74,7 +80,7 @@
         margin-bottom: -42px;
     }
 
-    .error{
+    .error, .msg{
         padding:9px;
     }
 

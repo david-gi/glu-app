@@ -1,34 +1,27 @@
 <template>
 	<div>
-	<input v-model="errz" :value="errz" type="text" @change="err1"/>
-		<aboutModal></aboutModal>
 		<div class="vw-100" :class="{full: !placeShown, short: placeShown}" id="map"></div>
 		<input id="search-input" class="controls d-absolute mt-1 ml-1 border border-success" type="text" placeholder="Search map...">
 	</div>
 </template>
-	
-
 
 <script>
 import {mapActions, mapGetters} from 'vuex'
-import About from './About.vue'
+
 export default {
-    	components: {
-			aboutModal: About
-		},
 		data() {
 			return {
-				errz: this.error
 			}
 		},
 		created(){
 			this.loadPlaceTypes()
 		},
 		mounted(){
-			//Load Map
+			// Init and load Map
+			var tthis = this
 			const map = new google.maps.Map(document.getElementById('map'), {
-				center: {lat: 41.81, lng: -88},
-				zoom: 15,
+				center: {lat: 40, lng: -88},
+				zoom: 3,
 				disableDefaultUI: true,
 				zoomControl: true,
 				zoomControlOptions: {
@@ -36,21 +29,139 @@ export default {
 				},
 			})
 			const places = new google.maps.places.PlacesService(map)
-			map.addListener('click', handleClick)
 
-			//Search box
+			// Location
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition((position) => 
+				{
+					map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude })
+					map.zoom = 8
+				}, ()=>{})
+			} 
+
+			// Place click
+			map.addListener('click', 
+			function(event) {
+				tthis.getPlaceDetails(places, event.placeId)
+			})
+
+			// Search box			
+			var markers = [];
 			var input = document.getElementById('search-input')
 			var searchBox = new google.maps.places.SearchBox(input)
 			map.controls[google.maps.ControlPosition.TOP_LEFT].push(input)
-
-			// Bias the SearchBox results towards current map's viewport.
 			map.addListener('bounds_changed', function() {
 				searchBox.setBounds(map.getBounds())
 			});
-			
-			//place get details
-			var tthis = this
-			function getPlaceDetails(placeId){
+
+			// Search querying
+			searchBox.addListener('places_changed', function() {
+
+				var sPlaces = searchBox.getPlaces()
+				if (sPlaces && sPlaces.length == 0) { return; }
+				// Clear old markers
+				markers.forEach(function(marker) { marker.setMap(null); })
+				markers = [];
+
+				//Get glu-place ratings
+				var ratingDict = []
+				sPlaces.forEach(function(p){
+					ratingDict.push(p.place_id)
+				})
+				var bounds = new google.maps.LatLngBounds()
+				var i = 0
+				var colors = ['#387fe9', '#e94538', '#e96d38', '#e9b438', '#c1e938', '#72e938']
+				tthis.getPlaceRatings(ratingDict).then(resDict =>{
+					if(!resDict){ resDict = ratingDict; console.log("empty"); }
+					sPlaces.forEach(function(place) {
+						if (!place.geometry) {
+							console.log("Returned place contains no geometry")
+							return;
+						}
+
+						// Create a marker for each place
+						var ratingLabel = (resDict[place.place_id] == 0 ? ' (?★)' : " (" + resDict[place.place_id] + "★)");
+						var m = new google.maps.Marker({
+							map: map,
+							label: {
+								text: (place.name.length > 10 ? place.name.substring(0,10)+"..." : place.name) + ratingLabel,
+								color: '#333',
+								fontSize: '1.1em',
+								fontWeight: 'bold'
+
+							},
+							icon: {
+								path: google.maps.SymbolPath.CIRCLE,
+								fillColor: colors[resDict[place.place_id]],
+								fillOpacity: 1,
+								scale: 8,
+								strokeColor: '#222',
+								strokeWeight: 1,
+								labelOrigin: new google.maps.Point(place.name.length > 10 ? 7.5 : 6,0)
+							},
+							shape: {coords: [0,0,50,50], type: "rect"},
+							title: place.name + ratingLabel,
+							position: place.geometry.location,
+							optimized: true,
+							cursor: 'pointer',
+							zIndex: i++
+						})
+						m.addListener('click', function() {
+							map.panTo(place.geometry.location)
+							var zm = map.getZoom()
+							if(zm > 7){
+								map.setZoom(14)
+								tthis.getPlaceDetails(places, place.place_id)
+							} else {								
+								map.setZoom(zm + 3)
+							}
+						})
+						m.addListener('dblclick', function() {
+							map.setZoom(19)
+							map.panTo(place.geometry.location)
+							tthis.getPlaceDetails(places, place.place_id)
+						})
+						markers.push(m)
+
+						if (place.geometry.viewport) {
+							// Only geocodes have viewport
+							bounds.union(place.geometry.viewport)
+						} else {
+							bounds.extend(place.geometry.location)
+						}
+
+						//Select Place if only result
+						if(sPlaces.length == 1){
+							tthis.getPlaceDetails(places, sPlaces[0].place_id)
+						} else {
+							tthis.clearPlace()
+						}
+						map.fitBounds(bounds)
+					});
+				});
+			});
+
+		},
+		computed: {
+			...mapGetters([
+				'currentPlace',
+				'placeTypes',
+				'error'
+			]),
+			placeShown(){
+				return this.currentPlace != null
+			},
+		},
+		methods: {
+			...mapActions([
+				'getPlaceRatings',
+				'getPlace',
+				'loadPlaceTypes',
+				'clearPlace',
+				'errorMsg',
+			]),
+			getPlaceDetails(places, placeId){
+				var tthis = this
 				if (placeId) {
 					places.getDetails({placeId: placeId, fields: ['name', 'formatted_address', 'place_id', 'types']}, 
 						function(place, status) {
@@ -78,95 +189,6 @@ export default {
 							}
 						})
 				}
-			}
-
-			var markers = [];
-			searchBox.addListener('places_changed', function() {
-				var sPlaces = searchBox.getPlaces()
-
-				if (sPlaces && sPlaces.length == 0) { return; }
-
-				// Clear old markers
-				markers.forEach(function(marker) { marker.setMap(null); })
-				markers = [];
-
-				// For each place, get the icon, name and location
-				var bounds = new google.maps.LatLngBounds()
-				sPlaces.forEach(function(place) {
-					if (!place.geometry) {
-						console.log("Returned place contains no geometry")
-						return;
-					}
-
-					// Create a marker for each place
-					var m = new google.maps.Marker({
-						map: map,
-						title: place.name,
-						position: place.geometry.location
-					})
-					m.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
-					m.addListener('click', function() {
-						map.setZoom(map.getZoom() + 1)
-						map.panTo(place.geometry.location)
-					})
-					m.addListener('dblclick', function() {
-						map.setZoom(19)
-						map.panTo(place.geometry.location)
-						getPlaceDetails(place.place_id)
-					})
-					markers.push(m)
-
-					if (place.geometry.viewport) {
-						// Only geocodes have viewport
-						bounds.union(place.geometry.viewport)
-					} else {
-						bounds.extend(place.geometry.location)
-					}
-
-				});
-				//Select Place if only one
-				if(sPlaces.length == 1){
-					getPlaceDetails(sPlaces[0].place_id)
-				} else {
-					tthis.clearPlace()
-				}
-				map.fitBounds(bounds)
-			});
-
-			//place click
-      function handleClick(event) {
-				getPlaceDetails(event.placeId)
-      }
-
-			//geolocate
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition((position) => 
-				{
-					map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude })
-					map.zoom = 8
-				}, ()=>{})
-			} 
-
-		},
-		computed: {
-			...mapGetters([
-				'currentPlace',
-				'placeTypes',
-				'error'
-			]),
-			placeShown(){
-				return this.currentPlace != null
-			},
-		},
-		methods: {
-			...mapActions([
-				'getPlace',
-				'loadPlaceTypes',
-				'clearPlace',
-				'errorMsg',
-			]),
-			err1(){
-				this.errorMsg(this.errz)
 			}
 		}
 	}

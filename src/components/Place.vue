@@ -1,5 +1,5 @@
 <template>
-	<div v-if="currentPlace != null" :class="{ expanded: isExpanded }" 
+	<div id='placeBox' v-if="currentPlace != null" :class="{ expanded: isExpanded }" 
 		class="PlaceMain bg-success text-white vw-100 border-top">
 		<button type="button" class="close text-white p-1 mt-n1" @click="close" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
@@ -12,7 +12,7 @@
 						</div>
 						<div class="col-12 col-sm-8">
 							<h5 class="text-break float-left ml-n3 pr-2 text-truncate" style="max-width:70%" >
-								<a title="Click to Open in Google Maps" class="text-white" target="blank" :href="'https://www.google.com/maps/place/?q=place_id:' + currentPlace.id">
+								<a id='name' title="Click to Open in Google Maps" class="text-white" target="blank" :href="'https://www.google.com/maps/place/?q=place_id:' + currentPlace.id">
 									{{currentPlace.name}}
 								</a>
 							</h5>
@@ -42,12 +42,16 @@
 							</div>
 						</div>
 					</h5>
-					<div class="card bg-light text-dark pb-1">
+					<div class="rounded bg-light text-dark pb-1">
 
-						<areport ref="areport"></areport>
-						<small class="text-muted pl-3 w-50 pb-2 mt-n4" v-if="reports == null || reports.length < 1">Be the first to make a report  &rarr;</small>
+						<areport ref="areport"></areport><br>
 
-						<div class="border bg-white pt-2 pb-2" v-for="report in reportsFiltered" :key="report.created">
+						<small class="text-muted pl-3 w-50 pb-2 mt-n4" v-if="reports == null || reports.length < 1">
+							Be the first to make a report!
+						</small>
+
+						<div class="border bg-white pt-2" :class="{'pb-2': report.note, 'mb-n2': !(report.note)}" 
+						v-for="(report, index) in reportsFiltered" :key="index + report.created + Math.random()">
 							<span class="col-12">
 								<span class="d-inline-block">
 									<small>
@@ -88,6 +92,7 @@
 		},
 		computed: {
 			...mapGetters([
+				'profile',
 				'currentPlace',
 				'reports',
 				'reportsFiltered',
@@ -129,13 +134,12 @@
 					this.expanded = !this.expanded;
 			},
 			toggleMore(e){
-				$(e.target).toggleClass('text-truncate').toggleClass('less')
+				$(e.target).toggleClass('text-truncate').toggleClass('more')
 			},
 			showMore(){
-				$(".note").each(() => {
-					console.log(this.scrollHeight);
+				$(".note").each(function() {
 					if(this.scrollHeight > this.clientHeight || this.scrollWidth > this.clientWidth){
-						$(this.target).addClass('more')
+						$(this).addClass('more')
 					}
 				});
 			},
@@ -149,22 +153,25 @@
 			},
 			close(){
 				this.clearPlace()
-				this.filterQuery = "";
-				this.rating = 0;
-				this.note = "";
+				this.expanded = false
+				this.filterQuery = ""
+				this.rating = 0
+				this.note = ""
 			}
 		},
 		mounted(){
 			var tthis = this
+			tthis.showMore()
 			$(window).on("resize", function(){ tthis.showMore() })
 		},
 		watch: {
-			nameWatch(x,y){
+			nameWatch(x, y){
+				//close add report form
 				if(this.$refs.areport){
 					this.$refs.areport.closeAdd()
-					this.filterQuery = "";
-					this.rating = 0;
-					this.note = "";
+					this.filterQuery = ""
+					this.rating = 0
+					this.note = ""
 				}
 			}
 		}
@@ -209,17 +216,17 @@
 		padding-right: 50px;
 		font-size: .9em;
 	}
-	.note.more{
+	.more{
 		cursor: pointer;
 	}
-	.note.more::before{
+	.note.moreX::before{
 		content: "[more]";
 		float:right;
 		font-size: .7em;
 		color:#0056b3;
 		margin: 4px -30px 0 0;
 	}
-	.note.more.less::before{
+	.note.moreX.less::before{
 		content: "[less]";
 	}
 	.star{

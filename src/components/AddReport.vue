@@ -1,21 +1,23 @@
 <template>
 	<div>
-		<div class="p-1 ">			
-			<button v-show="!isOpen" :disabled="!isLoggedIn" :title="btnTitle" @click="openAdd" 
+		<div class="p-1 mb-2 ">			
+			<button v-show="!isOpen" :disabled="alreadyReported || !isLoggedIn" :title="btnTitle" @click="openAdd" 
 				:class="{'btn-outline-primary': isLoggedIn, 'btn-outline-secondary': !isLoggedIn}"
 				class="float-right btn btn-sm pl-4 pr-4 mb-1 font-weight-bold">
-				<small>Add a Report</small>
+				<small v-show="!alreadyReported">Add a Report</small>
+				<small v-show="alreadyReported">Already reported today</small>
 			</button>
 		</div>
-		<div v-show="isOpen" class="m-x1 mt-n1 pt-2 pb-3 pl-3 pr-3 border-bottom" style="border-width:9px !important">
-			<h6 class="m-n1 pb-3">
+		<div v-show="isOpen" class="m-0 mt-n5 pt-2 pb-3 pl-3 pr-3 border-bottom rounded-top bg-white" style="border-bottom-width:9px !important">
+			<h6 id='addBox' class="m-n1 pb-3">
 				<button type="button" class="close text-dark" @click="closeAdd" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</h6>
-			<div class="form-group row">
-				<div class="col-5">
+			<div class="form-group row w-100">
+				<div class="col-5 mt-n4">
 					<vue-stars v-model="rating" :value="1" shadowColor="none" inactiveColor="#ddd"></vue-stars>
+					<small v-show="rating < 1" class="text-warning font-italic ml-n2">&larr; rate it!</small>
 				</div>
 				<div class="col-12">
 					<textarea @input="autoHeight" type="text" class="inputLine w-100 p-2" v-model="note" placeholder=" Share your gluten experience"></textarea>
@@ -37,7 +39,7 @@
 			return {
 				rating: 0,
 				note: "",
-				opened: false
+				opened: false,
 			}
 		},
 		components: {
@@ -48,7 +50,15 @@
 				'profile',
 				'conditions',
 				'currentPlace',
+				'reportedPlaceIds'
 			]),
+			alreadyReported(){
+				if(this.currentPlace){
+					return this.reportedPlaceIds.indexOf(this.currentPlace.id) > -1
+				} else{
+					return false
+				}
+			},
 			isOpen(){
 				return this.opened
 			},
@@ -62,6 +72,7 @@
 		methods: {
 			...mapActions([
 				'addReport',
+				'getPlace',
 				'errorMsg',
 			]),
 			add(){
@@ -70,9 +81,12 @@
 					note: this.note,
 					place: this.currentPlace.id
 				}
+				var tthis = this
 				this.addReport(newReport)
-					.then(() => { 
-						this.close() 
+					.then(x => { 
+						tthis.rating = 0
+						tthis.note = ""
+						tthis.opened = false
 					})
 					.catch(e => { _this.errorMsg(e+"") } )
 			},

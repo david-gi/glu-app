@@ -25,6 +25,7 @@ var store = new Vuex.Store({
 		placeTypesRef: db.collection("place-types"),
 		reportsRef: db.collection("reports"),
 		itemsRef: db.collection("items"),
+		bugsRef: db.collection("bugs"),
 		
 		auth: false,
 		msg: null,
@@ -40,7 +41,7 @@ var store = new Vuex.Store({
 		  state.msg = x
 		  setTimeout(() => {
 			state.msg = null
-		  }, 2000);
+		  }, 3000);
 		},
 		setError (state, x) {
 		  state.error = x

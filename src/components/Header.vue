@@ -1,11 +1,11 @@
 <template>
 		<nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light border" >
 		    <div class="navbar-header">
-		      <span class="navbar-brand text-success"><i class="glu-font">Glutenous!</i> 
+		      <span class="navbar-brand text-success"><i class="glu-font">GLUTENOUS!</i> 
 						<small class="font-weight-light text-black-50 d-inline-block w-75 text-wrap align-text-top">
 							<small> 
-								<span class="d-sm-none" style="font-size:.8em">Gluten Maps</span>
-								<span class="d-none d-sm-inline">Gluten Maps</span>
+								<span class="d-sm-none" style="font-size:.8em">Gluten Maps<span style="font-size:.8em">™</span></span>
+								<span class="d-none d-sm-inline">Gluten Maps<span style="font-size:.8em">™</span></span>
 							</small>
 						</small>
 					</span>
@@ -82,12 +82,11 @@
 			mounted(){
 				var tthis = this
 				this.$store.dispatch("autoLogin")
-					this.$refs.learnNavModal.open()
 				setTimeout(() => {
 							if(!tthis.$store.state.auth){
-								//tthis.$refs.aboutNavModal.open()
+								tthis.$refs.aboutNavModal.open()
 							}
-						}, 4000)
+						}, 2500)
 			}
 	}
 </script>

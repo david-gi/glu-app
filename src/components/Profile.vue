@@ -4,9 +4,9 @@
 			<div class="card-body">
 					<form>
 						<div class="form-group">
-						<button type="button" class="close text-white" @click="close"  aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+							<button type="button" class="close text-white" @click="close"  aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
 							<span class="font-weight-bold">{{profile.name}}</span><br>
 							<span class="text-white-50">{{profile.email}}</span><br><br>
 							<label for="cndInp">Gluten-related disorder:</label>
@@ -16,8 +16,20 @@
 							</select>
 						</div>
 						<br>
-						<button type="button" class="btn btn-primary" @click="signOff">Logout</button>
-						<button type="button" class="btn btn-success float-right" @click="save">Save</button>
+						<div class="text-right  mt-n3">
+							<button type="button" class="btn btn-primary btn-sm mt-2" @click="signOff">Logout</button>
+							<button type="button" class="btn btn-primary btn-sm ml-4 mt-2" @click="toggleBug">Report a Bug</button>
+							<button type="button" class="btn btn-success clearfix ml-4 mt-2" @click="save">Save</button>
+						</div>
+						<hr v-show="bugOpen">
+						<div class="card mt-3" v-show="bugOpen">
+							<div class="col-12">
+								<textarea id="bugInp" @input="autoHeight" type="text" class="inputLine w-100 p-2" v-model="bugText" 
+								placeholder="Bug report details..."></textarea>
+								<button type="button" class="btn btn-link text-muted pl-2 pr-2" @click="toggleBug">cancel</button>
+								<button type="button" class="btn btn-sm btn-success mt-1 pl-5 pr-5 float-right" @click="sendBugReport">Submit</button>
+							</div>
+						</div>
 					</form>
 			    </div>
 		</div>
@@ -29,7 +41,9 @@
 	export default {
 		data() {
 			return {
-				cId: ""
+				cId: "",
+				bugOpen: false,
+				bugText: "",
 			}
 		},
 		computed: {
@@ -47,7 +61,8 @@
 				'loadConditions',
 				'toggleProfile',
 				'errorMsg',
-				'logout'
+				'logout',
+				'sendBug'
 			]),
 			save(){
 				this.saveProfile(this.cId)
@@ -62,6 +77,22 @@
 			signOff(){
 				this.logout()
 					.catch(e => { _this.errorMsg(e+"") } )
+			},
+			toggleBug(){
+				this.bugOpen = !this.bugOpen
+			},
+			sendBugReport(){
+				var tthis = this
+				this.sendBug(tthis.bugText)
+					.then(x => { 
+						tthis.bugText = ""
+						tthis.bugOpen = false
+					})
+					.catch(e => { _this.errorMsg(e+"") } )
+			},
+			autoHeight(e) {
+				e.target.style.height = ""
+				e.target.style.height = Math.min(e.target.scrollHeight, 120) + "px"
 			}
 		},
 		created(){
@@ -69,7 +100,7 @@
 				.catch(e => { _this.errorMsg(e+"") } )
 		},
 		updated() {
-				if(this.showProfile && this.cId == "") { this.cId = this.profile.condition ? this.profile.condition.id : " " }
+			if(this.showProfile && this.cId == "") { this.cId = this.profile.condition ? this.profile.condition.id : " " }
 		}
 	}
 

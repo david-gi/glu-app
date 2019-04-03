@@ -90,7 +90,21 @@ const actions = {
 			context.commit("setProfile", { id: null, email: "", name: "", condition: null })
 			context.commit('setMsg', 'Signed out!')
 		})
-	}
+	},
+	sendBug: (context, btext) => {
+		var bugsRef = context.rootState.bugsRef
+		var user = context.rootState.usersRef.doc(firebase.auth().currentUser.uid)
+			
+		var bugReport = {
+			text: btext,
+			user: user,
+			created: firebase.firestore.FieldValue.serverTimestamp()
+		}
+		bugsRef.add(bugReport).then(()=>{
+			context.commit('setMsg', 'Bug reported, thanks!')
+		})
+		.catch(e => console.log(e));
+	},
 }
 
 const getters = {

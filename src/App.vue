@@ -67,7 +67,8 @@
 	}
     .glu-font{
         font-size: 1.1em;
-        font-family: Georgia, 'Times New Roman', Times, serif !important;
+        font-weight: bold;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
     #Header{
         padding: 0 24px;
@@ -119,4 +120,18 @@
     input[type="range"]:focus {
     outline: none;
     }
+	.inputLine{
+		background-color: transparent;
+		color:#555;
+		opacity: 1;
+		border: 0;
+		border-bottom: 2px solid #28A744;
+		margin-bottom: 6px;
+		height: 50px;
+		resize: none;
+		overflow: hidden;
+	}
+	.inputLine::placeholder {
+		opacity: 1;
+	}
 </style>

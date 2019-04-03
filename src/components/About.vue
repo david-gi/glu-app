@@ -1,11 +1,11 @@
 <template>
-		<div class="modal fade" id="aboutModal" @keydown="closeAbout" tabindex="-1" role="dialog" aria-labelledby="aboutModalTitle" aria-hidden="true">
+		<div class="modal fade" id="aboutModal" @keypress="closeAbout" tabindex="-1" role="dialog" aria-labelledby="aboutModalTitle" aria-hidden="true">
 			<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 				<div class="modal-content bg-light border border-primary" 
 					style="border-width:6px !important; box-shadow: 0px 0px 20px #666;">
 					<div class="modal-header text-white bg-primary rounded-0">
 						<h5 class="modal-title" id="aboutModalTitle">
-							Welcome to <i class="glu-font">Glutenous!</i>
+							Welcome to <i class="glu-font">GLUTENOUS!</i>
 							</h5>
 						<button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -19,10 +19,10 @@
 						<hr>
 
 						<blockquote class="blockquote border border-success text-success bg-light col-sm-4 col-12 
-							float-right text-center mt-0 mt-sm-4 ml-5 p-1 pt-3 pb-2 rounded">
+							float-right text-center mt-0 mt-sm-4 ml-5 p-2 pt-3 pb-2 rounded">
 							<p class="mb-1 glu-font">
 								<small>
-									<img width="120" height="120" src="src/assets/logo.png" /><br>
+									<img width="120" height="120" src="src/assets/stickers.gif" /><br>
 									<i class="font-weight-bolder">Glu′ten·ous! </i><br>
 									<small>
 										An exclamation of horror upon realizing a 'gluten-free' meal was in fact, <i class="font-weight-bolder">not so gluten-free after all.</i>
@@ -46,10 +46,10 @@
 								
 								<strong class="text-primary mt-3 d-inline-block">100% free, world-wide from any device.</strong><br>
 								<strong><span class="text-success"></span><i>No sign up,</i> just login with your Google account and go!</strong>
-								This community project is fueled by crowd-reporting from gluten-free people like you. Designed to be accessible from any device, anywhere.<br>
+								This community project is fueled by crowd-reporting from gluten-free people like you. No app download, as a progressive web app (PWA) it's accessible on the web from any device, anywhere.<br>
 
 								<strong class="text-primary mt-3 d-inline-block">Wanna support this?</strong> <br>
-								Donate or buy some <i>Glutenous!</i> project stickers today. <a href="#donate">Find out more.</a><br>
+								Buy some <i>GLUTENOUS!</i> retaliation stickers today. <a href="#donate">Find out more.</a><br>
 								<i class="text-muted">This is a not-for-profit community project founded by a Celiac - no ads, no paid commercial bias, no 3rd party affiliates and no promo emails! <span class="d-inline-block">Just what you see is what you get.</span></i><br>
 							</small>
 						</p>

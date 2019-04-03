@@ -24,32 +24,34 @@
 								We've all seen the gluten-free label on items that were always and naturally gluten-free, so what's the deal? Is it just marketing craze?
 								Well believe it or not the small amounts of gluten contamination from food made in facilities that handle grains or flour is enough to affect those with gluten-related disorders.
 								<br><br>
-								For gluten sufferers, each accidental gluten ingestion (glutening) can build upon each other, and can take up to 3 months to fully recover!
+								For gluten sufferers, each accidental gluten ingestion (glutening) can build upon each other, and can take victims up to 3 months to fully recover!
 								<br><br>
-								So those gluten-free labeled treats next to a cafe's cash register? Well their often made in the same bakery as their non-gluten-free treats and are therefore, <i> not gluten free.</i> 
+								So those gluten-free labeled treats next to a cafe's cash register? Well their often made in the same bakery as non-gluten-free treats and are therefore, <i> not gluten free.</i> 
 								<br>
 
 								<br><strong class="text-primary">The tragedy of Celiac's testing</strong><br>
 								Celiac's disease can be diagnosed in three ways (listed in order of accuracy).
 								<ul>
-									<li><strong>Diet confirmed:</strong><br>
-									Try a gluten-free diet, if it works, you have celiac's, probably. Of course being actually gluten-free is really difficult at first and diets often fail.</li>
-									<li><strong>Blood test confirmed:</strong><br>
-									Doctor tests you blood to see if your body reacts to gluten. Results aren't super accurate and you must have enough gluten in your diet for them to even work.</li>
-									<li><strong>Biopsy Confirmed:</strong><br>
-									Gastrointestinologists cut a tiny hole out of your upper instestines to test for gluten-related damage. 
-									It is the most accurate way to diagnose, though again, you'll need to have been consuming gluten for months for it to work.
+									<li><strong>Diet confirmed</strong><br>
+									Try a gluten-free diet, if it works, you have celiac's, probably. Though as stated above, it could also be FODMAP-realted. Since truly gluten-free diets are really difficult, dieters often fail unknowingly leading to a false negative.</li>
+									<li><strong>Blood test confirmed</strong><br>
+									Doctors test you blood to see if your body is reacting to gluten. Results aren't super accurate and doctors & technicians aren't always good at statistics.
+									What's more, you must have enough gluten in your diet for them to even work. 
+									Eating lots of gluten for several months in order for the test to work is refered to as a  'Gluten Challenge'.</li>
+									<li><strong>Biopsy 'Scope' Confirmed</strong><br>
+									Gastrointestinologists fully sedate you, put a special hose down your throat and stomach then cut a tiny hole out of your upper instestines to test for gluten-related damage. 
+									It is the most accurate way to diagnose, though again, you'll need to do a 'Gluten Challenge' for it to work well.
 									</li>
 								</ul>
 								While testing is getting better and better, and doctor's are getting more aware - mis-testing and mis-diagnosis happens.
 								As such, many Celiac's sufferers are left confused and untreated - and often treated as hypocondriacs unfairly. 
-								Given the difficulty of testing as well as the cost and intensity of biopsies, doctor's will often recommend a gluten-free diet and leave it at that.
+								Given the cost and intensity of biopsies, compounded by the harm of gluten-challenging, doctor's will often recommend a gluten-free diet and leave it at that.
 								<br><br>
 								The results are still out but this may be part of the equation of gluten-intolerance (and possibly IBS).
-								If you are undiagnosed but convinced gluten is a problem for you, you're not crazy but now you are informed.
+								If you are undiagnosed but convinced gluten is a problem for you, you're likely not crazy but now you are informed.
 								<br>
-								<br><strong class="text-primary">Fad and Marketing Labeling</strong><br>
-								That brings us to the world of marketing... Gluten-free living is being sold as a lifestyle choice regardless of an underlying disorder. Which leads to gluten-free labeling that is ignorant of gluten contamination.
+								<br><strong class="text-primary">Marketing Fads</strong><br>
+								That brings us to the world of health marketing... Gluten-free living is being sold as a lifestyle choice regardless of an underlying disorder. Which leads to gluten-free labeling that is ignorant of gluten contamination.
 								This makes gluten-free diets even harder and while gluten-free labels are become more controlled, we're not there yet.
 								<br><br>
 								Why is it being marketed as a health diet? As stated in the video above, gluten-free diets are by coincidence healthier.

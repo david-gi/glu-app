@@ -11,6 +11,10 @@ Vue.use(VueResource)
 
 const router = new VueRouter({ routes })
 
+Vue.config.errorHandler = function (err, vm, info) {
+	console.log("Global Handler: "+err + " | " + info)
+  }
+
 window.app = new Vue({
 	el: '#app',
 	router,

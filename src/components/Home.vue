@@ -1,7 +1,8 @@
 <template>
 	<div>
 		<div class="vw-100" :class="{full: !placeShown, short: placeShown}" id="map"></div>
-		<input id="search-input" class="controls d-absolute mt-1 ml-1 border border-success" type="text" placeholder="Search map...">
+		<input id="search-input" class="controls d-absolute mt-1 ml-1 border border-success" type="text" 
+			placeholder="Search map...">
 	</div>
 </template>
 
@@ -17,6 +18,7 @@ export default {
 			this.loadPlaceTypes()
 		},
 		mounted(){
+			try{
 			// Init and load Map
 			var tthis = this
 			const map = new google.maps.Map(document.getElementById('map'), {
@@ -140,7 +142,11 @@ export default {
 					});
 				});
 			});
-
+			} catch(e){
+				if(e || e.indexOf("google is not defined")){
+					window.location.replace(window.location.pathname)
+				}
+			}
 		},
 		computed: {
 			...mapGetters([

@@ -34,8 +34,8 @@
 						<p>
 							<small>
 								<strong class="text-primary">Being gluten-free just got easier...</strong><br>
-								<strong>Gluten-free places by gluten-free people</strong> with the power of Crowd-Reporting and Google Maps anywhere you go.<br>
-								Get informed <i>before</i> you go out, share your experiences and hold businesses accountable when they say 'gluten-free'.
+								<strong>Gluten-safe places by gluten-free people</strong> with the power of Crowd-Reporting and Google Maps. 
+								Get informed <i>before</i> you go out, report your gluten experiences and share them. Let's hold businesses accountable when they say 'gluten-free'.
 								
 								<br>
 								

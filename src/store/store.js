@@ -24,7 +24,6 @@ var store = new Vuex.Store({
 		placesRef: db.collection("places"),
 		placeTypesRef: db.collection("place-types"),
 		reportsRef: db.collection("reports"),
-		itemsRef: db.collection("items"),
 		bugsRef: db.collection("bugs"),
 		
 		auth: false,

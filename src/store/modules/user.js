@@ -90,6 +90,7 @@ const actions = {
 			context.commit("setProfile", { id: null, email: "", name: "", condition: null })
 			context.commit('setMsg', 'Signed out!')
 		})
+		.catch(e => { console.log(e) })
 	},
 	sendBug: (context, btext) => {
 		var bugsRef = context.rootState.bugsRef
@@ -122,29 +123,3 @@ export default {
 	actions, 
 	getters
 }
-
-
-		//**Clear Firestore** CANNOT BE UNDONE!
-		// context.rootState.reportsRef.get()
-		// 	.then(x => {
-		// 		console.log("reports"+x.docs.length)
-		// 		x.docs.forEach(d => {
-		// 			context.rootState.reportsRef.doc(d.id).delete()
-		// 		})
-		// 		context.rootState.placesRef.get()
-		// 			.then(y => {
-		// 				console.log("places"+y.docs.length)
-		// 				y.docs.forEach(d => {
-		// 					context.rootState.placesRef.doc(d.id).delete()
-		// 				})
-		// 				context.rootState.usersRef.get()
-		// 					.then(z => {
-		// 						console.log("users"+z.docs.length)
-		// 						z.docs.forEach(d => {
-		// 							context.rootState.usersRef.doc(d.id).delete()
-		// 						})
-		// 					})
-		// 			})
-		// 	})
-		// 	.catch(e => { console.log(e) })
-		//////////////////////////////////////

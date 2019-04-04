@@ -82,13 +82,15 @@
 				this.bugOpen = !this.bugOpen
 			},
 			sendBugReport(){
-				var tthis = this
-				this.sendBug(tthis.bugText)
-					.then(x => { 
-						tthis.bugText = ""
-						tthis.bugOpen = false
-					})
-					.catch(e => { _this.errorMsg(e+"") } )
+				if(this.bugText != null && this.bugText.length > 3){
+					var tthis = this
+					this.sendBug(tthis.bugText)
+						.then(x => { 
+							tthis.bugText = ""
+							tthis.bugOpen = false
+						})
+						.catch(e => { _this.errorMsg(e+"") } )
+				}
 			},
 			autoHeight(e) {
 				e.target.style.height = ""

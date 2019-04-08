@@ -175,6 +175,7 @@ export default {
 							//discriminate on place type
 							var ofType = false;
 							tthis.placeTypes.forEach(t=>{
+								console.log(t.id + "::: " +place.types)
 								if(place.types.includes(t.id.toLowerCase().trim().replace(' ','_'))){ ofType = true }
 							})
 							

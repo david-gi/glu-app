@@ -24,7 +24,8 @@
 								We've all seen the gluten-free label on items that were always and naturally gluten-free, so what's the deal? Is it just marketing craze?
 								Well believe it or not the small amounts of gluten contamination from food made in facilities that handle grains or flour is enough to affect those with gluten-related disorders.
 								<br><br>
-								For gluten sufferers, each accidental gluten ingestion (glutening) can build upon each other, and can take victims up to 3 months to fully recover!
+								For gluten sufferers, each accidental gluten ingestion (glutening) can build upon each other, and can take victims up to 3 months to fully recover! 
+								Gluten does more than lower quality of their lives, it does real harm to the immune system and can result in a number of secondary diseases.
 								<br><br>
 								So those gluten-free labeled treats next to a cafe's cash register? Well their often made in the same bakery as non-gluten-free treats and are therefore, <i> not gluten free.</i> 
 								<br>

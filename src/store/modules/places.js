@@ -23,11 +23,11 @@ const mutations = {
 	'setReportsFiltered' (state, x) {
 		state.reportsFiltered = x
 	},
-	'pushReport' (state, x) {
-		if(state.reports){ state.reports.unshift(x) }
-		else { state.reports = [x] }
-		state.reports = state.reports
-	},
+	// 'pushReport' (state, x) {
+	// 	if(state.reports){ state.reports.unshift(x) }
+	// 	else { state.reports = [x] }
+	// 	state.reports = state.reports
+	// },
 	'setPlaceTypes' (state, x) {
 		state.placeTypes = x
 	},
@@ -46,6 +46,7 @@ const actions = {
 		var length = ratingDict.length
 		return new Promise((resolve, reject) => {
 			ratingDict.forEach(function(key){
+				//TODO - change to  where query
 				context.rootState.placesRef.doc(key).get()
 					.then(p => {
 						count++;

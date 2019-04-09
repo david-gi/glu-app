@@ -9,12 +9,12 @@ Vue.use(Vuex)
 
 //firebase init
 const db = firebase.initializeApp({
-	apiKey: "AIzaSyAkl-CZ-sBxtpzN-zrB80Efn2zKMBI-bTc",
-	authDomain: "glu-base.firebaseapp.com",
-	databaseURL: "https://glu-base.firebaseio.com",
-	projectId: "glu-base",
-	storageBucket: "glu-base.appspot.com",
-	messagingSenderId: "940963835002"
+	apiKey: "AIzaSyBp4rGxWZB4i00Jf5khLks4nVyvSYs-3Gs",
+	authDomain: "glutenous.firebaseapp.com",
+	databaseURL: "https://glutenous.firebaseio.com",
+	projectId: "glutenous",
+	storageBucket: "glutenous.appspot.com",
+	messagingSenderId: "670970270718"
 }).firestore()
 
 var store = new Vuex.Store({

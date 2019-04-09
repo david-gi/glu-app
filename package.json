@@ -1,6 +1,7 @@
 {
-  "name": "glu-app",
-  "description": "A Vue.js Google Maps Mashup with Firebase",
+  "name": "glutenous",
+  "main": "app.js",
+  "description": "Gluten Maps: A Vue.js Google Maps Mashup with Firebase",
   "author": "David Gi",
   "private": true,
   "scripts": {
@@ -28,5 +29,15 @@
     "vue-loader": "^9.7.0",
     "webpack": "2.1.0-beta.25",
     "webpack-dev-server": "2.1.0-beta.0"
-  }
+  },
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/david-gi/glu-app.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/david-gi/glu-app/issues"
+  },
+  "homepage": "https://github.com/david-gi/glu-app#readme"
 }

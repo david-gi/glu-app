@@ -1,0 +1,26 @@
+_____place-types____
+bakery
+bar
+book_store
+bowling_alley
+cafe
+convenience_store
+gas_station
+liquor_store
+meal_delivery
+meal_takeaway
+night_club
+restaurant
+store
+supermarket
+food
+
+___conditions____
+
+Celiac's Disease (Biopsy Confirmed)
+Celiac's Disease (Blood Test Confirmed)
+Celiac's Disease (Diet Confirmed)
+Gluten Ataxia
+Gluten Dermatitis
+Wheat Allergy
+Gluten Intolerance

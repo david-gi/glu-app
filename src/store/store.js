@@ -9,7 +9,7 @@ Vue.use(Vuex)
 
 //firebase init
 const db = firebase.initializeApp({
-	apiKey: "AIzaSyBp4rGxWZB4i00Jf5khLks4nVyvSYs-3Gs",
+	apiKey: "AIzaSyAzTjASmqR-IXxxJ31I7wpOHOVpcHyhkdk",
 	authDomain: "glutenous.firebaseapp.com",
 	databaseURL: "https://glutenous.firebaseio.com",
 	projectId: "glutenous",

@@ -111,6 +111,7 @@ export default {
 						m.addListener('click', function() {
 							map.panTo(place.geometry.location)
 							var zm = map.getZoom()
+					console.log(zm);
 							if(zm > 14){
 								map.setZoom(14)
 								tthis.getPlaceDetails(places, place.place_id)

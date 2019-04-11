@@ -27,14 +27,17 @@
 				</button>
 				
 				<span class="navbar-text float-left pl-1">
-					<a href="#" id="loginBtn" class="border border-primary p-2 rounded btn-link text-primary" v-show="!isLoggedIn" @click="doLogin">
-						<img class="mr-n1" src="/src/assets/G.svg"/>
-						<small>SIGN IN</small>
+					<a id="loginBtn" class="border border-primary p-2 rounded btn-link text-primary" style="cursor:pointer"
+						v-show="!isLoggedIn" @click="doLogin">
+						<img v-show="!loginLoading" class="mr-n1" src="/src/assets/G.svg"/>
+						<small v-show="!loginLoading">SIGN IN</small>
+						<small v-show="loginLoading">Loading...</small>
 					</a>
 					<a id="LoginIcon" href="#" v-show="isLoggedIn" @click="toggleProfile" class="align-middle"
 							:class="{ active: showProfile }"	:style="{ backgroundImage: 'url('+photoUrl+')' }">
 					</a>
 				</span>
+
 			<aboutModal ref="aboutNavModal"></aboutModal>
 			<learnModal ref="learnNavModal"></learnModal>
 		</nav>
@@ -44,10 +47,12 @@
 	import {mapActions, mapGetters} from 'vuex'
 	import About from './About.vue'
 	import Learn from './Learn.vue'
+	import firebase from 'firebase/app'
     export default {
 			...mapGetters,
     	data() {
     		return {
+					loginLoading: false
     		}
     	},
 			components: {
@@ -68,20 +73,28 @@
 			methods: {
 				...mapActions([
 					'toggleProfile',
+					'setLoading',
 				]),
 				doLogin() {
-					this.$store.dispatch("doLogin")
+					var provider = new firebase.auth.GoogleAuthProvider()
+					firebase.auth().signInWithRedirect(provider)
 				},
 				navAbout(){
 					this.$refs.aboutNavModal.open()
 				},
 				navLearn(){
 					this.$refs.learnNavModal.open()
-				}
+				},
+			},
+			created(){
+				var tthis = this
 			},
 			mounted(){
 				var tthis = this
+				this.loginLoading = true
+				setTimeout(function(){ tthis.loginLoading = false }, 3000)
 				this.$store.dispatch("autoLogin")
+
 				setTimeout(() => {
 							if(!tthis.$store.state.auth){
 								tthis.$refs.aboutNavModal.open()

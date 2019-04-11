@@ -1,5 +1,6 @@
 <template>
-		<div class="modal fade" id="aboutModal" @keypress="closeAbout" tabindex="-1" role="dialog" aria-labelledby="aboutModalTitle" aria-hidden="true">
+		<div class="modal fade" id="aboutModal" @keypress="closeAbout" tabindex="-1" role="dialog" 
+		aria-labelledby="aboutModalTitle" aria-hidden="true">
 			<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 				<div class="modal-content bg-light border border-primary" 
 					style="border-width:6px !important; box-shadow: 0px 0px 20px #666;">
@@ -49,7 +50,7 @@
 								This community project is fueled by crowd-reporting from gluten-free people like you. No app download, as a progressive web app (PWA) it's accessible on the web from any device, anywhere.<br>
 
 								<strong class="text-primary mt-3 d-inline-block">Wanna support this?</strong> <br>
-								Buy some <i>GLUTENOUS!</i> retaliation stickers today. <a href="#donate">Find out more.</a><br>
+								Check out our Indiegogo Campaign. <a href="#donate">Find out more.</a><br>
 								<i class="text-muted">This is a not-for-profit community project founded by a Celiac - no ads, no paid commercial bias, no 3rd party affiliates and no promo emails! <span class="d-inline-block">Just what you see is what you get.</span></i><br>
 							</small>
 						</p>

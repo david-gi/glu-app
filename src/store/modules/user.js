@@ -1,5 +1,4 @@
 import firebase from 'firebase'
-import firebaseui from 'firebaseui'
 
 const state = {
 	profile: { id: null, email: "", name: "", condition: null },
@@ -15,32 +14,7 @@ const mutations = {
 	},
 }
 
-const actions = {
-	doLogin: (context) => {
-        const provider = new firebase.auth.GoogleAuthProvider()
-        firebase.auth().signInWithPopup(provider)
-            .then(res => {
-                var docRef = context.rootState.usersRef.doc(res.user.uid)
-				docRef.get()
-					.then(p => {
-						if(p.exists){
-							var refreshProfile = { email: res.user.email, name: res.user.displayName, photoURL: res.user.photoURL, points: p.data().points, condition: p.data().condition }
-							docRef.set(refreshProfile, { merge: true })
-							context.commit('setProfile', refreshProfile)
-							context.commit('setAuth', true)
-							if(p.data().condition == null){ context.commit('toggleProfile') }
-						} else{
-							var newProfile = { email: res.user.email, name: res.user.displayName, photoURL: res.user.photoURL, points: "0", condition: null }
-							docRef.set(newProfile)
-							console.log("New user created")
-							context.commit('setProfile', newProfile)
-							context.commit('toggleProfile')
-							context.commit('setAuth', true)
-						}
-					})
-            })
-			.catch(e => { console.log("Auth Failed: " + e) })			
-	},
+const actions = {	
 	autoLogin: (context, uid) => {
 		firebase.auth().onAuthStateChanged(function(user) {
 			if (user) {
@@ -54,10 +28,18 @@ const actions = {
 							context.commit('setProfile', refreshProfile)
 							context.commit('setAuth', true)
 							if(p.data().condition == null){ context.commit('toggleProfile') }
+						} else{
+							var newProfile = { email: user.email, name: user.displayName, photoURL: user.photoURL, points: "0", condition: null }
+							docRef.set(newProfile)
+							console.log("New user created")
+							context.commit('setProfile', newProfile)
+							context.commit('toggleProfile')
+							context.commit('setAuth', true)
 						}
 					})
 			}
 		})
+		.catch(e => { console.log("Auth Failed: " + e) })		
 	},
 	loadConditions: (context) => {
 		if(state.conditions == null){

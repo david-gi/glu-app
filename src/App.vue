@@ -21,7 +21,6 @@
 </template>
 
 <script>
-    import bootstrap from 'bootstrap'
 	import {mapActions, mapGetters} from 'vuex'
 	import Header from './components/Header.vue'
     import Profile from './components/Profile.vue'

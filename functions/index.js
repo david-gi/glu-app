@@ -4,9 +4,19 @@ const functions = require('firebase-functions')
 const admin = require('firebase-admin')
 admin.initializeApp()
 
-// Sum report ratings for a place when a new report is made
+// Sum report ratings for a place when a new report is made and add points
 exports.sumRatings = functions.firestore.document('reports/{report}')
     .onWrite((change, context) => {
+        
+        var userRef = admin.firestore().collection('users').doc(change.after.data().user.id)
+        userRef.get()
+        .then(res => {
+            var oldPoints = res.data().points
+            var increment = 10
+            var newPoints = oldPoints && isFinite(oldPoints) ? oldPoints + increment : increment
+            userRef.set({points: newPoints}, { merge: true })
+        })
+
         var placeRef = admin.firestore().collection('places').doc((change.after.data().place || change.before.data().place).id)
         admin.firestore().collection('reports')
             .where('place', '==', placeRef).get()

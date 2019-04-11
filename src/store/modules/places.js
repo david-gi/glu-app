@@ -102,7 +102,7 @@ const actions = {
 						.then(u => { 
 							var user = u.data()
 							reports.push({rating: r.rating, note: r.note, created: r.created, 
-								user: { name: user.name, condition: user.condition, photoURL: user.photoURL } })
+								user: { name: user.name, condition: user.condition, points: user.points, photoURL: user.photoURL } })
 							if(--i == 0){
 								context.commit("setReports", reports)
 							}

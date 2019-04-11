@@ -30,11 +30,11 @@
 								So those gluten-free labeled treats next to a cafe's cash register? Well their often made in the same bakery as non-gluten-free treats and are therefore, <i> not gluten free.</i> 
 								<br>
 
-								<br><strong class="text-primary">The tragedy of Celiac's testing</strong><br>
-								Celiac's disease can be diagnosed in three ways (listed in order of accuracy).
+								<br><strong class="text-primary">The tragedy of Celiac testing</strong><br>
+								Celiac disease can be diagnosed in three ways (listed in order of accuracy).
 								<ul>
 									<li><strong>Diet confirmed</strong><br>
-									Try a gluten-free diet, if it works, you have celiac's, probably. Though as stated above, it could also be FODMAP-realted. Since truly gluten-free diets are really difficult, dieters often fail unknowingly leading to a false negative.</li>
+									Try a gluten-free diet, if it works, you are celiac, probably. Though as stated above, it could also be FODMAP-realted. Since truly gluten-free diets are really difficult, dieters often fail unknowingly leading to a false negative.</li>
 									<li><strong>Blood test confirmed</strong><br>
 									Doctors test you blood to see if your body is reacting to gluten. Results aren't super accurate and doctors & technicians aren't always good at statistics.
 									What's more, you must have enough gluten in your diet for them to even work. 
@@ -45,7 +45,7 @@
 									</li>
 								</ul>
 								While testing is getting better and better, and doctor's are getting more aware - mis-testing and mis-diagnosis happens.
-								As such, many Celiac's sufferers are left confused and untreated - and often treated as hypocondriacs unfairly. 
+								As such, many Celiac sufferers are left confused and untreated - and often treated as hypocondriacs unfairly. 
 								Given the cost and intensity of biopsies, compounded by the harm of gluten-challenging, doctor's will often recommend a gluten-free diet and leave it at that.
 								<br><br>
 								The results are still out but this may be part of the equation of gluten-intolerance (and possibly IBS).

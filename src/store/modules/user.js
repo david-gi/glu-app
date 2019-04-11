@@ -23,13 +23,13 @@ const actions = {
 				docRef.get()
 					.then(p => {
 						if(p.exists){
-							var refreshProfile = { email: res.user.email, name: res.user.displayName, photoURL: res.user.photoURL, condition: p.data().condition }
+							var refreshProfile = { email: res.user.email, name: res.user.displayName, photoURL: res.user.photoURL, points: p.data().points, condition: p.data().condition }
 							docRef.set(refreshProfile, { merge: true })
 							context.commit('setProfile', refreshProfile)
 							context.commit('setAuth', true)
 							if(p.data().condition == null){ context.commit('toggleProfile') }
 						} else{
-							var newProfile = { email: res.user.email, name: res.user.displayName, photoURL: res.user.photoURL, condition: null }
+							var newProfile = { email: res.user.email, name: res.user.displayName, photoURL: res.user.photoURL, points: "0", condition: null }
 							docRef.set(newProfile)
 							console.log("New user created")
 							context.commit('setProfile', newProfile)
@@ -48,7 +48,7 @@ const actions = {
 				docRef.get()
 					.then(p => {
 						if(p.exists){
-							var refreshProfile = { email: user.email, name: user.displayName, photoURL: user.photoURL, condition: p.data().condition }
+							var refreshProfile = { email: user.email, name: user.displayName, photoURL: user.photoURL, points: p.data().points, condition: p.data().condition }
 							docRef.set(refreshProfile, { merge: true })
 							context.commit('setProfile', refreshProfile)
 							context.commit('setAuth', true)
@@ -87,7 +87,7 @@ const actions = {
 			console.log("logged out")
 			context.commit('setAuth', false)
 			context.commit('toggleProfile')
-			context.commit("setProfile", { id: null, email: "", name: "", condition: null })
+			context.commit("setProfile", { id: null, email: "", name: "", points: "0", condition: null })
 			context.commit('setMsg', 'Signed out!')
 		})
 		.catch(e => { console.log(e) })

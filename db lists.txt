@@ -17,9 +17,9 @@ food
 
 ___conditions____
 
-Celiac's Disease (Biopsy Confirmed)
-Celiac's Disease (Blood Test Confirmed)
-Celiac's Disease (Diet Confirmed)
+Celiac Disease (Biopsy Confirmed)
+Celiac Disease (Blood Test Confirmed)
+Celiac Disease (Diet Confirmed)
 Gluten Ataxia
 Gluten Dermatitis
 Wheat Allergy

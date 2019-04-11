@@ -111,11 +111,15 @@ export default {
 						m.addListener('click', function() {
 							map.panTo(place.geometry.location)
 							var zm = map.getZoom()
-							if(zm > 7){
+							if(zm > 14){
 								map.setZoom(14)
 								tthis.getPlaceDetails(places, place.place_id)
+							}
+							if(zm < 14 && zm > 5){
+								map.setZoom(5)
+								tthis.getPlaceDetails(places, place.place_id)
 							} else {								
-								map.setZoom(zm + 3)
+								map.setZoom(zm + 2)
 							}
 						})
 						m.addListener('dblclick', function() {
@@ -175,7 +179,6 @@ export default {
 							//discriminate on place type
 							var ofType = false;
 							tthis.placeTypes.forEach(t=>{
-								console.log(t.id + "::: " +place.types)
 								if(place.types.includes(t.id.toLowerCase().trim().replace(' ','_'))){ ofType = true }
 							})
 							

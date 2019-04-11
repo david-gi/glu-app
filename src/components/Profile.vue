@@ -7,8 +7,14 @@
 							<button type="button" class="close text-white" @click="close"  aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-							<span class="font-weight-bold">{{profile.name}}</span><br>
-							<span class="text-white-50">{{profile.email}}</span><br><br>
+							<span class="font-weight-bold clearfixc">{{profile.name}}</span>
+							<span class="text-warning d-inline-block pl-1 pr-1 pb-1 pt-0 rounded ">
+								<small>
+									<strong class="">{{profile.points}}</strong>
+									<small>reputation</small>
+								</small>
+							</span><br>
+							<span class="text-white-50 ">{{profile.email}}</span><br><br>
 							<label for="cndInp">Gluten-related disorder:</label>
 							<select class="form-control" id="cndInp" :value="cId" @input="cId = $event.target.value">
 								<option value=" ">- None -</option>

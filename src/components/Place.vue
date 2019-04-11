@@ -56,7 +56,8 @@
 								<span class="d-inline-block">
 									<small>
 										<span class="text-primary font-weight-bold mr-1">{{report.user.name}}</span> 
-										<span class="text-muted d-inline-block">{{getConditionName(report.user.condition.id)}}</span> 
+										<span title="reputation" class="text-warning border border-warning d-inline-block font-weight-bold mr-1 rounded pl-1 pr-1"><small>{{report.user.points}}</small></span> 
+										<span title="condition" class="text-muted d-inline-block">{{getConditionName(report.user.condition.id)}}</span> 
 									</small>
 								</span>
 								<span class="d-inline-block float-right mr-2 ml-3">

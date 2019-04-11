@@ -17,9 +17,10 @@ exports.sumRatings = functions.firestore.document('reports/{report}')
 
                 if(count > 0){
                     var newRating = Math.floor(sum / count)
+                    newRating = isNaN(newRating) ? 0 : newRating
                     if(newRating < 1) newRating = 1;
                     if(newRating > 5) newRating = 5;
-                    placeRef.set({ newRating}, { merge: true })
+                    placeRef.set({rating: newRating}, { merge: true })
                     .catch(e => console.log(e))
                 }
                 return Promise.resolve(null)

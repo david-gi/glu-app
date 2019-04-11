@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import firebaseui from 'firebaseui'
 
 const state = {
 	profile: { id: null, email: "", name: "", condition: null },

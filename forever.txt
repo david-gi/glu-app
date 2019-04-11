@@ -2,5 +2,3 @@ npm install http-server -g
 npm install forever -g
 
 forever start -l forever.log -a -o out.log -e err.log app.js -p 8080
-
-way david deida superior man

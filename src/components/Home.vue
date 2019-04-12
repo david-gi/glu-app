@@ -3,6 +3,20 @@
 		<div class="vw-100" :class="{full: !placeShown, short: placeShown}" id="map"></div>
 		<input id="search-input" class="controls d-absolute mt-1 ml-1 border border-success" type="text" 
 			placeholder="Search map...">
+		
+		<div class="modal fade" id="warnModal" @keypress="closeWarn" tabindex="-1" role="dialog" 
+			aria-labelledby="warnModalTitle" aria-hidden="true">
+			<div class="modal-dialog modal-lg modal-dialog-centered">
+				<div class="modal-content bg-primary border-primary text-white p-3 text-center" 
+					style="border-width:6px !important; box-shadow: 0px 0px 20px #666;">
+					<img width="91" height="70" class="m-auto" src="src/assets/sadLogo.jpg" />
+					<br>
+					<p class="mt-4">Unfortunately, you'll need to disable adblockers for this site to function. </p>
+					<br>
+					<button class="btn mt-2 ml-5 mr-5 btn-outline-light" @keypress="closeWarn">close</button>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -18,6 +32,7 @@ export default {
 			this.loadPlaceTypes()
 		},
 		mounted(){
+		var mapInitAndLoad = function(){
 			try{
 			// Init and load Map
 			var tthis = this
@@ -149,9 +164,14 @@ export default {
 			});
 			} catch(e){
 				if(e || e.indexOf("google is not defined")){
-					window.location.replace(window.location.pathname)
+					$("#warnModal").modal({backdrop:true, show: true})
+						.on('hidden.bs.modal', function (e) {
+							window.location.replace(window.location.pathname)
+						})
 				}
 			}
+		}
+		setTimeout(mapInitAndLoad(), 1000)
 		},
 		computed: {
 			...mapGetters([
@@ -171,6 +191,10 @@ export default {
 				'clearPlace',
 				'errorMsg',
 			]),
+			closeWarn(){
+				$("#warnModal").modal("hide")
+				window.location.replace(window.location.pathname)
+			},
 			getPlaceDetails(places, placeId){
 				var tthis = this
 				if (placeId) {

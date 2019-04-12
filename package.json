@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "start": "forever start -l forever.log -a -o out.log -e err.log app.js"
+    "start": "node app.js"
   },
   "dependencies": {
     "circular-json": "^0.5.9",

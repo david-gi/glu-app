@@ -32,10 +32,10 @@ export default {
 			this.loadPlaceTypes()
 		},
 		mounted(){
+		var tthis = this
 		var mapInitAndLoad = function(){
 			try{
 			// Init and load Map
-			var tthis = this
 			const map = new google.maps.Map(document.getElementById('map'), {
 				center: {lat: 40, lng: -88},
 				zoom: 3,
@@ -126,16 +126,16 @@ export default {
 						m.addListener('click', function() {
 							map.panTo(place.geometry.location)
 							var zm = map.getZoom()
-					console.log(zm);
+							
 							if(zm < 6){
 								map.setZoom(6)
-								tthis.getPlaceDetails(places, place.place_id)
 							}
 							if(zm < 14 && zm > 6){
 								map.setZoom(14)
 								tthis.getPlaceDetails(places, place.place_id)
 							} else {								
 								map.setZoom(zm + 2)
+								tthis.getPlaceDetails(places, place.place_id)
 							}
 						})
 						m.addListener('dblclick', function() {

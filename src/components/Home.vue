@@ -112,12 +112,12 @@ export default {
 							map.panTo(place.geometry.location)
 							var zm = map.getZoom()
 					console.log(zm);
-							if(zm > 14){
-								map.setZoom(14)
+							if(zm < 6){
+								map.setZoom(6)
 								tthis.getPlaceDetails(places, place.place_id)
 							}
-							if(zm < 14 && zm > 5){
-								map.setZoom(5)
+							if(zm < 14 && zm > 6){
+								map.setZoom(14)
 								tthis.getPlaceDetails(places, place.place_id)
 							} else {								
 								map.setZoom(zm + 2)

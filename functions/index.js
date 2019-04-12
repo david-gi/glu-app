@@ -8,12 +8,12 @@ admin.initializeApp()
 exports.sumRatings = functions.firestore.document('reports/{report}')
     .onWrite((change, context) => {
         //points
-        var userRef = admin.firestore().collection('users').doc(context.auth.uid)//change.after.data().user.id)
+        var userRef = admin.firestore().collection('users').doc(change.after.data().user.id)
         userRef.get()
         .then(res => {
             var oldPoints = res.data().points
             var increment = 10
-            var newPoints = oldPoints && isFinite(oldPoints) ? oldPoints + increment : increment
+            var newPoints = oldPoints && isFinite(oldPoints) ? Number(oldPoints) + increment : increment
             userRef.set({points: newPoints}, { merge: true })
 
             //rating

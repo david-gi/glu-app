@@ -158,6 +158,7 @@ const actions = {
 			created: firebase.firestore.FieldValue.serverTimestamp()
 		}
 		repRef.add(newReport).then(()=>{
+			context.commit('addPoints')
 			context.commit('addReportedPlaceId', place.id)
 			context.dispatch("getReports", place)
 			context.commit('setMsg', 'Report added!')

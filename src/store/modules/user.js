@@ -9,6 +9,9 @@ const mutations = {
 	'setProfile' (state, x) {
 		state.profile = x
 	},
+	'addPoints' (state) {
+		state.profile.points = Number(state.profile.points) + 10
+	},
 	'setConditions' (state, x) {
 		state.conditions = x
 	},

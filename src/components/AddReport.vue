@@ -20,8 +20,9 @@
 					<small v-show="rating < 1" class="text-warning font-italic ml-n2">&larr; rate it!</small>
 				</div>
 				<div class="col-12">
-					<textarea @input="autoHeight" type="text" class="inputLine w-100 p-2" v-model="note" placeholder=" Share your gluten experience"></textarea>
+					<textarea @input="autoHeight" type="text" class="inputLine w-100 p-2" v-model="note" placeholder=" Share your gluten experience..."></textarea>
 				</div>
+				<i class="col-12 text-success"><small>Keep in mind this is a report about your gluten experience and not a review of the place itself.</small></i>
 				<div class="col-12 mb-n3">
 						<button type="button" class="btn btn-link text-muted pl-2 pr-2" @click="closeAdd">cancel</button>
 					<button type="button" class="btn btn-sm btn-success mt-1 pl-5 pr-5 float-right" :disabled="rating < 1" @click="add">Submit</button>

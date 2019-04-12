@@ -31,6 +31,17 @@
             }
         },
         mounted(){
+            var tthis = this
+            setInterval(function(){
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() { 
+                    if (this.readyState == 4 && xmlHttp.status != 200){
+                        tthis.errorMsg("Connection issues...")
+                    }
+                }
+                xmlHttp.open("GET", "/src/index", true); // true for asynchronous 
+                xmlHttp.send(null);
+            }, 30000)
         },
     	components: {
     		appHeader: Header,
@@ -53,6 +64,7 @@
 		methods: {
 			...mapActions([
 				'setLoading',
+				'errorMsg',
 			]),
 		},
     	created() {

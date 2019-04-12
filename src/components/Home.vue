@@ -9,11 +9,14 @@
 			<div class="modal-dialog modal-lg modal-dialog-centered">
 				<div class="modal-content bg-primary border-primary text-white p-3 text-center" 
 					style="border-width:6px !important; box-shadow: 0px 0px 20px #666;">
-					<img width="91" height="70" class="m-auto" src="src/assets/sadLogo.jpg" />
+					<img width="91" height="70" class="m-auto" src="src/assets/sadlogo.jpg" />
 					<br>
-					<p class="mt-4">Unfortunately, you'll need to disable adblockers for this site to function. </p>
+					<p class="mt-4">
+						Oh bother... something went wrong.<br>
+						Hm, try disabling adblockers and/or refreshing the page.
+					</p>
 					<br>
-					<button class="btn mt-2 ml-5 mr-5 btn-outline-light" @keypress="closeWarn">close</button>
+					<button class="btn mt-2 ml-5 mr-5 btn-outline-light" @click="closeWarn">reload page</button>
 				</div>
 			</div>
 		</div>

@@ -19,9 +19,10 @@ const mutations = {
 
 const actions = {	
 	autoLogin: (context, uid) => {
+		firebase.auth().getRedirectResult()
 		firebase.auth().onAuthStateChanged(function(user) {
 			if (user) {
-				console.log('autologin...')
+                console.log('autologin...')
 				var docRef = context.rootState.usersRef.doc(user.uid)
 				docRef.get()
 					.then(p => {

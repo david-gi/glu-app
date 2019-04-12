@@ -77,7 +77,10 @@
 				]),
 				doLogin() {
 					var provider = new firebase.auth.GoogleAuthProvider()
-					firebase.auth().signInWithRedirect(provider)
+					firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+						.then(function() {
+							firebase.auth().signInWithRedirect(provider)
+						})
 				},
 				navAbout(){
 					this.$refs.aboutNavModal.open()

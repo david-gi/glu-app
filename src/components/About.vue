@@ -51,7 +51,7 @@
 
 								<strong class="text-primary mt-3 d-inline-block">Wanna support this?</strong> <br>
 								Check out our Indiegogo Campaign. <a href="#donate">Find out more.</a><br>
-								<i class="text-muted">This is a not-for-profit community project founded by a Celiac - no ads, no paid commercial bias, no 3rd party affiliates and no promo emails! <span class="d-inline-block">Just what you see is what you get.</span></i><br>
+								<i class="text-muted">This is a not-for-profit community project founded by a Celiac - minimal ads, but no paid commercial bias or no 3rd party affiliates! <span class="d-inline-block">Just what you see is what you get.</span></i><br>
 							</small>
 						</p>
 					</div>

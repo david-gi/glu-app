@@ -19,7 +19,9 @@ const mutations = {
 
 const actions = {	
 	autoLogin: (context, uid) => {
-		firebase.auth().getRedirectResult()
+		// firebase.auth().getRedirectResult()
+		// .then(function(res){
+		// 	var user = res.user
 		firebase.auth().onAuthStateChanged(function(user) {
 			if (user) {
                 console.log('autologin...')
@@ -43,7 +45,7 @@ const actions = {
 					})
 			}
 		})
-		.catch(e => { console.log("Auth Failed: " + e) })		
+		.catch(e => { console.log("Auth Failed: " + e); context.commit('setError',"Auth Failed: " + e) })		
 	},
 	loadConditions: (context) => {
 		if(state.conditions == null){
@@ -56,7 +58,7 @@ const actions = {
 	saveProfile: (context, cndId) => {
 		var docRef = context.rootState.usersRef.doc(firebase.auth().currentUser.uid)
 		docRef.get()
-			.then(res => {
+			.then(res => {				
 				if(res.exists){
 					var cnd = context.rootState.conditionsRef.doc(cndId)
 					context.state.profile.condition = cnd
@@ -67,7 +69,7 @@ const actions = {
 					throw "User does not exist!"
 				}
 			})
-			.catch(e => console.log(e))
+		// 	.catch(e => console.log(e))
 	},
 	logout: (context) => {
 		firebase.auth().signOut().then(() => {

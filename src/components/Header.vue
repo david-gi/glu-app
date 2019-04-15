@@ -12,12 +12,26 @@
 		    </div>
 		    <div class="collapse navbar-collapse clearfix mr-3 border-right" id="navCollapse">
 		      	<ul class="nav navbar-nav justify-content-end col-12">
+							
+		      		<div class="nav-link" style="cursor:pointer">
+								<a href="https://www.facebook.com/Glutenous-Gluten-Maps-281841432706483/" target="_blank" class="nav-item">
+									<img title="facebook" class="mr-n1" src="/src/assets/f.png"/>
+								</a>
+								<a href="https://twitter.com/GlutenousMaps" target="_blank" class="nav-item ml-1">
+									<img title="twitter" src="/src/assets/tw.png"/>
+								</a>
+								<a href="https://bit.ly/2VKBSTT" target="_blank" class="nav-item ml-0">
+									<img title="Indiegogo" src="/src/assets/go.png"/>
+								</a>
+		      		</div>
+
 		      		<div class="nav-link" style="cursor:pointer">
 								<a @click="navAbout" class="nav-item text-muted font-weight-lighter"><small>About</small></a>
 							</div>
 		      		<div class="nav-link" style="cursor:pointer">
 								<a @click="navLearn" class="nav-item text-muted font-weight-lighter"><small>Learn</small></a>
 		      		</div>
+							
 		      	</ul>
 		    </div>
 
@@ -27,11 +41,13 @@
 				</button>
 				
 				<span class="navbar-text float-left pl-1">
-					<a id="loginBtn" class="border border-primary p-2 rounded btn-link text-primary" style="cursor:pointer"
+					<a id="loginBtn" class="border border-primary bg-white p-2 rounded btn-link text-primary" style="cursor:pointer"
 						v-show="!isLoggedIn" @click="doLogin">
-						<img v-show="!loginLoading" class="mr-n1" src="/src/assets/G.svg"/>
-						<small v-show="!loginLoading">SIGN IN</small>
-						<small v-show="loginLoading">Loading...</small>
+						<span class=" d-inline-block">
+							<img v-show="!loginLoading" class="mr-n1" src="/src/assets/G.svg"/>
+							<small v-show="!loginLoading"><span class="d-inline-block">SIGN IN</span></small>
+							<small v-show="loginLoading">Loading...</small>
+						</span>
 					</a>
 					<a id="LoginIcon" href="#" v-show="isLoggedIn" @click="toggleProfile" class="align-middle"
 							:class="{ active: showProfile }"	:style="{ backgroundImage: 'url('+photoUrl+')' }">

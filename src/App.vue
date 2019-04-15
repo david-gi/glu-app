@@ -39,7 +39,7 @@
                         tthis.errorMsg("Connection issues...")
                     }
                 }
-                xmlHttp.open("GET", "/src/index", true); // true for asynchronous 
+                xmlHttp.open("GET", "/", true); // true for asynchronous 
                 xmlHttp.send(null);
             }, 30000)
         },

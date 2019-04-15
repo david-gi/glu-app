@@ -47,6 +47,8 @@
 								While testing is getting better and better, and doctor's are getting more aware - mis-testing and mis-diagnosis happens.
 								As such, many Celiac sufferers are left confused and untreated - and often treated as hypocondriacs unfairly. 
 								Given the cost and intensity of biopsies, compounded by the harm of gluten-challenging, doctor's will often recommend a gluten-free diet and leave it at that.
+								
+								<a target="_blank" href="https://www.celiac.com/articles.html/journal-of-gluten-sensitivity/winter-2011-issue/the-conundrum-of-gluten-sensitivity-why-the-tests-are-often-wrong-r4776/">Read more on this...</a>
 								<br><br>
 								The results are still out but this may be part of the equation of gluten-intolerance (and possibly IBS).
 								If you are undiagnosed but convinced gluten is a problem for you, you're likely not crazy but now you are informed.

@@ -50,7 +50,7 @@
 								This community project is fueled by crowd-reporting from gluten-free people like you. No app download, as a progressive web app (PWA) it's accessible on the web from any device, anywhere.<br>
 
 								<strong class="text-primary mt-3 d-inline-block">Wanna support this?</strong> <br>
-								Check out our Indiegogo Campaign. <a href="#donate">Find out more.</a><br>
+								Check out our Indiegogo Campaign. <a target="_blank" href="https://bit.ly/2VKBSTT">Find out more.</a><br>
 								<i class="text-muted">This is a not-for-profit community project founded by a Celiac - minimal ads, but no paid commercial bias or no 3rd party affiliates! <span class="d-inline-block">Just what you see is what you get.</span></i><br>
 							</small>
 						</p>

@@ -35,16 +35,15 @@
 		      	</ul>
 		    </div>
 
-				<button class="navbar-toggler p-0 position-absolute" :class="{'on': isLoggedIn, 'off': !isLoggedIn}" type="button" data-toggle="collapse" 
+				<button class="navbar-toggler p-0 position-absolute" :class="{'on': isLoggedIn, 'off': !isLoggedIn}" type="button" data-toggle="collapse"
 				data-target="#navCollapse" aria-controls="navCollapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				
-				<span class="navbar-text float-left pl-1x">
+				<span class="navbar-text float-leftx pl-1">
 					<a id="loginBtn" class="border border-primary bg-white p-2 rounded btn-link text-primary" style="cursor:pointer"
 						v-show="!isLoggedIn" @click="doLogin">
-						<span class=" d-inline-block">
-							<img v-show="!loginLoading" class="mr-n1x" src="/src/assets/G.svg"/>
+						<span class=" d-inline-block" :class="{gLogo: !loginLoading}">
 							<small v-show="!loginLoading"><span class="ml-n1 d-inline-block">SIGN IN</span></small>
 							<small v-show="loginLoading">Loading...</small>
 						</span>
@@ -140,5 +139,10 @@
 	} 
 	.navbar-toggler.off{
 		right: 126px;
+	}
+	.gLogo{
+			background-image:url("/src/assets/G.svg");
+			background-repeat: no-repeat;
+			padding-left:28px;
 	}
 </style>

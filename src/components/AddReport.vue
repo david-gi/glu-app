@@ -4,7 +4,7 @@
 			<button v-show="!isOpen" :disabled="alreadyReported || !isLoggedIn" :title="btnTitle" @click="openAddAReport" 
 				:class="{'btn-outline-primary': isLoggedIn, 'btn-outline-secondary': !isLoggedIn}" type="button"
 				class="float-right btn btn-sm pl-4 pr-4 mb-1 font-weight-bold">
-				<small v-show="!alreadyReported">Add a Report!!</small>
+				<small v-show="!alreadyReported">Add a Report</small>
 				<small v-show="alreadyReported">Already reported today</small>
 			</button>
 		</div>

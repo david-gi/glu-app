@@ -191,6 +191,7 @@ export default {
 				'getPlaceRatings',
 				'getPlace',
 				'loadPlaceTypes',
+				'loadSponsors',
 				'clearPlace',
 				'errorMsg',
 			]),

@@ -44,3 +44,20 @@ exports.sumRatings = functions.firestore.document('reports/{report}')
             })
             return Promise.resolve(null)
     })
+exports.sponsorClick = functions.https.onRequest((req, res) => {
+    console.log(req.query)
+    var ref = admin.firestore().collection("sponsors").doc(req.query.x)
+    ref.get().then(r => {
+        if(r.exists){
+            var s = r.data()
+            var newClicks = s.clicks ? s.clicks + 1 : 1
+            ref.set({clicks: newClicks}, { merge: true })
+        }
+        res.send("OK")
+        return
+    })
+    .catch(e => {
+        console.log(e);
+    })
+    return
+})

@@ -5,6 +5,7 @@ const state = {
 	reports: null,
 	reportsFiltered: null,
 	placeTypes: null,
+	sponsors: null,
 	reportedPlaceIds: []
 }
 
@@ -30,6 +31,9 @@ const mutations = {
 	// },
 	'setPlaceTypes' (state, x) {
 		state.placeTypes = x
+	},
+	'setSponsors' (state, x) {
+		state.sponsors = x
 	},
 	'addReportedPlaceId' (state, x){
 		state.reportedPlaceIds.push({id: x, date: Date.now()})
@@ -173,6 +177,22 @@ const actions = {
 			})
 		}
 	},
+	loadSponsors: (context) => {
+		return new Promise((resolve, reject) => {
+			if(context.state.sponsors == null){
+				context.rootState.sponsorsRef.get()
+				.then(res => {
+					context.commit('setSponsors', res.docs.map(x=>{ 
+						var res =  x.data() 
+						res.id = x.id
+						return res
+						}))
+					resolve(null)
+				})
+			}
+			resolve(null)
+		})
+	},
 }
 
 const getters = {
@@ -196,6 +216,9 @@ const getters = {
 			}
 		});
 		return ids;
+	},
+	sponsors: state => {
+		return state.sponsors
 	}
 }
 

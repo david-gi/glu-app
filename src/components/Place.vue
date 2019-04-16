@@ -20,13 +20,13 @@
 						</div>
 						<div class="d-none d-sm-block col-sm-4 text-right">
 							<span class="d-inline-block align-baseline">
-								<i v-for="(x, index) in Number(currentPlace.rating)" :key="index"><span class="star a">★</span></i><i v-for="(x, index) in (5 - currentPlace.rating)" :key="index"><span class="star b">★</span></i>
+								<i v-for="(x, index0) in Number(currentPlace.rating)" :key="index0 + Math.random()"><span class="star a">★</span></i><i v-for="(x, index01) in (5 - currentPlace.rating)" :key="index01 + Math.random()"><span class="star b">★</span></i>
 							</span>
 						</div>
 						<div class="d-sm-none col-12 mt-n1">
 							<span class="d-inline-block ml-n3 pr-2 mt-n2 text-break location ">{{currentPlace.city}}, {{currentPlace.province}}</span>
 							<span class="d-inline-block float-right">
-								<i v-for="(x, index) in Number(currentPlace.rating)" :key="index"><span class="star a">★</span></i><i v-for="(x, index) in (5 - currentPlace.rating)" :key="index"><span class="star b">★</span></i>
+								<i v-for="(x, index00) in Number(currentPlace.rating)" :key="index00 + Math.random()"><span class="star a">★</span></i><i v-for="(x, index02) in (5 - currentPlace.rating)" :key="index02 + Math.random()"><span class="star b">★</span></i>
 							</span>
 						</div>
 					</div>
@@ -63,13 +63,14 @@
 								<span class="d-inline-block float-right mr-2 ml-3">
 									<small class="align-top font-italic text-muted mr-2">{{ getTSDate(report.created) }}</small>
 									<span class="d-inline-block">
-										<i v-for="(x, index) in Number(report.rating)" :key="index"><span class="star a small">★</span></i><i v-for="(x, index) in (5 - report.rating)" :key="index"><span class="star b small">★</span></i>
+										<i v-for="(x, index2) in Number(report.rating)" :key="index2 + '2'"><span class="star a small">★</span></i><i v-for="(x, index3) in (5 - report.rating)" :key="index3 + '3'"><span class="star b small">★</span></i>
 									</span>
 								</span>
 							</span>
 							<span class="col-12 d-inline-block text-truncate note" @click="toggleMore">
 								{{report.note}}
 							</span>
+							<sponsor v-if="!(index % 2) || true"></sponsor>
 						</div>
 						
 					</div>
@@ -81,9 +82,11 @@
 <script>
 	import {mapActions, mapGetters} from 'vuex'
     import AddReport from './AddReport.vue'
+    import Sponsor from './Sponsor.vue'
 	export default {
     	components: {
     		areport: AddReport,
+    		sponsor: Sponsor,
         },
 		data() {
 			return {
@@ -158,7 +161,7 @@
 				this.filterQuery = ""
 				this.rating = 0
 				this.note = ""
-			}
+			},
 		},
 		mounted(){
 			var tthis = this

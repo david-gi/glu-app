@@ -23,6 +23,7 @@ var store = new Vuex.Store({
 		conditionsRef: db.collection("conditions"),
 		placesRef: db.collection("places"),
 		placeTypesRef: db.collection("place-types"),
+		sponsorsRef: db.collection("sponsors"),
 		reportsRef: db.collection("reports"),
 		bugsRef: db.collection("bugs"),
 		

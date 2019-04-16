@@ -40,12 +40,12 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				
-				<span class="navbar-text float-left pl-1">
+				<span class="navbar-text float-left pl-1x">
 					<a id="loginBtn" class="border border-primary bg-white p-2 rounded btn-link text-primary" style="cursor:pointer"
 						v-show="!isLoggedIn" @click="doLogin">
 						<span class=" d-inline-block">
-							<img v-show="!loginLoading" class="mr-n1" src="/src/assets/G.svg"/>
-							<small v-show="!loginLoading"><span class="d-inline-block">SIGN IN</span></small>
+							<img v-show="!loginLoading" class="mr-n1x" src="/src/assets/G.svg"/>
+							<small v-show="!loginLoading"><span class="ml-n1 d-inline-block">SIGN IN</span></small>
 							<small v-show="loginLoading">Loading...</small>
 						</span>
 					</a>

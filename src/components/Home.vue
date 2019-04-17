@@ -3,7 +3,12 @@
 		<div class="vw-100" :class="{full: !placeShown, short: placeShown}" id="map"></div>
 		<input id="search-input" class="controls d-absolute mt-1 ml-1 border border-success" type="text" 
 			placeholder="Search map...">
-		
+			
+		<div class="text-white font-weight-boldx bg-success rounded p-2" style="bottom: 2px; left: 2px; position:absolute">
+			Alpha Version -  
+			<a target="_blank" href="https://bit.ly/2VKBSTT"  class="text-white font-underline">Indiegogo Prelaunch!</a>
+		</div>
+
 		<div class="modal fade" id="warnModal" @keypress="closeWarn" tabindex="-1" role="dialog" 
 			aria-labelledby="warnModalTitle" aria-hidden="true">
 			<div class="modal-dialog modal-lg modal-dialog-centered">

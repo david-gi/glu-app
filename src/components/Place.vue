@@ -70,7 +70,7 @@
 							<span class="col-12 d-inline-block text-truncate note" @click="toggleMore">
 								{{report.note}}
 							</span>
-							<sponsor v-if="!(index % 2) || true"></sponsor>
+							<sponsor v-if="!(index % 2) "></sponsor>
 						</div>
 						
 					</div>

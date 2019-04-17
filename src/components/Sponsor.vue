@@ -28,7 +28,7 @@ export default {
 			xmlHttp.open("post", "https://us-central1-glutenous.cloudfunctions.net/sponsorClick?x="+this.currentSponsor.id, true);  
 			xmlHttp.send(null);
 
-			window.open(this.currentSponsor.link)
+			window.open(this.currentSponsor.link, "_blank")
 		}
 	},
 	mounted(){

@@ -15,7 +15,7 @@
 					<div class="modal-body bg-white text-dark">
 
 						<div class="m-n3 p-3">
-							<span class="text-dark">Gluten Maps: Google Maps for Gluten-free living.</span>
+							<span class="text-dark">Gluten-Free Maps: Google Maps for Gluten-free living.</span>
 						</div>
 						<hr>
 

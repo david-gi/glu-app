@@ -4,8 +4,8 @@
 		      <span class="navbar-brand text-success"><i class="glu-font">GLUTENOUS!</i> 
 						<small class="font-weight-light text-black-50 d-inline-block w-75 text-wrap align-text-top">
 							<small> 
-								<span class="d-sm-none" style="font-size:.8em">Gluten Maps<span style="font-size:.8em">™</span></span>
-								<span class="d-none d-sm-inline">Gluten Maps<span style="font-size:.8em">™</span></span>
+								<span class="d-sm-none" style="font-size:.8em">Gluten-Free Maps<span style="font-size:.8em">™</span></span>
+								<span class="d-none d-sm-inline">Gluten-Free Maps<span style="font-size:.8em">™</span></span>
 							</small>
 						</small>
 					</span>

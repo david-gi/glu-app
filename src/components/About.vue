@@ -40,12 +40,17 @@
 								
 								<br>
 								
-								<strong class="text-primary mt-3 d-inline-block">It's glutenous world out there.</strong><br>								 
+								<strong class="text-primary mt-3 d-inline-block">It's glutenous world out there</strong><br>								 
 								Gluten is one of the most common food ingredients; it's everywhere, along with those false "gluten-free" assurances too. 
 								For those of us who suffer from a gluten-related disorder, <i><span class="d-inline-block">gluten-free</span> isn't just preference, <strong>it's precedent.</strong></i>
 								<br>
 								
-								<strong class="text-primary mt-3 d-inline-block">100% free, world-wide from any device.</strong><br>
+								<strong class="text-primary mt-3 d-inline-block">How this differs from other projects</strong><br>
+								<span class="glu-font">Glutenous!</span> is focused on getting around the gluten-free discorse - the ignorance, the marketing, the fad.
+								It is a real tool for real guten-free need. It's not trying to <i>sell</i> anyone on gluten-free, rather help prevent glutenings worldwide.
+								<br>
+
+								<strong class="text-primary mt-3 d-inline-block">100% free, world-wide from any device</strong><br>
 								<strong><span class="text-success"></span><i>No sign up,</i> just login with your Google account and go!</strong>
 								This community project is fueled by crowd-reporting from gluten-free people like you. No app download, as a progressive web app (PWA) it's accessible on the web from any device, anywhere.<br>
 

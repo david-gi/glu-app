@@ -221,7 +221,7 @@ export default {
 								var addr =  place.formatted_address.split(',')
 								var locality = addr[1] ? addr[1].trim() : ""
 								var region = addr[2] ? addr[2].split(' ')[1] :""
-								var country = addri[3] ? addr[3].trim() : ""
+								var country = addr[3] ? addr[3].trim() : ""
 
 								tthis.getPlace({
 									pid: place.place_id, 

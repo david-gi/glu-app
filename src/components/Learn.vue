@@ -34,18 +34,18 @@
 								Celiac disease can be diagnosed in three ways (listed in order of accuracy).
 								<ul>
 									<li><strong>Diet confirmed</strong><br>
-									Try a gluten-free diet, if it works, you are celiac, probably. Though as stated above, it could also be FODMAP-realted. Since truly gluten-free diets are really difficult, dieters often fail unknowingly leading to a false negative.</li>
+									Try a gluten-free diet, if it works, you are celiac, probably. Though as stated above, it could also be FODMAP-related. Since truly gluten-free diets are really difficult, dieters often fail unknowingly leading to a false negative.</li>
 									<li><strong>Blood test confirmed</strong><br>
 									Doctors test you blood to see if your body is reacting to gluten. Results aren't super accurate and doctors & technicians aren't always good at statistics.
 									What's more, you must have enough gluten in your diet for them to even work. 
-									Eating lots of gluten for several months in order for the test to work is refered to as a  'Gluten Challenge'.</li>
+									Eating lots of gluten for several months in order for the test to work is referred to as a  'Gluten Challenge'.</li>
 									<li><strong>Biopsy 'Scope' Confirmed</strong><br>
-									Gastrointestinologists fully sedate you, put a special hose down your throat and stomach then cut a tiny hole out of your upper instestines to test for gluten-related damage. 
+									Gastroenterologists fully sedate you, put a special hose down your throat and stomach then cut a tiny hole out of your upper intestines to test for gluten-related damage. 
 									It is the most accurate way to diagnose, though again, you'll need to do a 'Gluten Challenge' for it to work well.
 									</li>
 								</ul>
 								While testing is getting better and better, and doctor's are getting more aware - mis-testing and mis-diagnosis happens.
-								As such, many Celiac sufferers are left confused and untreated - and often treated as hypocondriacs unfairly. 
+								As such, many Celiac sufferers are left confused and untreated - and often treated as hypochondriacs unfairly. 
 								Given the cost and intensity of biopsies, compounded by the harm of gluten-challenging, doctor's will often recommend a gluten-free diet and leave it at that.
 								
 								<a target="_blank" href="https://www.celiac.com/articles.html/journal-of-gluten-sensitivity/winter-2011-issue/the-conundrum-of-gluten-sensitivity-why-the-tests-are-often-wrong-r4776/">Read more on this...</a>
@@ -59,6 +59,8 @@
 								<br><br>
 								Why is it being marketed as a health diet? As stated in the video above, gluten-free diets are by coincidence healthier.
 								It forces you to cut out most heavily processed foods, reduces high glycemic carbs from breads/beer/pizza and gets you to be aware of what you are eating.
+								<br><br>
+								<a href='https://www.youtube.com/watch?v=Hxd0msD954I' target="_blank">Learn even more about Celiac Disease here.</a>
 								<br><br>
 								<strong>We haven't cured gluten-related disorders yet, but we can at least cure the ignorance surrounding it!</strong>
 							</small>

@@ -83,6 +83,9 @@ var store = new Vuex.Store({
 		error: state => {
 			return state.error
 		},
+		auth: state => {
+			return state.auth
+		},
 	},
 	modules: {
 		user,

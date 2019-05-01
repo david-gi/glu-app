@@ -41,8 +41,8 @@
 				</button>
 				
 				<span class="navbar-text float-leftx pl-1">
-					<a id="loginBtn" class="border border-primary bg-white p-2 rounded btn-link text-primary" style="cursor:pointer"
-						v-show="!isLoggedIn" @click="doLogin">
+					<a id="loginBtn" class="border border-primary bg-white p-2 rounded btn-link text-primary ht" style="cursor:pointer"
+						v-show="!isLoggedIn" @click="doLogin" data-toggle="tooltip" data-placement="bottom" title="<strong>Free sign up!</strong> <br>Just use your Google Account.">
 						<span class=" d-inline-block" :class="{gLogo: !loginLoading}">
 							<small v-show="!loginLoading"><span class="ml-n1 d-inline-block">SIGN IN</span></small>
 							<small v-show="loginLoading">Loading...</small>
@@ -64,7 +64,9 @@
 	import Learn from './Learn.vue'
 	import firebase from 'firebase/app'
     export default {
-			...mapGetters,
+			...mapGetters([
+				'auth'
+			]),
     	data() {
     		return {
 					loginLoading: false
@@ -108,6 +110,7 @@
 				var tthis = this
 			},
 			mounted(){
+				if(!this.auth){ $('.ht').tooltip({html: true}) }
 				var tthis = this
 				this.loginLoading = true
 				setTimeout(function(){ tthis.loginLoading = false }, 3000)

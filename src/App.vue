@@ -146,4 +146,11 @@
 	.inputLine::placeholder {
 		opacity: 1;
 	}
+
+	.tooltip .arrow::before{
+        border-bottom-color: #007bff;    
+    } 
+    .tooltip-inner{
+		background-color: #007bff !important;
+	}
 </style>

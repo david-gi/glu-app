@@ -1,8 +1,8 @@
 <template>
 	<div>
 		<div class="vw-100" :class="{full: !placeShown, short: placeShown}" id="map"></div>
-		<input id="search-input" class="controls d-absolute mt-1 ml-1 border border-success" type="text" 
-			placeholder="Search map...">
+		<input id="search-input" class="controls d-absolute mt-1 ml-1 border border-success ht" type="text" 
+			placeholder="Search map..." data-toggle="tooltip" data-placement="bottom" title="Search for a place <i>just like you would on Google Maps.</i>">
 			
 		<div class="text-white font-weight-boldx bg-success rounded p-2" style="bottom: 2px; left: 2px; position:absolute">
 			Alpha Version -  
@@ -170,6 +170,17 @@ export default {
 					});
 				});
 			});
+			
+			//Helptips
+			if(!tthis.auth){
+				setTimeout(function(){
+					$('.ht').tooltip({html: true}).tooltip("show")
+					setTimeout(function(){
+						$('.ht').tooltip("dispose")
+					}, 13000)
+				}, 3300)
+			}
+
 			} catch(e){
 				if(e || e.indexOf("google is not defined")){
 					$("#warnModal").modal({backdrop:true, show: true})
@@ -180,12 +191,14 @@ export default {
 			}
 		}
 		setTimeout(mapInitAndLoad(), 1000)
+		
 		},
 		computed: {
 			...mapGetters([
 				'currentPlace',
 				'placeTypes',
-				'error'
+				'error',
+				'auth'
 			]),
 			placeShown(){
 				return this.currentPlace != null
@@ -264,5 +277,4 @@ export default {
 			width: 75%;
 			max-width: auto;
 		}
-
 </style>

@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<i id="defaultSearch"></i>
 		<div class="vw-100" :class="{full: !placeShown, short: placeShown}" id="map"></div>
 		<input id="search-input" class="controls d-absolute mt-1 ml-1 border border-success ht" type="text" 
 			placeholder="Search map..." data-toggle="tooltip" data-placement="bottom" title="Search for a place <i>just like you would on Google Maps.</i>">
@@ -55,15 +56,6 @@ export default {
 			})
 			const places = new google.maps.places.PlacesService(map)
 
-			// Location
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition((position) => 
-				{
-					map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude })
-					map.zoom = 8
-				}, ()=>{})
-			} 
-
 			// Place click
 			map.addListener('click', 
 			function(event) {
@@ -78,6 +70,29 @@ export default {
 			map.addListener('bounds_changed', function() {
 				searchBox.setBounds(map.getBounds())
 			});
+
+			document.getElementById('defaultSearch').onclick = function () {
+				var loc = 'cafe or restaurant or store';
+				var searchEl = document.getElementById("search-input")
+				searchEl.value = loc
+				google.maps.event.trigger(searchEl, 'focus', {})
+				google.maps.event.trigger(searchEl, 'keydown', { keyCode: 13 })
+			};
+			setTimeout(() => {
+				document.getElementById('defaultSearch').click()
+			}, 2000);
+
+			// Location
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition((position) => 
+				{
+					map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude })
+					map.zoom = 8
+					setTimeout(() => {
+						document.getElementById('defaultSearch').click()
+					}, 2000);
+				}, ()=>{})
+			} 
 
 			// Search querying
 			searchBox.addListener('places_changed', function() {
@@ -178,7 +193,7 @@ export default {
 					setTimeout(function(){
 						$('.ht').tooltip("dispose")
 					}, 13000)
-				}, 3300)
+				}, 3600)
 			}
 
 			} catch(e){

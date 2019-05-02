@@ -1,8 +1,9 @@
 <template>
 		<nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light border" >
 		    <div class="navbar-header">
-		      <span class="navbar-brand text-success"><i class="glu-font">GLUTENOUS!</i> 
-						<small class="font-weight-light text-black-50 d-inline-block w-75 text-wrap align-text-top">
+		      <span class="navbar-brand text-success">
+						<i class="glu-font d-block float-left" style="line-height:.8em">GLUTENOUS!</i><br> 
+						<small class="font-weight-light text-black-50 d-block float-left mt-n2 ml-1" style="line-height:.1em">
 							<small> 
 								<span class="d-sm-none" style="font-size:.8em">Gluten-Free Maps<span style="font-size:.8em">™</span></span>
 								<span class="d-none d-sm-inline">Gluten-Free Maps<span style="font-size:.8em">™</span></span>
@@ -36,11 +37,11 @@
 		    </div>
 
 				<button class="navbar-toggler p-0 position-absolute" :class="{'on': isLoggedIn, 'off': !isLoggedIn}" type="button" data-toggle="collapse"
-				data-target="#navCollapse" aria-controls="navCollapse" aria-expanded="false" aria-label="Toggle navigation">
+					data-target="#navCollapse" aria-controls="navCollapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				
-				<span class="navbar-text float-leftx pl-1">
+				<span class="navbar-text pl-1" data-toggle="collapse">
 					<a id="loginBtn" class="border border-primary bg-white p-2 rounded btn-link text-primary ht" style="cursor:pointer"
 						v-show="!isLoggedIn" @click="doLogin" data-toggle="tooltip" data-placement="bottom" title="<strong>Free sign up!</strong> <br>Just use your Google Account.">
 						<span class=" d-inline-block" :class="{gLogo: !loginLoading}">

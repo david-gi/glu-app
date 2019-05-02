@@ -192,7 +192,7 @@ export default {
 					$('.ht').tooltip({html: true}).tooltip("show")
 					setTimeout(function(){
 						$('.ht').tooltip("dispose")
-					}, 13000)
+					}, 20000)
 				}, 3600)
 			}
 

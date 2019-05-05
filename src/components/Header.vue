@@ -36,16 +36,20 @@
 		      	</ul>
 		    </div>
 
-				<button class="navbar-toggler p-0 position-absolute" :class="{'on': isLoggedIn, 'off': !isLoggedIn}" type="button" data-toggle="collapse"
+				<button class="navbar-toggler p-0 mr-4 position-absolute" :class="{'on': isLoggedIn, 'off': !isLoggedIn}" type="button" data-toggle="collapse"
 					data-target="#navCollapse" aria-controls="navCollapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				
-				<span class="navbar-text pl-1" data-toggle="collapse">
+				<span class="navbar-text " data-toggle="collapse">
 					<a id="loginBtn" class="border border-primary bg-white p-2 rounded btn-link text-primary ht" style="cursor:pointer"
-						v-show="!isLoggedIn" @click="doLogin" data-toggle="tooltip" data-placement="bottom" title="<strong>Free sign up!</strong> <br>Just use your Google Account.">
-						<span class=" d-inline-block" :class="{gLogo: !loginLoading}">
-							<small v-show="!loginLoading"><span class="ml-n1 d-inline-block">SIGN IN</span></small>
+						v-show="!isLoggedIn" @click="openLogin()" data-toggle="tooltip" data-placement="bottom" title="<strong>Free sign up!</strong> <br>Just use your Google or Facebook Account.">
+						<span class="d-inline-block">
+							<small v-show="!loginLoading">
+								<span class="d-inline-block">
+									<div class="">Login<strong>/</strong>Sign Up</div>
+								</span>
+							</small>
 							<small v-show="loginLoading">Loading...</small>
 						</span>
 					</a>
@@ -56,6 +60,26 @@
 
 			<aboutModal ref="aboutNavModal"></aboutModal>
 			<learnModal ref="learnNavModal"></learnModal>
+			
+
+		<div class="modal fade" id="logginModal" @keypress="closeLogin" tabindex="-1" role="dialog" 
+			aria-labelledby="logginModalTitle" aria-hidden="true" style="z-index:99999;">
+			<div class="modal-dialog float-right mt-0 mr-0 modal-sm">
+				<div class="rounded">
+				<div class="modal-content bg-light">
+					<div class="row no-gutters">
+					<strong class="text-muted p-2"><small class="font-weight-bold">Login with: </small></strong>
+					<button class="btn btn-sm btn-light pl-3 pr-3" @click="doLogin(2)">
+						<img width="32" height="32" class="rounded" src="src/assets/fb.png" />
+					</button>
+					<button class="btn btn-sm btn-light pl-3 pr-3" @click="doLogin(1)">
+						<img width="32" height="32" class="rounded" src="src/assets/g.png" />
+					</button>
+			</div>
+			</div>
+			</div>
+			</div>
+		</div>
 		</nav>
 </template>
 
@@ -93,8 +117,23 @@
 					'toggleProfile',
 					'setLoading',
 				]),
-				doLogin() {
-					var provider = new firebase.auth.GoogleAuthProvider()
+				openLogin(){
+					$("#logginModal").modal({backdrop:false, show: true})
+					setTimeout(() => {$("#logginModal").modal("hide")}, 5000)
+				},
+				closeLogin(){
+					$("#logginModal").modal("hide")
+				},
+				doLogin(provId) {
+					var provider = null
+					switch(provId){
+						case 1:
+							provider = new firebase.auth.GoogleAuthProvider()
+							break;
+						case 2:
+							provider = new firebase.auth.FacebookAuthProvider()
+							break;
+					}
 					firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
 						.then(function() {
 							firebase.auth().signInWithRedirect(provider)
@@ -111,10 +150,12 @@
 				var tthis = this
 			},
 			mounted(){
-				if(!this.auth){ $('.ht').tooltip({html: true}) }
 				var tthis = this
 				this.loginLoading = true
-				setTimeout(function(){ tthis.loginLoading = false }, 3000)
+				setTimeout(function(){ 
+					tthis.loginLoading = false
+					if(!this.auth){ $('.ht').tooltip({html: true}) } 
+				}, 3000)
 				this.$store.dispatch("autoLogin")
 
 				setTimeout(() => {

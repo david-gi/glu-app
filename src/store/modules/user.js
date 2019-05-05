@@ -19,23 +19,22 @@ const mutations = {
 
 const actions = {	
 	autoLogin: (context, uid) => {
-		 firebase.auth().getRedirectResult()
-		 .then(function(res){
-		 	var user = res.user
-		//firebase.auth().onAuthStateChanged(function(user) {
+		var loginFun = (user) => {
 			if (user) {
                 console.log('autologin...')
 				var docRef = context.rootState.usersRef.doc(user.uid)
 				docRef.get()
 					.then(p => {
 						if(p.exists){
-							var refreshProfile = { email: user.email, name: user.displayName, photoURL: user.photoURL, points: p.data().points, condition: p.data().condition }
+							var photo = user.photoURL && user.photoURL.endsWith("/picture") ? "/src/assets/profile.png" : user.photoURL
+							var refreshProfile = { email: user.email, name: user.displayName, photoURL: photo, points: p.data().points, condition: p.data().condition }
 							docRef.set(refreshProfile, { merge: true })
 							context.commit('setProfile', refreshProfile)
 							context.commit('setAuth', true)
 							if(p.data().condition == null){ context.commit('toggleProfile') }
 						} else{
-							var newProfile = { email: user.email, name: user.displayName, photoURL: user.photoURL, points: "0", condition: null }
+							var photo = user.photoURL && user.photoURL.endsWith("/picture") ? "/src/assets/profile.png" : user.photoURL
+							var newProfile = { email: user.email, name: user.displayName, photoURL: photo, points: "0", condition: null }
 							docRef.set(newProfile)
 							console.log("New user created")
 							context.commit('setProfile', newProfile)
@@ -44,8 +43,19 @@ const actions = {
 						}
 					})
 			}
+		}
+		//for 3rd party redirection
+		firebase.auth().getRedirectResult()
+		 .then(function(res){
+			 var user = res.user
+			 loginFun(user)
 		})
-		.catch(e => { console.log("Auth Failed: " + e); context.commit('setError',"Auth Failed: " + e) })		
+		.catch(e => { console.log("Auth Failed: " + e); context.commit('setError',"Auth Failed (redirect): " + e) })	
+		//if already logged in
+		firebase.auth().onAuthStateChanged(function(user) {	
+			loginFun(user)
+		})
+		.catch(e => { console.log("Auth Failed: " + e); context.commit('setError',"Auth Failed (redirect): " + e) })	
 	},
 	loadConditions: (context) => {
 		if(state.conditions == null){

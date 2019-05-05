@@ -75,7 +75,7 @@ export default {
 			});
 
 			document.getElementById('defaultSearch').onclick = function () {
-				var loc = 'cafe or restaurant or store';
+				var loc = 'cafe or restaurant or store, gluten free';
 				var searchEl = document.getElementById("search-input")
 				searchEl.value = loc
 				google.maps.event.trigger(searchEl, 'focus', {})

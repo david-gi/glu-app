@@ -46,17 +46,17 @@
 								<br>
 								
 								<strong class="text-primary mt-3 d-inline-block">How this differs from other projects</strong><br>
-								<span class="glu-font">Glutenous!</span> is focused on getting around the gluten-free discorse - the ignorance, the marketing, the fad.
+								<span class="glu-font">Glutenous!</span> strives to get past the gluten-free confusion - all that ignorance, marketing, fad diet stuff.
 								It is a real tool for real guten-free need. It's not trying to <i>sell</i> anyone on gluten-free, rather help prevent glutenings worldwide.
 								<br>
 
 								<strong class="text-primary mt-3 d-inline-block">100% free, world-wide from any device</strong><br>
-								<strong><span class="text-success"></span><i>No sign up,</i> just login with your Google account and go!</strong>
+								<strong><span class="text-success"></span><i>No sign up,</i> just login with your Google or Facebook account and go!</strong>
 								This community project is fueled by crowd-reporting from gluten-free people like you. No app download, as a progressive web app (PWA) it's accessible on the web from any device, anywhere.<br>
 
 								<strong class="text-primary mt-3 d-inline-block">Wanna support this?</strong> <br>
 								Check out our Indiegogo Campaign. <a target="_blank" href="https://bit.ly/2VKBSTT">Find out more.</a><br>
-								<i class="text-muted">This is a not-for-profit community project founded by a Celiac - minimal ads, but no paid commercial bias or no 3rd party affiliates! <span class="d-inline-block">Just what you see is what you get.</span></i><br>
+								<i class="text-muted">This is a not-for-profit community project founded by a Celiac - minimal & vetted ads, but no paid commercial bias or 3rd party affiliates! <span class="d-inline-block">Just what you see is what you get.</span></i><br>
 							</small>
 						</p>
 					</div>

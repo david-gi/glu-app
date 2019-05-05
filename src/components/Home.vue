@@ -3,11 +3,14 @@
 		<i id="defaultSearch"></i>
 		<div class="vw-100" :class="{full: !placeShown, short: placeShown}" id="map"></div>
 		<input id="search-input" class="controls d-absolute mt-1 ml-1 border border-success ht" type="text" 
-			placeholder="Search map..." data-toggle="tooltip" data-placement="bottom" title="Search for a place <i>just like you would on Google Maps.</i>">
+			placeholder="Search map..." data-toggle="tooltip" data-placement="bottom" 
+			title="Search for a place <i>just like you would on Google Maps</i>">
 			
 		<div class="text-white font-weight-boldx bg-success rounded p-2" style="bottom: 2px; left: 2px; position:absolute">
 			Alpha Version -  
-			<a target="_blank" href="https://bit.ly/2VKBSTT"  class="text-white font-underline">Indiegogo Prelaunch!</a>
+			<a target="_blank" href="https://bit.ly/2VKBSTT"  class="text-white font-underline ht"
+				data-toggle="tooltip" data-placement="top" 
+				title="<i>Keep this project alive!</i>">Indiegogo Prelaunch!</a>
 		</div>
 
 		<div class="modal fade" id="warnModal" @keypress="closeWarn" tabindex="-1" role="dialog" 

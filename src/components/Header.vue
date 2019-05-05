@@ -11,6 +11,7 @@
 						</small>
 					</span>
 		    </div>
+
 		    <div class="collapse navbar-collapse clearfix mr-3 border-right" id="navCollapse">
 		      	<ul class="nav navbar-nav justify-content-end col-12">
 							
@@ -26,8 +27,10 @@
 								</a>
 		      		</div>
 
-		      		<div class="nav-link" style="cursor:pointer">
-								<a @click="navAbout" class="nav-item text-muted font-weight-lighter"><small>About</small></a>
+		      		<div class="nav-link " style="cursor:pointer" >
+								<a @click="navAbout" class="nav-item text-muted font-weight-lighter">
+									<small>About</small>
+								</a>
 							</div>
 		      		<div class="nav-link" style="cursor:pointer">
 								<a @click="navLearn" class="nav-item text-muted font-weight-lighter"><small>Learn</small></a>
@@ -43,7 +46,7 @@
 				
 				<span class="navbar-text " data-toggle="collapse">
 					<a id="loginBtn" class="border border-primary bg-white p-2 rounded btn-link text-primary ht" style="cursor:pointer"
-						v-show="!isLoggedIn" @click="openLogin()" data-toggle="tooltip" data-placement="bottom" title="<strong>Free sign up!</strong> <br>Just use your Google or Facebook Account.">
+						v-show="!isLoggedIn" @click="openLogin()" data-toggle="tooltip" data-placement="bottom" title="<strong>Free sign up!</strong> <br>Sign up now using <br>Google or Facebook">
 						<span class="d-inline-block">
 							<small v-show="!loginLoading">
 								<span class="d-inline-block">
@@ -157,12 +160,6 @@
 					if(!this.auth){ $('.ht').tooltip({html: true}) } 
 				}, 3000)
 				this.$store.dispatch("autoLogin")
-
-				setTimeout(() => {
-							if(!tthis.$store.state.auth){
-								tthis.$refs.aboutNavModal.open()
-							}
-						}, 2500)
 			}
 	}
 </script>

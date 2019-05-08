@@ -25,16 +25,40 @@ const actions = {
 				var docRef = context.rootState.usersRef.doc(user.uid)
 				docRef.get()
 					.then(p => {
+						function grabNested(fieldName, defaultTxt){
+							try{
+								var res = user[fieldName] 
+									? user[fieldName] 
+									: (user.providerData[0] 
+										? (user.providerData[0][fieldName]
+											? user.providerData[0][fieldName] 
+											: defaultTxt)
+										: defaultTxt)
+								return res
+							} catch(e) { return defaultTxt }
+						}
 						if(p.exists){
-							var photo = user.photoURL && user.photoURL.endsWith("/picture") ? "/src/assets/profile.png" : user.photoURL
-							var refreshProfile = { email: user.email, name: user.displayName, photoURL: photo, points: p.data().points, condition: p.data().condition }
+							var pUrl = grabNested('photoURL',"")
+							var refreshProfile = { 
+								email: grabNested('email',""), 
+								name: grabNested('displayName', "private"),
+								photoURL: pUrl == "" || pUrl.endsWith("/picture") ? "/src/assets/profile.png" : pUrl, 
+								points: p.data().points, 
+								condition: p.data().condition 
+							}
 							docRef.set(refreshProfile, { merge: true })
 							context.commit('setProfile', refreshProfile)
 							context.commit('setAuth', true)
 							if(p.data().condition == null){ context.commit('toggleProfile') }
 						} else{
-							var photo = user.photoURL && user.photoURL.endsWith("/picture") ? "/src/assets/profile.png" : user.photoURL
-							var newProfile = { email: user.email, name: user.displayName, photoURL: photo, points: "0", condition: null }
+							var pUrl = grabNested('photoURL',"")
+							var newProfile = { 
+								email: grabNested('email',""), 
+								name: grabNested('displayName', "private"),
+								photoURL: pUrl == "" || pUrl.endsWith("/picture") ? "/src/assets/profile.png" : pUrl, 
+								points: "0", 
+								condition: null
+							}
 							docRef.set(newProfile)
 							console.log("New user created")
 							context.commit('setProfile', newProfile)

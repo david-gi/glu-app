@@ -47,7 +47,7 @@
 								
 								<strong class="text-primary mt-3 d-inline-block">How this differs from other projects</strong><br>
 								<span class="glu-font">Glutenous!</span> strives to get past the gluten-free confusion - all that ignorance, marketing, fad diet stuff.
-								It is a real tool for real guten-free need. It's not trying to <i>sell</i> anyone on gluten-free, rather help prevent glutenings worldwide.
+								It is a real tool for real gluten-free need. It's not trying to <i>sell</i> anyone on gluten-free, rather help prevent glutenings worldwide.
 								<br>
 
 								<strong class="text-primary mt-3 d-inline-block">100% free, world-wide from any device</strong><br>

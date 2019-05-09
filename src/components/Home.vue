@@ -193,6 +193,7 @@ export default {
 			if(!tthis.auth){
 				setTimeout(function(){
 					$('.ht').tooltip({html: true}).tooltip("show")
+					$('.ht').click(()=>{$('.ht').tooltip("dispose")})
 					setTimeout(function(){
 						$('.ht').tooltip("dispose")
 					}, 20000)

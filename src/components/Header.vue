@@ -50,7 +50,7 @@
 						<span class="d-inline-block">
 							<small v-show="!loginLoading">
 								<span class="d-inline-block">
-									<div class="">Login<strong>/</strong>Sign Up</div>
+									<div class="">Login<i style="padding:0 3px;">|</i>Sign Up</div>
 								</span>
 							</small>
 							<small v-show="loginLoading">Loading...</small>
@@ -71,7 +71,7 @@
 				<div class="rounded">
 				<div class="modal-content bg-light">
 					<div class="row no-gutters">
-					<strong class="text-muted p-2"><small class="font-weight-bold">Login with: </small></strong>
+					<strong class="text-muted p-2"><small class="font-weight-bold">Choose account: </small></strong>
 					<button class="btn btn-sm btn-light pl-3 pr-3" @click="doLogin(2)">
 						<img width="32" height="32" class="rounded" src="src/assets/fb.png" />
 					</button>
@@ -122,7 +122,7 @@
 				]),
 				openLogin(){
 					$("#logginModal").modal({backdrop:false, show: true})
-					setTimeout(() => {$("#logginModal").modal("hide")}, 5000)
+					setTimeout(() => {$("#logginModal").modal("hide")}, 3000)
 				},
 				closeLogin(){
 					$("#logginModal").modal("hide")

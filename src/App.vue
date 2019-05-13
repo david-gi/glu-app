@@ -14,6 +14,9 @@
         <div class="row no-gutters">
             <div v-show="msg" class="w-25 rounded-top text-center p-2 pt-4 pb-4 text-white fixed-bottom msg bg-primary">{{msg}}</div>
         </div>
+        <div v-show="loading" class="loadingDiv h-100 w-100 m-0">
+            Loading...
+        </div>
         <div class="row no-gutters">
             <div v-show="error" class="col-12x text-center text-white fixed-bottom error bg-danger">{{error}}</div>
         </div>
@@ -63,7 +66,6 @@
 		},
 		methods: {
 			...mapActions([
-				'setLoading',
 				'errorMsg',
 			]),
 		},
@@ -91,6 +93,17 @@
     #Home{
 		padding-top: 42px;
         margin-bottom: -42px;
+    }
+    
+    .loadingDiv{
+        position: absolute;
+        text-align: center;
+        font-size: 1.2em;
+        color:#555;
+        top:0;
+        left:0;
+        padding-top:120px;
+        background-color: rgba(255, 255, 255, 0.55);
     }
 
     .error, .msg{

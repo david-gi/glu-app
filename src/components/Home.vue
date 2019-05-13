@@ -2,7 +2,7 @@
 	<div>
 		<i id="defaultSearch"></i>
 		<div class="vw-100" :class="{full: !placeShown, short: placeShown}" id="map"></div>
-		<input id="search-input" class="controls d-absolute mt-1 ml-1 border border-success ht" type="text" 
+		<input id="search-input" class="controls d-absolute mt-3 ml-2 border border-success ht" type="text" 
 			placeholder="Search map..." data-toggle="tooltip" data-placement="bottom" 
 			title="Search for a place <i>just like you would on Google Maps</i>">
 			
@@ -47,6 +47,7 @@ export default {
 		var tthis = this
 		var mapInitAndLoad = function(){
 			try{
+			tthis.loading1()
 			// Init and load Map
 			const map = new google.maps.Map(document.getElementById('map'), {
 				center: {lat: 40, lng: -88},
@@ -186,6 +187,7 @@ export default {
 						}
 						map.fitBounds(bounds)
 					});
+					tthis.loading0()
 				});
 			});
 			
@@ -201,6 +203,7 @@ export default {
 			}
 
 			} catch(e){
+				tthis.loading0()
 				if(e || e.indexOf("google is not defined")){
 					$("#warnModal").modal({backdrop:true, show: true})
 						.on('hidden.bs.modal', function (e) {
@@ -209,7 +212,7 @@ export default {
 				}
 			}
 		}
-		setTimeout(mapInitAndLoad(), 1000)
+		setTimeout(mapInitAndLoad(), 2000)
 		
 		},
 		computed: {
@@ -231,6 +234,8 @@ export default {
 				'loadSponsors',
 				'clearPlace',
 				'errorMsg',
+				'loading1',
+				'loading0',
 			]),
 			closeWarn(){
 				$("#warnModal").modal("hide")

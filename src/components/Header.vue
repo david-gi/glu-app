@@ -1,5 +1,5 @@
 <template>
-		<nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light border" >
+		<nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light border" style="min-width:340px;">
 		    <div class="navbar-header">
 		      <span class="navbar-brand text-success">
 						<i class="glu-font d-block float-left" style="line-height:.8em">GLUTENOUS!</i><br> 
@@ -45,17 +45,17 @@
 				</button>
 				
 				<span class="navbar-text " data-toggle="collapse">
-					<a id="loginBtn" class="border border-primary bg-white p-2 rounded btn-link text-primary ht" style="cursor:pointer"
+					<button id="loginBtn" class="border border-primary bg-white pb-1 rounded btn-link text-primary ht" style="cursor:pointer"
 						v-show="!isLoggedIn" @click="openLogin()" data-toggle="tooltip" data-placement="bottom" title="<strong>Free sign up!</strong> <br>Sign up now using <br>Google or Facebook">
 						<span class="d-inline-block">
 							<small v-show="!loginLoading">
-								<span class="d-inline-block">
+								<span class="d-block">
 									<div class="">Login<i style="padding:0 3px;">|</i>Sign Up</div>
 								</span>
 							</small>
 							<small v-show="loginLoading">Loading...</small>
 						</span>
-					</a>
+					</button>
 					<a id="LoginIcon" href="#" v-show="isLoggedIn" @click="toggleProfile" class="align-middle"
 							:class="{ active: showProfile }"	:style="{ backgroundImage: 'url('+photoUrl+')' }">
 					</a>
@@ -181,6 +181,9 @@
 	} 
 	.navbar-toggler.off{
 		right: 126px;
+	}
+	.navbar-collapse.show .nav div a{
+		padding-left:12px;
 	}
 	.gLogo{
 			background-image:url("/src/assets/G.svg");

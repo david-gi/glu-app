@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div id="rootAll" class="container-fluid">
     	<app-header id="Header" class="row"></app-header>
     	<div class="row vh-100" id="Home">
             <transition name="slide" mode="out-in" class="position-absolute">

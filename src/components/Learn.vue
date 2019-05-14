@@ -25,7 +25,7 @@
 								Well believe it or not the small amounts of gluten contamination from food made in facilities that handle grains or flour is enough to affect those with gluten-related disorders.
 								<br><br>
 								For gluten sufferers, each accidental gluten ingestion (glutening) can build upon each other, and can take victims up to 3 months to fully recover! 
-								Gluten does more than lower quality of their lives, it does real harm to the immune system and can result in a number of secondary diseases.
+								Gluten does more than lower quality of their lives, it does real harm to the immune system and can result in a number of secondary diseases & disorders (including Gluten Ataxia and Gluten Dermatitis).
 								<br><br>
 								So those gluten-free labeled treats next to a cafe's cash register? Well their often made in the same bakery as non-gluten-free treats and are therefore, <i> not gluten free.</i> 
 								<i>Extra good labeling: 'Celiac Approved' and 'Made in a dedicated gluten-free facility'</i>
@@ -51,8 +51,9 @@
 								
 								<a target="_blank" href="https://www.celiac.com/articles.html/journal-of-gluten-sensitivity/winter-2011-issue/the-conundrum-of-gluten-sensitivity-why-the-tests-are-often-wrong-r4776/">Read more on this...</a>
 								<br><br>
-								The results are still out but this may be part of the equation of gluten-intolerance (and possibly IBS).
-								If you are undiagnosed but convinced gluten is a problem for you, you're likely not crazy but now you are informed.
+								The results are still out but this may be part of the equation of gluten-intolerance* (and possibly IBS).
+								If you are undiagnosed but convinced gluten is a problem for you, you're likely not crazy but now you are informed. 
+								<i>* The medical term for gluten sensitivity and intolerance is Non-Celiac Gluten Sensitivity (NCGS). NCGS is really just a symptom list (non-)diagnosis for when Celiac and FODMAPs testing return negative.</i>
 								<br>
 								<br><strong class="text-primary">Marketing Fads</strong><br>
 								That brings us to the world of health marketing... Gluten-free living is being sold as a lifestyle choice regardless of an underlying disorder. Which leads to gluten-free labeling that is ignorant of gluten contamination.
@@ -62,6 +63,11 @@
 								It forces you to cut out most heavily processed foods, reduces high glycemic carbs from breads/beer/pizza and gets you to be aware of what you are eating.
 								<br><br>
 								<a href='https://www.youtube.com/watch?v=Hxd0msD954I' target="_blank">Learn even more about Celiac Disease here.</a>
+								<br><br>
+								<strong class="text-primary">Wheat (Grain) Allergies</strong><br>
+								This is an entirely different story than Celaic Disease though still a serious condition. While Celiac disease reaction starts only in the small intestines, a grain allergy reacts both inside & outside the gut. 
+								While an allergic reaction does not cause damage in the long run, in the short run it can make you feel just as terrible. Importantly, severe cases can cause a potentially fatal anaphylactic shock, 
+								hence people with a grain allergy must carry a life-saving EpiPen.
 								<br><br>
 								<strong>We haven't cured gluten-related disorders yet, but we can at least cure the ignorance surrounding it!</strong>
 							</small>

@@ -28,7 +28,7 @@
 								Gluten does more than lower quality of their lives, it does real harm to the immune system and can result in a number of secondary diseases.
 								<br><br>
 								So those gluten-free labeled treats next to a cafe's cash register? Well their often made in the same bakery as non-gluten-free treats and are therefore, <i> not gluten free.</i> 
-								<i>Extra good labeling: 'Celiac Approved', 'Made in a dedicated facility' and 'Gliadin-Free'</i>
+								<i>Extra good labeling: 'Celiac Approved' and 'Made in a dedicated gluten-free facility'</i>
 								<br>
 
 								<br><strong class="text-primary">The tragedy of Celiac testing</strong><br>

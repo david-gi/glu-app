@@ -84,6 +84,7 @@ export default {
 			};
 			setTimeout(() => {
 				document.getElementById('defaultSearch').click()
+				$("#search-input").blur()
 			}, 2000);
 
 			// Location
@@ -186,8 +187,10 @@ export default {
 							tthis.clearPlace()
 						}
 						map.fitBounds(bounds)
+						$("#search-input").blur()
 					});
 					tthis.loading0()
+					$("#search-input").blur()
 				});
 			});
 			

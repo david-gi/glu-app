@@ -25,6 +25,7 @@ const actions = {
 				var docRef = context.rootState.usersRef.doc(user.uid)
 				docRef.get()
 					.then(p => {
+						console.log("#*# "+JSON.stringify(p))
 						function grabNested(fieldName, defaultTxt){
 							try{
 								var res = user[fieldName] 

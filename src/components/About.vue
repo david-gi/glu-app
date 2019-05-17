@@ -15,7 +15,7 @@
 					<div class="modal-body bg-white text-dark">
 
 						<div class="m-n3 p-3">
-							<span class="text-dark">Gluten-Free Maps: Google Maps for Gluten-free living.</span>
+							<span class="text-dark">Gluten-Free Maps: Google Maps for true Gluten-free living.</span>
 						</div>
 						<hr>
 
@@ -34,8 +34,8 @@
 
 						<p>
 							<small>
-								<strong class="text-primary">Being gluten-free just got easier...</strong><br>
-								<strong>Gluten-safe places by gluten-free people</strong> with the power of Crowd-Reporting and Google Maps. 
+								<strong class="text-primary">Being gluten-free just got safer...</strong><br>
+								<strong>Gluten-safe places by gluten-free people</strong> - an experience-based & disease-aware map set on reducing global glutenings, false claims & commercial bias.
 								Get informed <i>before</i> you go out, report your gluten experiences and share them. Let's hold businesses accountable when they say 'gluten-free'.
 								
 								<br>
@@ -46,12 +46,12 @@
 								<br>
 								
 								<strong class="text-primary mt-3 d-inline-block">How this differs from other projects</strong><br>
-								<span class="glu-font">Glutenous!</span> strives to get past the gluten-free confusion - all that ignorance, marketing, fad diet stuff.
-								It is a real tool for real gluten-free need. It's not trying to <i>sell</i> anyone on gluten-free, rather help prevent glutenings worldwide.
+								<span class="glu-font">Glutenous!</span> strives to get past the "gluten-free" confusion - the disease unawareness, hype, false claims and ignorant marketing.
+								It is a real tool for real gluten-free need. It's not trying to <i>sell</i> anyone on gluten-free, rather to help prevent glutenings worldwide.
 								<br>
 
 								<strong class="text-primary mt-3 d-inline-block">100% free, world-wide from any device</strong><br>
-								<strong><span class="text-success"></span><i>No sign up,</i> just login with your Google or Facebook account and go!</strong>
+								<strong><span class="text-success"></span><i>Use it without signing up</i></strong>, and just login with your Google or Facebook account to make a report.
 								This community project is fueled by crowd-reporting from gluten-free people like you. No app download, as a progressive web app (PWA) it's accessible on the web from any device, anywhere.<br>
 
 								<strong class="text-primary mt-3 d-inline-block">Wanna support this?</strong> <br>

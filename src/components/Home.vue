@@ -198,9 +198,10 @@ export default {
 			if(!tthis.auth){
 				setTimeout(function(){
 					$('.ht').tooltip({html: true}).tooltip("show")
-					$('#rootAll').click(()=>{$('.ht').tooltip("dispose")})
+					$('#rootAll').click(()=>{$('.ht').tooltip("dispose"); $("#search-input").title("")})
 					setTimeout(function(){
 						$('.ht').tooltip("dispose")
+						$("#search-input").title("")
 					}, 20000)
 				}, 3600)
 			}

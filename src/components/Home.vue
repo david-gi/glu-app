@@ -3,7 +3,7 @@
 		<i id="defaultSearch"></i>
 		<div class="vw-100" :class="{full: !placeShown, short: placeShown}" id="map"></div>
 		<input id="search-input" class="controls d-absolute mt-3 ml-2 border border-success ht" type="text" 
-			placeholder="Search map..." data-toggle="tooltip" data-placement="right" 
+			placeholder="Search map..." data-toggle="tooltip" data-placement="top" 
 			title="Search for a place <i>just like you would on Google Maps</i>">
 			
 		<div class="text-white font-weight-boldx bg-success rounded p-2" style="bottom: 2px; left: 2px; position:absolute">
@@ -48,9 +48,9 @@ export default {
 		var tthis = this
 		var cycle = 0;
 		var mapInitAndLoad = function(){
-			console.log("loading "+cycle++)
-			if(!(google)){
-				if(cycle > 15){
+			console.log("loading "+cycle)
+			if(google == undefined){
+				if(cycle++ > 15){
 					$("#warnModal").modal({backdrop:true, show: true})
 						.on('hidden.bs.modal', function (e) {
 							window.location.replace(window.location.pathname)
@@ -216,10 +216,9 @@ export default {
 					setTimeout(function(){
 						$('.ht').tooltip({html: true}).tooltip("show")
 					}, 3600)
-					$('#rootAll').click(()=>{$('.ht').tooltip("dispose"); $("#search-input").prop("title","")})
+					$('#rootAll').click(()=>{$('.ht').tooltip("dispose");})
 					setTimeout(function(){
 						$('.ht').tooltip("dispose")
-						$("#search-input").prop("title","")
 					}, 20000)
 				}
 

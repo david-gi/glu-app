@@ -57,7 +57,7 @@
 									<small>
 										<span class="text-primary font-weight-bold mr-1">{{report.user.name}}</span> 
 										<span title="reputation" class="text-warning border border-warning d-inline-block font-weight-bold mr-1 rounded pl-1 pr-1"><small>{{report.user.points}}</small></span> 
-										<span @click="toggleAfi" :title="'Additional food intolerances: '+report.user.notes" 
+										<span @click="toggleAfi" :title="'Additional food intolerances: '+(report.user.notes ? report.user.notes : 'none')" 
 												class="text-muted d-inline-block afi-ht">
 											{{getConditionName(report.user.condition.id)}}
 										</span>

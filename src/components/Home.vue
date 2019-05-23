@@ -92,7 +92,9 @@ export default {
 				});
 
 				document.getElementById('defaultSearch').onclick = function () {
-					var loc = 'cafe or restaurant or store, gluten free';
+					var loc = window.location.hash.length > 3 
+						? decodeURIComponent(window.location.hash.substring(3))
+						: 'cafe or restaurant or store, gluten free';
 					var searchEl = document.getElementById("search-input")
 					searchEl.value = loc
 					google.maps.event.trigger(searchEl, 'focus', {})
@@ -117,9 +119,8 @@ export default {
 
 				// Search querying
 				searchBox.addListener('places_changed', function() {
-
 					var sPlaces = searchBox.getPlaces()
-					if (sPlaces && sPlaces.length == 0) { return; }
+					if (sPlaces && sPlaces.length == 0) { tthis.loading0(); return; }
 					// Clear old markers
 					markers.forEach(function(marker) { marker.setMap(null); })
 					markers = [];
@@ -207,7 +208,7 @@ export default {
 						});
 						tthis.loading0()
 						$("#search-input").blur()
-					})
+					}).catch(e=>{ tthis.loading0() })
 				})
 				
 				//Helptips
@@ -280,6 +281,8 @@ export default {
 									pcity:  locality, 
 									pprovince:  region,
 									pcountry:  country
+								}).then(()=>{
+									window.location.hash = "#/?"+encodeURIComponent(place.name + ", "+ place.formatted_address)
 								})
 							}
 						})

@@ -3,7 +3,7 @@
 		<i id="defaultSearch"></i>
 		<div class="vw-100" :class="{full: !placeShown, short: placeShown}" id="map"></div>
 		<input id="search-input" class="controls d-absolute mt-3 ml-2 border border-success ht" type="text" 
-			placeholder="Search map..." data-toggle="tooltip" data-placement="bottom" 
+			placeholder="Search map..." data-toggle="tooltip" data-placement="right" 
 			title="Search for a place <i>just like you would on Google Maps</i>">
 			
 		<div class="text-white font-weight-boldx bg-success rounded p-2" style="bottom: 2px; left: 2px; position:absolute">
@@ -49,178 +49,181 @@ export default {
 		var cycle = 0;
 		var mapInitAndLoad = function(){
 			console.log("loading "+cycle++)
-			if(!(google)){return}
-			clearInterval(googleInterval)
-			googleInterval = null
-
-			try{
-			tthis.loading1()
-			// Init and load Map
-			const map = new google.maps.Map(document.getElementById('map'), {
-				center: {lat: 40, lng: -88},
-				zoom: 3,
-				disableDefaultUI: true,
-				zoomControl: true,
-				zoomControlOptions: {
-						position: google.maps.ControlPosition.RIGHT_TOP
-				},
-			})
-			const places = new google.maps.places.PlacesService(map)
-
-			// Place click
-			map.addListener('click', 
-			function(event) {
-				tthis.getPlaceDetails(places, event.placeId)
-			})
-
-			// Search box			
-			var markers = [];
-			var input = document.getElementById('search-input')
-			var searchBox = new google.maps.places.SearchBox(input)
-			map.controls[google.maps.ControlPosition.TOP_LEFT].push(input)
-			map.addListener('bounds_changed', function() {
-				searchBox.setBounds(map.getBounds())
-			});
-
-			document.getElementById('defaultSearch').onclick = function () {
-				var loc = 'cafe or restaurant or store, gluten free';
-				var searchEl = document.getElementById("search-input")
-				searchEl.value = loc
-				google.maps.event.trigger(searchEl, 'focus', {})
-				google.maps.event.trigger(searchEl, 'keydown', { keyCode: 13 })
-			};
-			setTimeout(() => {
-				document.getElementById('defaultSearch').click()
-				$("#search-input").blur()
-			}, 2000);
-
-			// Location
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition((position) => 
-				{
-					map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude })
-					map.zoom = 8
-					setTimeout(() => {
-						document.getElementById('defaultSearch').click()
-					}, 2000);
-				}, ()=>{})
-			} 
-
-			// Search querying
-			searchBox.addListener('places_changed', function() {
-
-				var sPlaces = searchBox.getPlaces()
-				if (sPlaces && sPlaces.length == 0) { return; }
-				// Clear old markers
-				markers.forEach(function(marker) { marker.setMap(null); })
-				markers = [];
-
-				//Get glu-place ratings
-				var ratingDict = []
-				sPlaces.forEach(function(p){
-					ratingDict.push(p.place_id)
-				})
-				var bounds = new google.maps.LatLngBounds()
-				var i = 0
-				var colors = ['#387fe9', '#e94538', '#e96d38', '#e9b438', '#c1e938', '#72e938']
-				tthis.getPlaceRatings(ratingDict).then(resDict =>{
-					if(!resDict){ resDict = ratingDict; console.log("empty"); }
-					sPlaces.forEach(function(place) {
-						if (!place.geometry) {
-							console.log("Returned place contains no geometry")
-							return;
-						}
-
-						// Create a marker for each place
-						var ratingLabel = (resDict[place.place_id] == 0 ? ' (?★)' : " (" + resDict[place.place_id] + "★)");
-						var m = new google.maps.Marker({
-							map: map,
-							label: {
-								text: (place.name.length > 10 ? place.name.substring(0,10)+"..." : place.name) + ratingLabel,
-								color: '#333',
-								fontSize: '1.1em',
-								fontWeight: 'bold'
-
-							},
-							icon: {
-								path: google.maps.SymbolPath.CIRCLE,
-								fillColor: colors[resDict[place.place_id]],
-								fillOpacity: 1,
-								scale: 8,
-								strokeColor: '#222',
-								strokeWeight: 1,
-								labelOrigin: new google.maps.Point(place.name.length > 10 ? 7.5 : 6,0)
-							},
-							shape: {coords: [0,0,50,50], type: "rect"},
-							title: place.name + ratingLabel,
-							position: place.geometry.location,
-							optimized: true,
-							cursor: 'pointer',
-							zIndex: i++
-						})
-						m.addListener('click', function() {
-							map.panTo(place.geometry.location)
-							var zm = map.getZoom()
-							
-							if(zm < 6){
-								map.setZoom(6)
-							}
-							if(zm < 14 && zm > 6){
-								map.setZoom(14)
-								tthis.getPlaceDetails(places, place.place_id)
-							} else {								
-								map.setZoom(zm + 2)
-								tthis.getPlaceDetails(places, place.place_id)
-							}
-						})
-						m.addListener('dblclick', function() {
-							map.setZoom(19)
-							map.panTo(place.geometry.location)
-							tthis.getPlaceDetails(places, place.place_id)
-						})
-						markers.push(m)
-
-						if (place.geometry.viewport) {
-							// Only geocodes have viewport
-							bounds.union(place.geometry.viewport)
-						} else {
-							bounds.extend(place.geometry.location)
-						}
-
-						//Select Place if only result
-						if(sPlaces.length == 1){
-							tthis.getPlaceDetails(places, sPlaces[0].place_id)
-						} else {
-							tthis.clearPlace()
-						}
-						map.fitBounds(bounds)
-						$("#search-input").blur()
-					});
-					tthis.loading0()
-					$("#search-input").blur()
-				});
-			});
-			
-			//Helptips
-			if(!tthis.auth){
-				setTimeout(function(){
-					$('.ht').tooltip({html: true}).tooltip("show")
-					$('#rootAll').click(()=>{$('.ht').tooltip("dispose"); $("#search-input").title("")})
-					setTimeout(function(){
-						$('.ht').tooltip("dispose")
-						$("#search-input").title("")
-					}, 20000)
-				}, 3600)
-			}
-
-			} catch(e){
-				tthis.loading0()
-				if(e || e.indexOf("google is not defined")){
+			if(!(google)){
+				if(cycle > 15){
 					$("#warnModal").modal({backdrop:true, show: true})
 						.on('hidden.bs.modal', function (e) {
 							window.location.replace(window.location.pathname)
 						})
+					} else{
+						return
+					}
+			}
+			clearInterval(googleInterval)
+			googleInterval = null
+
+			try{
+				tthis.loading1()
+				// Init and load Map
+				const map = new google.maps.Map(document.getElementById('map'), {
+					center: {lat: 40, lng: -88},
+					zoom: 3,
+					disableDefaultUI: true,
+					zoomControl: true,
+					zoomControlOptions: {
+							position: google.maps.ControlPosition.RIGHT_TOP
+					},
+				})
+				const places = new google.maps.places.PlacesService(map)
+
+				// Place click
+				map.addListener('click', 
+				function(event) {
+					tthis.getPlaceDetails(places, event.placeId)
+				})
+
+				// Search box			
+				var markers = [];
+				var input = document.getElementById('search-input')
+				var searchBox = new google.maps.places.SearchBox(input)
+				map.controls[google.maps.ControlPosition.TOP_LEFT].push(input)
+				map.addListener('bounds_changed', function() {
+					searchBox.setBounds(map.getBounds())
+				});
+
+				document.getElementById('defaultSearch').onclick = function () {
+					var loc = 'cafe or restaurant or store, gluten free';
+					var searchEl = document.getElementById("search-input")
+					searchEl.value = loc
+					google.maps.event.trigger(searchEl, 'focus', {})
+					google.maps.event.trigger(searchEl, 'keydown', { keyCode: 13 })
+				};
+				setTimeout(() => {
+					document.getElementById('defaultSearch').click()
+					$("#search-input").blur()
+				}, 2000);
+
+				// Location
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition((position) => 
+					{
+						map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude })
+						map.zoom = 8
+						setTimeout(() => {
+							document.getElementById('defaultSearch').click()
+						}, 2000);
+					}, ()=>{})
+				} 
+
+				// Search querying
+				searchBox.addListener('places_changed', function() {
+
+					var sPlaces = searchBox.getPlaces()
+					if (sPlaces && sPlaces.length == 0) { return; }
+					// Clear old markers
+					markers.forEach(function(marker) { marker.setMap(null); })
+					markers = [];
+
+					//Get glu-place ratings
+					var ratingDict = []
+					sPlaces.forEach(function(p){
+						ratingDict.push(p.place_id)
+					})
+					var bounds = new google.maps.LatLngBounds()
+					var i = 0
+					var colors = ['#387fe9', '#e94538', '#e96d38', '#e9b438', '#c1e938', '#72e938']
+					tthis.getPlaceRatings(ratingDict).then(resDict =>{
+						if(!resDict){ resDict = ratingDict; console.log("empty"); }
+						sPlaces.forEach(function(place) {
+							if (!place.geometry) {
+								console.log("Returned place contains no geometry")
+								return;
+							}
+
+							// Create a marker for each place
+							var ratingLabel = (resDict[place.place_id] == 0 ? ' (?★)' : " (" + resDict[place.place_id] + "★)");
+							var m = new google.maps.Marker({
+								map: map,
+								label: {
+									text: (place.name.length > 10 ? place.name.substring(0,10)+"..." : place.name) + ratingLabel,
+									color: '#333',
+									fontSize: '1.1em',
+									fontWeight: 'bold'
+
+								},
+								icon: {
+									path: google.maps.SymbolPath.CIRCLE,
+									fillColor: colors[resDict[place.place_id]],
+									fillOpacity: 1,
+									scale: 8,
+									strokeColor: '#222',
+									strokeWeight: 1,
+									labelOrigin: new google.maps.Point(place.name.length > 10 ? 7.5 : 6,0)
+								},
+								shape: {coords: [0,0,50,50], type: "rect"},
+								title: place.name + ratingLabel,
+								position: place.geometry.location,
+								optimized: true,
+								cursor: 'pointer',
+								zIndex: i++
+							})
+							m.addListener('click', function() {
+								map.panTo(place.geometry.location)
+								var zm = map.getZoom()
+								
+								if(zm < 6){
+									map.setZoom(6)
+								}
+								if(zm < 14 && zm > 6){
+									map.setZoom(14)
+									tthis.getPlaceDetails(places, place.place_id)
+								} else {								
+									map.setZoom(zm + 2)
+									tthis.getPlaceDetails(places, place.place_id)
+								}
+							})
+							m.addListener('dblclick', function() {
+								map.setZoom(19)
+								map.panTo(place.geometry.location)
+								tthis.getPlaceDetails(places, place.place_id)
+							})
+							markers.push(m)
+
+							if (place.geometry.viewport) {
+								// Only geocodes have viewport
+								bounds.union(place.geometry.viewport)
+							} else {
+								bounds.extend(place.geometry.location)
+							}
+
+							//Select Place if only result
+							if(sPlaces.length == 1){
+								tthis.getPlaceDetails(places, sPlaces[0].place_id)
+							} else {
+								tthis.clearPlace()
+							}
+							map.fitBounds(bounds)
+							$("#search-input").blur()
+						});
+						tthis.loading0()
+						$("#search-input").blur()
+					})
+				})
+				
+				//Helptips
+				if(!tthis.auth){
+					setTimeout(function(){
+						$('.ht').tooltip({html: true}).tooltip("show")
+					}, 3600)
+					$('#rootAll').click(()=>{$('.ht').tooltip("dispose"); $("#search-input").prop("title","")})
+					setTimeout(function(){
+						$('.ht').tooltip("dispose")
+						$("#search-input").prop("title","")
+					}, 20000)
 				}
+
+			} catch(e){
+				tthis.loading0()
 			}
 		}
 		googleInterval = setInterval(mapInitAndLoad(), 1000)

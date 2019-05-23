@@ -14,12 +14,16 @@
 									<small>reputation</small>
 								</small>
 							</span><br>
-							<span class="text-white-50 ">{{profile.email}}</span><br><br>
-							<label for="cndInp">Gluten-related disorder:</label>
-							<select class="form-control" id="cndInp" :value="cId" @input="cId = $event.target.value">
+							<span class="text-white-50">{{profile.email}}</span><br>
+							<label class="mt-2" for="cndInp"><small>Gluten-related disorder:</small></label>
+							<select class="form-control form-control-sm" id="cndInp" :value="cId" @input="cId = $event.target.value">
 								<option value=" ">- None -</option>
 								<option v-for="cnd in conditions" :key="cnd.id" :value="cnd.id">{{cnd.data().name}}</option>
 							</select>
+							<label class="mt-3" for="afiInp"><small>Additional food intolerances:</small></label>
+							<input type="text" class="form-control form-control-sm mb-n1" id="extraInp" v-model="afi" 
+								max-length="90" :class="{'border-danger': afi.length > 90}" placeholder="dairy, corn, oats..."/>
+							<small v-show="afi.length > 90" class="ml-1 rounded pl-1 pr-1 bg-danger">Max length 90 characters.</small>
 						</div>
 						<br>
 						<div class="text-right  mt-n3">
@@ -48,9 +52,13 @@
 		data() {
 			return {
 				cId: "",
+				afi:"",
 				bugOpen: false,
 				bugText: "",
 			}
+		},
+		created() {
+			this.afi = this.profile.notes
 		},
 		computed: {
 			...mapGetters([
@@ -71,7 +79,7 @@
 				'sendBug'
 			]),
 			save(){
-				this.saveProfile(this.cId)
+				this.saveProfile({cndId :this.cId, addition: this.afi })
 					.then(() => { 
 						this.toggleProfile() 
 					})

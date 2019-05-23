@@ -57,7 +57,10 @@
 									<small>
 										<span class="text-primary font-weight-bold mr-1">{{report.user.name}}</span> 
 										<span title="reputation" class="text-warning border border-warning d-inline-block font-weight-bold mr-1 rounded pl-1 pr-1"><small>{{report.user.points}}</small></span> 
-										<span title="condition" class="text-muted d-inline-block">{{getConditionName(report.user.condition.id)}}</span> 
+										<span @click="toggleAfi" :title="'Additional food intolerances: '+report.user.notes" 
+												class="text-muted d-inline-block afi-ht">
+											{{getConditionName(report.user.condition.id)}}
+										</span>
 									</small>
 								</span>
 								<span class="d-inline-block float-right mr-2 ml-3">
@@ -134,6 +137,10 @@
     			var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 				return months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear()+' @ '+(hours > 12 ? hours - 12 : hours)+':'+minutes+ampm
 			},
+			toggleAfi(e){
+				$(e.target).tooltip({trigger: 'manual'}).tooltip('toggle')
+				$('.tooltip').on('click', function(){ $(this).tooltip('hide') })
+			},
 			toggleExpand(e){
 					this.expanded = !this.expanded;
 			},
@@ -184,6 +191,7 @@
 </script>
 
 <style scoped>
+	.afi-ht{ cursor: pointer;}
 	.PlaceMain{
 		position: fixed;
 		min-height: 35%;

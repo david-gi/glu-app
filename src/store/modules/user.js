@@ -89,14 +89,14 @@ const actions = {
 				})
 		}
 	},
-	saveProfile: (context, cndId) => {
+	saveProfile: (context, {cndId, addition}) => {
 		var docRef = context.rootState.usersRef.doc(firebase.auth().currentUser.uid)
 		docRef.get()
 			.then(res => {				
 				if(res.exists){
 					var cnd = context.rootState.conditionsRef.doc(cndId)
 					context.state.profile.condition = cnd
-					docRef.set({condition: cnd}, { merge: true })
+					docRef.set({condition: cnd, notes: addition}, { merge: true })
 					context.commit("setProfile", context.state.profile)
 					context.commit('setMsg', 'Saved!')
 				} else {

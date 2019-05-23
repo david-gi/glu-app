@@ -1,6 +1,7 @@
 <template>
-	<div class="col-12 p-0 m-0 pt-2 pb-1 border-top text-center">
-		<img class="col-12 col-sm-8 col-md-7 col-lg-5 p-0 m-0" @click="sClick" :src="currentSponsor.img" style=" cursor:pointer"/>
+	<div class="col-12 p-0 m-0 pl-3 pr-3 pt-2 pb-1 border-top text-right">
+		<img class="col-12 col-sm-8 col-md-7 col-lg-5 p-0 m-0" @click="sClick" :src="currentSponsor.img" 
+		style="cursor:pointer; max-width:280px;"/>
 	</div>
 </template>
 <script>

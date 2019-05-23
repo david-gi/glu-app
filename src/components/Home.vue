@@ -44,8 +44,15 @@ export default {
 			this.loadPlaceTypes()
 		},
 		mounted(){
+		var googleInterval = null
 		var tthis = this
+		var cycle = 0;
 		var mapInitAndLoad = function(){
+			console.log("loading "+cycle++)
+			if(!(google)){return}
+			clearInterval(googleInterval)
+			googleInterval = null
+
 			try{
 			tthis.loading1()
 			// Init and load Map
@@ -216,7 +223,7 @@ export default {
 				}
 			}
 		}
-		setTimeout(mapInitAndLoad(), 2000)
+		googleInterval = setInterval(mapInitAndLoad(), 1000)
 		
 		},
 		computed: {

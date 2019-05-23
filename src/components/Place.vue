@@ -33,7 +33,7 @@
 					<hr style="margin:0 0 4px 0">
 					<h5 class="clearfix m-0 mt-n2 pb-1">
 						<div class="mt-3 p-0 text-middle col-12 col-sm-4 float-left"><small>Reports</small></div>
-						<div v-show="reports != null && reports.length > 6" class="input-group mt-2 p-0 col-12 col-sm-6 float-right ">
+						<div v-show="reports != null && reports.length > 0" class="input-group mt-2 p-0 col-12 col-sm-6 float-right ">
 							<input id="SearchBox" v-model="filterQuery" v-on:keydown="clearQuery" v-on:keyup.enter="queryReports"  type="text" 
 								class="form-control form-control-sm border-primary border" 
 								placeholder="Ex: 'Soup' or '5 stars'" aria-label="Filter reports..." aria-describedby="rsearch">
@@ -70,7 +70,7 @@
 							<span class="col-12 d-inline-block text-truncate note" @click="toggleMore">
 								{{report.note}}
 							</span>
-							<sponsor v-if="!(index % 2) "></sponsor>
+							<sponsor v-if="(index % 2) "></sponsor>
 						</div>
 						
 					</div>

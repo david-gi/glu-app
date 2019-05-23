@@ -8,7 +8,7 @@
 				<small v-show="alreadyReported">Already reported today</small>
 			</button>
 		</div>
-		<div v-show="isOpen" class="m-0 mt-n5 pt-2 pb-3 pl-3 pr-3 border-bottom rounded-top bg-white" style="border-bottom-width:9px !important">
+		<div v-show="isOpen" class="m-0 pt-2 pb-3 pl-3 pr-3 border-bottom rounded-top bg-white" style="border-bottom-width:9px !important">
 			<h6 id='addBox' class="m-n1 pb-3">
 				<button type="button" class="close text-dark" @click="closeAdd" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -19,10 +19,10 @@
 					<vue-stars v-model="rating" :value="1" shadowColor="none" inactiveColor="#ddd"></vue-stars>
 					<small v-show="rating < 1" class="text-warning font-italic ml-n2">&larr; rate it!</small>
 				</div>
+				<span class="col-12 text-success ml-2"><small>This is a report about your gluten experience and not a review of the place itself.</small></span>
 				<div class="col-12">
 					<textarea @input="autoHeight" type="text" class="inputLine w-100 p-2" v-model="note" placeholder=" Share your gluten experience..."></textarea>
 				</div>
-				<i class="col-12 text-success"><small>Keep in mind this is a report about your gluten experience and not a review of the place itself.</small></i>
 				<div class="col-12 mb-n3">
 						<button type="button" class="btn btn-link text-muted pl-2 pr-2" @click="closeAdd">cancel</button>
 					<button type="button" class="btn btn-sm btn-success mt-1 pl-5 pr-5 float-right" :disabled="rating < 1" @click="add">Submit</button>

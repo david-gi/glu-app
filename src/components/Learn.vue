@@ -1,6 +1,6 @@
 <template>
 		<div class="modal fade" id="learnModal" @keypress="closeLearn" tabindex="-1" role="dialog" aria-labelledby="learnModalTitle" aria-hidden="true">
-			<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+			<div class="modal-dialog modal-lg modal-dialog-centered" :class="{'mw-100': fullpage}" role="document">
 				<div class="modal-content bg-light border border-primary" 
 					style="border-width:6px !important; box-shadow: 0px 0px 20px #666;">
 					<div class="modal-header text-white bg-primary rounded-0">
@@ -88,9 +88,17 @@
     		return {
 				}
 			},
+			mounted(){
+				if(this.fullpage){
+					this.open()
+				}
+			},
 			computed:{
 				...mapGetters([
 				]),
+				fullpage(){
+					return window.location.hash == '#/learn'
+				}
 			},
 			methods: {
 				open(){

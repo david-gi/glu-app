@@ -2,7 +2,7 @@
 		<div class="modal fade" id="aboutModal" @keypress="closeAbout" tabindex="-1" role="dialog" 
 		aria-labelledby="aboutModalTitle" aria-hidden="true">
 			<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-				<div class="modal-content bg-light border border-primary" 
+				<div class="modal-content bg-light border border-primary" :class="{'mw-100': fullpage}"
 					style="border-width:6px !important; box-shadow: 0px 0px 20px #666;">
 					<div class="modal-header text-white bg-primary rounded-0">
 						<h5 class="modal-title" id="aboutModalTitle">
@@ -75,9 +75,17 @@
     		return {
 				}
 			},
+			mounted(){
+				if(this.fullpage){
+					this.open()
+				}
+			},
 			computed:{
 				...mapGetters([
 				]),
+				fullpage(){
+					return window.location.hash == '#/about'
+				}
 			},
 			methods: {
 				open(){

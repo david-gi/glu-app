@@ -73,6 +73,110 @@ export default {
 					zoomControlOptions: {
 							position: google.maps.ControlPosition.RIGHT_TOP
 					},
+					styles:
+					[
+					{
+						"elementType": "geometry",
+						"stylers": [
+						{
+							"saturation": 20
+						}
+						]
+					},
+					{
+						"featureType": "administrative.locality",
+						"elementType": "labels.icon",
+						"stylers": [
+						{
+							"color": "#65df31"
+						},
+						{
+							"visibility": "on"
+						}
+						]
+					},
+					{
+						"featureType": "poi.attraction",
+						"stylers": [
+						{
+							"visibility": "off"
+						}
+						]
+					},
+					{
+						"featureType": "poi.business",
+						"stylers": [
+						{
+							"visibility": "on"
+						}
+						]
+					},
+					{
+						"featureType": "poi.government",
+						"stylers": [
+						{
+							"visibility": "off"
+						}
+						]
+					},
+					{
+						"featureType": "poi.medical",
+						"stylers": [
+						{
+							"visibility": "off"
+						}
+						]
+					},
+					{
+						"featureType": "poi.park",
+						"stylers": [
+						{
+							"visibility": "simplified"
+						}
+						]
+					},
+					{
+						"featureType": "poi.place_of_worship",
+						"stylers": [
+						{
+							"visibility": "off"
+						}
+						]
+					},
+					{
+						"featureType": "poi.school",
+						"stylers": [
+						{
+							"visibility": "off"
+						}
+						]
+					},
+					{
+						"featureType": "poi.sports_complex",
+						"stylers": [
+						{
+							"visibility": "simplified"
+						}
+						]
+					},
+					{
+						"featureType": "road",
+						"stylers": [
+						{
+							"visibility": "simplified"
+						}
+						]
+					},
+					{
+						"featureType": "water",
+						"elementType": "geometry",
+						"stylers": [
+						{
+							"color": "#a7c7f8"
+						}
+						]
+					}
+					]
 				})
 				const places = new google.maps.places.PlacesService(map)
 

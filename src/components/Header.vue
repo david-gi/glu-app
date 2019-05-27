@@ -50,7 +50,7 @@
 						<span class="d-inline-block">
 							<small v-show="!loginLoading">
 								<span class="d-block">
-									<div class="">Login<i style="padding:0 3px;">|</i>Sign Up</div>
+									<div>Login<i style="padding:0 3px;">|</i>Sign Up<div class="redDot"></div></div>
 								</span>
 							</small>
 							<small v-show="loginLoading">Loading...</small>
@@ -61,6 +61,7 @@
 					</a>
 				</span>
 
+			<privacyModal ref="privacyNavModal"></privacyModal>
 			<aboutModal ref="aboutNavModal"></aboutModal>
 			<learnModal ref="learnNavModal"></learnModal>
 			
@@ -71,13 +72,14 @@
 				<div class="rounded">
 				<div class="modal-content bg-light">
 					<div class="row no-gutters">
-					<strong class="text-muted p-2"><small class="font-weight-bold">Choose account: </small></strong>
+					<strong class="text-muted p-2 mt-n1"><small class="font-weight-bold">Choose account: </small></strong>
 					<button class="btn btn-sm btn-light pl-3 pr-3" @click="doLogin(2)">
 						<img width="32" height="32" class="rounded" src="src/assets/fb.png" />
 					</button>
 					<button class="btn btn-sm btn-light pl-3 pr-3" @click="doLogin(1)">
 						<img width="32" height="32" class="rounded" src="src/assets/g.png" />
-					</button>
+					</button><br>
+					<button class="ml-2 mt-n4 btn btn-link" @click="navPrivacy"><small><small>Privacy Policy</small></small></button>
 			</div>
 			</div>
 			</div>
@@ -90,6 +92,7 @@
 	import {mapActions, mapGetters} from 'vuex'
 	import About from './About.vue'
 	import Learn from './Learn.vue'
+	import Privacy from './Privacy.vue'
 	import firebase from 'firebase/app'
     export default {
 			...mapGetters([
@@ -102,7 +105,8 @@
     	},
 			components: {
 				aboutModal: About,
-				learnModal: Learn
+				learnModal: Learn,
+				privacyModal: Privacy
 			},
 			computed: {
 				isLoggedIn(){
@@ -148,6 +152,9 @@
 				navLearn(){
 					this.$refs.learnNavModal.open()
 				},
+				navPrivacy(){
+					this.$refs.privacyNavModal.open()
+				},
 			},
 			created(){
 				var tthis = this
@@ -189,5 +196,14 @@
 			background-image:url("/src/assets/G.svg");
 			background-repeat: no-repeat;
 			padding-left:28px;
+	}
+	.redDot{
+			background-image:url("/src/assets/red2.png");
+			background-repeat: no-repeat;
+			position: absolute;
+			top:2px;
+			right:18px;
+			width: 20px;
+			height: 20px;
 	}
 </style>

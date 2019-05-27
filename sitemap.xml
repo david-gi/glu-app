@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
+  <url>
+    <loc>https://glutenous.org/</loc>
+    <lastmod>2019-05-27</lastmod>
+  </url>
+  <url>
+    <loc>https://glutenous.org/#/about</loc>
+    <lastmod>2019-05-27</lastmod>
+  </url>
+  <url>
+    <loc>https://glutenous.org/#/learn</loc>
+    <lastmod>2019-05-27</lastmod>
+  </url>
+  <url>
+    <loc>https://glutenous.org/#/privacy</loc>
+    <lastmod>2019-05-27</lastmod>
+  </url> 
+  <url>
+    <loc>https://maps.glutenous.org/</loc>
+    <lastmod>2019-05-27</lastmod>
+  </url>
+  <url>
+    <loc>https://maps.glutenous.org/#/about</loc>
+    <lastmod>2019-05-27</lastmod>
+  </url>
+  <url>
+    <loc>https://maps.glutenous.org/#/learn</loc>
+    <lastmod>2019-05-27</lastmod>
+  </url>
+  <url>
+    <loc>https://maps.glutenous.org/#/privacy</loc>
+    <lastmod>2019-05-27</lastmod>
+  </url>
+</urlset>

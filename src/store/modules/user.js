@@ -42,11 +42,11 @@ const actions = {
 							var refreshProfile = { 
 								email: grabNested('email',""), 
 								name: grabNested('displayName', "private"),
-								photoURL: pUrl == "" || pUrl.endsWith("/picture") ? "/src/assets/profile.png" : pUrl, 
 								points: p.data().points, 
 								condition: p.data().condition 
 							}
 							docRef.set(refreshProfile, { merge: true })
+							refreshProfile["photoURL"] = pUrl == "" || pUrl.endsWith("/picture") ? "/src/assets/profile.png" : pUrl, 
 							context.commit('setProfile', refreshProfile)
 							context.commit('setAuth', true)
 							if(p.data().condition == null){ context.commit('toggleProfile') }
@@ -55,12 +55,12 @@ const actions = {
 							var newProfile = { 
 								email: grabNested('email',""), 
 								name: grabNested('displayName', "private"),
-								photoURL: pUrl == "" || pUrl.endsWith("/picture") ? "/src/assets/profile.png" : pUrl, 
 								points: "0", 
-								condition: null
+								condition: null,
 							}
 							docRef.set(newProfile)
 							console.log("New user created")
+							newProfile["photoURL"] = pUrl == "" || pUrl.endsWith("/picture") ? "/src/assets/profile.png" : pUrl, 
 							context.commit('setProfile', newProfile)
 							context.commit('toggleProfile')
 							context.commit('setAuth', true)

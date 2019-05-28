@@ -18,7 +18,7 @@
 								<br>
 								Your privacy is important to us at Glutenous.org. <br>
 								<br>
-								We do not any collect information for commercial purposes, nor do we sell or share information collected with 3rd parties or affliates.
+								We do not any collect information for commercial purposes, nor do we sell or share information collected with 3rd parties or affiliates.
 								<br>
 								<br>
 								<i>When you use this site:</i> Basic anonymous web traffic statistics are collected for site management and analytics.
@@ -30,7 +30,10 @@
 								<i>When you login:</i> We only save data you enter and only for the purpose of this site's operation, which exclusively includes: reports (description and rating), your 'gluten-related disorder' and 'additional food intolerances'.
 								<br>
 								<br>
-								<i>When your make a report:</i> The report description, your account name, your 'gluten-related disorder' and 'additional food intolerances' will be publicly displayed in a place's reports. This is to add legitmacy to reports and to provide relevant information for those reading the report.
+								<i>When your make a report:</i> The report description, your account name, your 'gluten-related disorder' and 'additional food intolerances' will be publicly displayed in a place's reports. This is to add legitimacy to reports and to provide relevant information for those reading the report.
+								<br>
+								<br>
+								This site is build with Google Maps API. Therefore using Glutenous! also accepts <a href="https://www.google.com/intl/en-US_US/help/terms_maps/" target="_blank">these terms</a>.
 								<br>
 								<br>
 								<i>By signing up to and using our website,</i> you agree to this privacy policy.

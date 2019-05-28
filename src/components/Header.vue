@@ -5,8 +5,17 @@
 						<i class="glu-font d-block float-left" style="line-height:.8em">GLUTENOUS!</i><br> 
 						<small class="font-weight-light text-black-50 d-block float-left mt-n2 ml-1" style="line-height:.1em">
 							<small> 
-								<span class="d-sm-none" style="font-size:.8em">Gluten-Free Maps<span style="font-size:.8em">™</span></span>
-								<span class="d-none d-sm-inline">Gluten-Free Maps<span style="font-size:.8em">™</span></span>
+
+								<span class="d-sm-none" style="font-size:.8em">
+									<span class="txt-rotate" data-period="2000"></span>
+									 Maps<span style="font-size:.8em">™</span>
+									</span>
+
+								<span class="d-none d-sm-inline">
+									<span class="txt-rotate" data-period="2000">Gluten-Free</span>
+									 Maps<span style="font-size:.8em">™</span>
+									</span>
+
 							</small>
 						</small>
 					</span>
@@ -79,7 +88,7 @@
 					<button class="btn btn-sm btn-light pl-3 pr-3" @click="doLogin(1)">
 						<img width="32" height="32" class="rounded" src="src/assets/g.png" />
 					</button><br>
-					<button class="ml-2 mt-n4 btn btn-link" @click="navPrivacy"><small><small>Privacy Policy</small></small></button>
+					<button class="ml-2 mt-n4 btn btn-link float-left" @click="navPrivacy"><small><small>Privacy Policy</small></small></button>
 			</div>
 			</div>
 			</div>
@@ -94,13 +103,14 @@
 	import Learn from './Learn.vue'
 	import Privacy from './Privacy.vue'
 	import firebase from 'firebase/app'
+	import gfRotate from '../utils/gfRotate.js'
     export default {
 			...mapGetters([
 				'auth'
 			]),
     	data() {
     		return {
-					loginLoading: false
+					loginLoading: false,
     		}
     	},
 			components: {
@@ -117,7 +127,7 @@
 				},
 				showProfile(){
 					return this.$store.state.showProfile && this.$store.state.auth
-				},
+				}
 			},
 			methods: {
 				...mapActions([

@@ -40,7 +40,7 @@ const actions = {
 						if(p.exists){
 							var pUrl = grabNested('photoURL',"")
 							var refreshProfile = { 
-								email: grabNested('email',""), 
+								email: '', //grabNested('email',""), 
 								name: grabNested('displayName', "private"),
 								points: p.data().points, 
 								condition: p.data().condition 
@@ -53,7 +53,7 @@ const actions = {
 						} else{
 							var pUrl = grabNested('photoURL',"")
 							var newProfile = { 
-								email: grabNested('email',""), 
+								email: '', //grabNested('email',""), 
 								name: grabNested('displayName', "private"),
 								points: "0", 
 								condition: null,

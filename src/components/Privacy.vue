@@ -24,10 +24,10 @@
 								<i>When you use this site:</i> Basic anonymous web traffic statistics are collected for site management and analytics.
 								<br>
 								<br>
-								<i>When you sign up:</i> We only collect the bare minimum, your email (only when signing up with a Google account) and account name (as displayed on Google or Facebook). You email is for sign in purposes only. We will never send you email of any kind.
+								<i>When you sign up:</i> We only collect your account name (as displayed on Google or Facebook).
 								<br>
 								<br>
-								<i>When you login:</i> We only save data you enter and only for the purpose of this site's operation, which exclusively includes: reports (description and rating), your 'gluten-related disorder' and 'additional food intolerances'.
+								<i>When you login:</i> We only save data you enter and only for the purpose of this site's operation, which exclusively includes: reports (description and rating), your 'gluten-related disorder', 'additional food intolerances' and bug reports.
 								<br>
 								<br>
 								<i>When your make a report:</i> The report description, your account name, your 'gluten-related disorder' and 'additional food intolerances' will be publicly displayed in a place's reports. This is to add legitimacy to reports and to provide relevant information for those reading the report.

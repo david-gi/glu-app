@@ -14,7 +14,6 @@
 									<small>reputation</small>
 								</small>
 							</span><br>
-							<span class="text-white-50">{{profile.email}}</span><br>
 							<label class="mt-2" for="cndInp"><small>Gluten-related disorder:</small></label>
 							<select class="form-control form-control-sm" id="cndInp" :value="cId" @input="cId = $event.target.value">
 								<option value=" ">- None -</option>

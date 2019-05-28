@@ -322,7 +322,9 @@ export default {
 							$('.ht').tooltip({html: true}).tooltip("show")
 						}
 					}, 3600)
-					$('#rootAll').click(()=>{$('.ht').tooltip("dispose");})
+					$('#rootAll').click(()=>{
+						$('.ht').tooltip("dispose");
+					})
 					setTimeout(function(){
 						$('.ht').tooltip("dispose")
 					}, 20000)

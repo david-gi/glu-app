@@ -47,15 +47,15 @@ export default {
 		var googleInterval = null
 		var tthis = this
 		var cycle = 0;
-		var mapInitAndLoad = function(){
-			console.log("loading "+cycle)
-			if(google == undefined){
-				if(cycle++ > 15){
+		function mapInitAndLoad() {
+			if(!(google) || google == undefined){
+				if(cycle++ > 6){
 					$("#warnModal").modal({backdrop:true, show: true})
 						.on('hidden.bs.modal', function (e) {
 							window.location.replace(window.location.pathname)
 						})
 					} else{
+						console.log("loading retry "+cycle)
 						return
 					}
 			}
@@ -318,7 +318,9 @@ export default {
 				//Helptips
 				if(!tthis.auth){
 					setTimeout(function(){
-						$('.ht').tooltip({html: true}).tooltip("show")
+						if(window.location.hash.length < 4){
+							$('.ht').tooltip({html: true}).tooltip("show")
+						}
 					}, 3600)
 					$('#rootAll').click(()=>{$('.ht').tooltip("dispose");})
 					setTimeout(function(){
@@ -330,7 +332,7 @@ export default {
 				tthis.loading0()
 			}
 		}
-		googleInterval = setInterval(mapInitAndLoad(), 1000)
+		googleInterval = setInterval(()=>{ mapInitAndLoad() }, 1000)
 		
 		},
 		computed: {

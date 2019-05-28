@@ -95,7 +95,7 @@ const actions = {
 		}
 	},
 	getReports: (context, placeRef) => {
-		context.rootState.reportsRef.where("place", "==", placeRef).orderBy("created", "desc").get()
+		context.rootState.reportsRef.where("place", "==", placeRef).orderBy("created", "desc").limit(30).get()
 			.then(ss => {
 				context.commit("setReports", [])
 				var reports = []

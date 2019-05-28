@@ -53,14 +53,15 @@ var TxtRotate = function(el, toRotate, period) {
               "Glutenfri",
               "Gluten-Frei",
               "Glutenvrij",
+              "χωρίς γλουτένη",
+              "Glütensiz",
+              "گلوتن رایگان است",
+              "не содержит глютен",
               "不含麸质",
               "무 글루텐",
               "無グルテンの",
-              "не содержит глютен",
-              "χωρίς γλουτένη",
               "ग्लूटेन मुक्त",
-              "گلوتن رایگان است",
-              "Glütensiz"
+              "Gluten-Free"
           ]
         var period = elements[i].getAttribute('data-period');
         new TxtRotate(elements[i], gfLangs, period);

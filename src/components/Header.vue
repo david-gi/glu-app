@@ -70,6 +70,7 @@
 					</a>
 				</span>
 
+			<introModal ref="introNavModal"></introModal>
 			<privacyModal ref="privacyNavModal"></privacyModal>
 			<aboutModal ref="aboutNavModal"></aboutModal>
 			<learnModal ref="learnNavModal"></learnModal>
@@ -102,6 +103,7 @@
 	import About from './About.vue'
 	import Learn from './Learn.vue'
 	import Privacy from './Privacy.vue'
+	import Intro from './Intro.vue'
 	import firebase from 'firebase/app'
 	import gfRotate from '../utils/gfRotate.js'
     export default {
@@ -116,7 +118,8 @@
 			components: {
 				aboutModal: About,
 				learnModal: Learn,
-				privacyModal: Privacy
+				privacyModal: Privacy,
+				introModal: Intro
 			},
 			computed: {
 				isLoggedIn(){
@@ -174,7 +177,10 @@
 				this.loginLoading = true
 				setTimeout(function(){ 
 					tthis.loginLoading = false
-					if(!this.auth){ $('.ht').tooltip({html: true}) } 
+					if(!tthis.isLoggedIn){
+						tthis.$refs.introNavModal.open() 
+						$('.ht').tooltip({html: true})
+					} 
 				}, 3000)
 				this.$store.dispatch("autoLogin")
 			}

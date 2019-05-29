@@ -1,5 +1,6 @@
 //ref:Gregory Schier// 
 var TxtRotate = function(el, toRotate, period) {
+    this.max = toRotate.length;
     this.toRotate = toRotate;
     this.el = el;
     this.loopNum = 0;
@@ -34,10 +35,16 @@ var TxtRotate = function(el, toRotate, period) {
       this.loopNum++;
       delta = 500;
     }
-  
-    setTimeout(function() {
-      that.tick();
-    }, delta);
+
+    if(this.max != this.loopNum){
+      setTimeout(function() {
+        that.tick();
+      }, delta);
+    } else{
+      setTimeout(function() {
+        that.el.innerHTML = that.toRotate[that.max - 1]
+      }, this.period);
+    }
   };
   
   window.onload = function() {
@@ -69,7 +76,7 @@ var TxtRotate = function(el, toRotate, period) {
       // INJECT CSS
       var css = document.createElement("style");
       css.type = "text/css";
-      css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+      css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #777 }";
       document.body.appendChild(css);
     }, 5000)
   };

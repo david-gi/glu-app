@@ -7,12 +7,12 @@
 							<small> 
 
 								<span class="d-sm-none" style="font-size:.8em">
-									<span class="txt-rotate" data-period="2000"></span>
+									<span class="txt-rotate" data-period="2500"></span>
 									 Maps<span style="font-size:.8em">™</span>
 									</span>
 
 								<span class="d-none d-sm-inline">
-									<span class="txt-rotate" data-period="2000">Gluten-Free</span>
+									<span class="txt-rotate" data-period="2500">Gluten-Free</span>
 									 Maps<span style="font-size:.8em">™</span>
 									</span>
 

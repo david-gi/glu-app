@@ -1,14 +1,13 @@
 <template>
-		<div class="modal fade" id="introModal" @keypress="closeIntro" tabindex="-1" role="dialog" aria-labelledby="introModalTitle" aria-hidden="true">
-			<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-				<div class="modal-content bg-light border border-primary"
-					style="border-width:12px !important; border-top-width:48px !important; box-shadow: 0px 0px 20px #666;">
-					<div class="modal-body bg-white text-dark p-0" style="">
-							<iframe class="w-100" height="300px" title="How to use Glutenous!" src="https://www.youtube.com/embed/8UDToGtQYIQ?controls=0&amp;start=7" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-							<button type="button" class="btn btn-primary w-100 m-0 mt-n2 rounded-0" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
+		<div v-show="isOpen" id="introModal" @keypress="closeIntro" class="rounded-top border border-primary"
+			style="width:25%; height:30%; position:fixed; bottom:0; right:0; border-width:3px !important;">
+						<button type="button" class="mb-n4 close text-light" @click="closeIntro">
+							<span aria-hidden="true">&times;</span>
+						</button>
+			<iframe class="w-100 h-100" width="auto" height="auto" title="How to use Glutenous!" 
+				src="https://www.youtube.com/embed/8UDToGtQYIQ?controls=1&amp;start=1" frameborder="0" 
+				allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+			<br>
 		</div>
 </template>
 
@@ -17,14 +16,17 @@
     export default {
     	data() {
     		return {
+					isOpen: false
 				}
 			},
 			methods: {
 				open(){
-					$("#introModal").modal({backdrop:false, show: true})
+					this.isOpen = true
+					//$("#introModal").modal({backdrop:false, show: true})
 				},
 				closeIntro(){
-					$("#introModal").modal("hide")
+					this.isOpen = false
+					//$("#introModal").modal("hide")
 				}
 			}
 	}

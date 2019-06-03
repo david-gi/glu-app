@@ -7,12 +7,12 @@
 							<small> 
 
 								<span class="d-sm-none" style="font-size:.8em">
-									<span class="txt-rotate" data-period="2500"></span>
+									<span class="txt-rotate" data-period="2000"></span>
 									 Maps<span style="font-size:.8em">™</span>
 									</span>
 
 								<span class="d-none d-sm-inline">
-									<span class="txt-rotate" data-period="2500">Gluten-Free</span>
+									<span class="txt-rotate" data-period="2000">Gluten-Free</span>
 									 Maps<span style="font-size:.8em">™</span>
 									</span>
 
@@ -31,7 +31,7 @@
 								<a href="https://twitter.com/GlutenousMaps" target="_blank" class="nav-item ml-1">
 									<img title="twitter" src="/src/assets/tw.png"/>
 								</a>
-								<a href="https://bit.ly/2VKBSTT" target="_blank" class="nav-item ml-0">
+								<a href="https://igg.me/at/Glutenous" target="_blank" class="nav-item ml-0">
 									<img title="Indiegogo" src="/src/assets/go.png"/>
 								</a>
 		      		</div>

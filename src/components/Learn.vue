@@ -40,6 +40,10 @@
 									Doctors test you blood to see if your body is reacting to gluten. Results aren't super accurate and doctors & technicians aren't always good at statistics.
 									What's more, you must have enough gluten in your diet for them to even work. 
 									Eating lots of gluten for several months in order for the test to work is referred to as a  'Gluten Challenge'.</li>
+									<li><strong>Genetic Testing</strong><br>
+									Tests your DNA to see if the genes associated with the development of Celiac Disease are present. Positive results does <i>not</i> mean you have Celiac Disease, only that you have an increased likelihood of developing it. 
+									A wise idea for youth who have no symptoms but have a genetic relative who has Celiac Disease. 
+									<i>Also helpful you are on a gluten-free diet without a diagnosis and have chosen not to do a gluten challenge for Celiac testing.</i>
 									<li><strong>Biopsy 'Scope' Confirmed</strong><br>
 									Gastroenterologists fully sedate you, put a special hose down your throat and stomach then cut a tiny hole out of your upper intestines to test for gluten-related damage. 
 									It is the most accurate way to diagnose, though again, you'll need to do a 'Gluten Challenge' for it to work well.
@@ -69,7 +73,7 @@
 								While an allergic reaction does not cause damage in the long run, in the short run it can make you feel just as terrible. Importantly, severe cases can cause a potentially fatal anaphylactic shock, 
 								hence people with a grain allergy must carry a life-saving EpiPen.
 								<br><br>
-								<strong>We haven't cured gluten-related disorders yet, but we can at least cure the ignorance surrounding it!</strong>
+								<strong>We haven't cured gluten-related disorders yet, but we can reduce the ignorance surrounding it.</strong>
 							</small>
 						</p>
 					</div>

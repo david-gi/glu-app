@@ -8,7 +8,7 @@
 			
 		<div class="text-white font-weight-boldx bg-success rounded p-2" style="bottom: 2px; left: 2px; position:absolute">
 			Beta Version -  
-			<a target="_blank" href="https://bit.ly/2VKBSTT"  class="text-white font-underline ht"
+			<a target="_blank" href="https://igg.me/at/Glutenous"  class="text-white font-underline ht"
 				data-toggle="tooltip" data-placement="top" 
 				title="<i>Keep this project alive!</i>">Join our Indiegogo Prelaunch!</a>
 		</div>
@@ -47,23 +47,27 @@ export default {
 		var googleInterval = null
 		var tthis = this
 		var cycle = 0;
+		this.loading1()
 		function mapInitAndLoad() {
-			if(!(google) || google == undefined){
-				if(cycle++ > 6){
+			try{
+				var g = google
+			} catch(e){
+				if(cycle++ > 4){
+					tthis.loading0()
 					$("#warnModal").modal({backdrop:true, show: true})
 						.on('hidden.bs.modal', function (e) {
 							window.location.replace(window.location.pathname)
 						})
 					} else{
 						console.log("loading retry "+cycle)
-						return
 					}
+				return
 			}
+
 			clearInterval(googleInterval)
 			googleInterval = null
 
 			try{
-				tthis.loading1()
 				// Init and load Map
 				const map = new google.maps.Map(document.getElementById('map'), {
 					center: {lat: 40, lng: -88},
@@ -334,7 +338,7 @@ export default {
 				tthis.loading0()
 			}
 		}
-		googleInterval = setInterval(()=>{ mapInitAndLoad() }, 1000)
+		googleInterval = setInterval(()=>{ mapInitAndLoad() }, 800)
 		
 		},
 		computed: {

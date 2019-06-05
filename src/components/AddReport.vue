@@ -25,7 +25,7 @@
 				</small>
 				<div class="col-12">
 					<textarea @input="autoHeight" type="text" class="inputLine w-100 p-2" v-model="note" 
-						placeholder="Tell us about it..."></textarea>
+						id="note" placeholder="No problems, good, ordered the..."></textarea>
 				</div>
 				<div class="col-12 tags">
 					<div class="m-1 text-white rounded p-1" @click="dedicatedGFToggle()" 
@@ -140,6 +140,7 @@
 			openAddAReport(){
 				this.opened = true
 				this.$emit('fullsize')
+				setTimeout(()=>{$("#note").focus()},200)
 			},
 			closeAdd(){
 				this.rating = 0

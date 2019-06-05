@@ -30,16 +30,16 @@
 							</span>
 						</div>
 						<div class="w-100 p-0 m-0 mt-n2 align-right" style="font-size: .6em;">
-							<div class="bg-primary m-1 rounded p-1 pl-2 pr-2 d-inline-block" v-if="currentPlace.dedicatedCount">
+							<div class="bg-primary m-1 rounded p-1 pl-2 pr-2 d-inline-block" v-if="currentPlace.dedicatedCount && currentPlace.dedicatedCount > 0">
 								Dedicated GF {{ currentPlace.dedicatedCount > 10 ? "★" : "(+"+currentPlace.dedicatedCount+")" }}
 							</div>
-							<div class="bg-primary m-1 rounded p-1 pl-2 pr-2 d-inline-block" v-if="currentPlace.pDedicatedCount">
+							<div class="bg-primary m-1 rounded p-1 pl-2 pr-2 d-inline-block" v-if="currentPlace.pDedicatedCount && currentPlace.pDedicatedCount > 0">
 								Partly Dedicated GF {{ currentPlace.pDedicatedCount > 10 ? "★" : "(+"+currentPlace.pDedicatedCount+")" }}
 							</div>
-							<div class="bg-primary m-1 rounded p-1 pl-2 pr-2 d-inline-block" v-if="currentPlace.MenuCount">
+							<div class="bg-primary m-1 rounded p-1 pl-2 pr-2 d-inline-block" v-if="currentPlace.MenuCount && currentPlace.MenuCount > 0">
 								GF Menu {{ currentPlace.MenuCount > 10 ? "★" : "(+"+currentPlace.MenuCount+")" }}
 							</div>
-							<div class="bg-primary m-1 rounded p-1 pl-2 pr-2 d-inline-block" v-if="currentPlace.LabellingCount">
+							<div class="bg-primary m-1 rounded p-1 pl-2 pr-2 d-inline-block" v-if="currentPlace.LabellingCount && currentPlace.LabellingCount > 0">
 								GF Labelling {{ currentPlace.LabellingCount > 10 ? "★" : "(+"+currentPlace.LabellingCount+")" }}
 							</div>
 						</div>

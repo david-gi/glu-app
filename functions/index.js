@@ -7,16 +7,17 @@ admin.initializeApp()
 // Sum report ratings for a place when a new report is made and add points
 exports.sumRatings = functions.firestore.document('reports/{report}')
     .onWrite((change, context) => {
-        //points
+        //user points
+        var tally = (o, inc) => { o && isFinite(o) ? Number(o) + inc : inc }
         var userRef = admin.firestore().collection('users').doc(change.after.data().user.id)
         userRef.get()
         .then(res => {
-            var oldPoints = res.data().points
-            var increment = 10
-            var newPoints = oldPoints && isFinite(oldPoints) ? Number(oldPoints) + increment : increment
-            userRef.set({points: newPoints}, { merge: true })
+            var oPoints = res.data().points
+            userRef.set({
+                points: tally(newPoints, 10),
+            }, { merge: true })
 
-            //rating
+            //place rating and tags
             var placeRef = admin.firestore().collection('places').doc((change.after.data().place || change.before.data().place).id)
             return admin.firestore().collection('reports')
                 .where('place', '==', placeRef).get()
@@ -30,13 +31,23 @@ exports.sumRatings = functions.firestore.document('reports/{report}')
                         newRating = isNaN(newRating) ? 0 : newRating
                         if(newRating < 1) newRating = 1;
                         if(newRating > 5) newRating = 5;
-                        placeRef.set({rating: newRating}, { merge: true })
-                        .catch(e => console.log(e))
                     }
-                    return Promise.resolve(null)
-                })
-                .catch(e => {
-                    console.log(e);
+                    return placeRef.get().then(place => {
+                        var oDedicatedCount = place.data().dedicatedCount
+                        var oPDedicatedCount = place.data().oPDedicatedCount
+                        var oMenuCount = place.data().menuCount
+                        var oLabellingCount = place.data().labellingCount
+
+                        placeRef.set({
+                            rating: newRating,
+                            dedicatedCount: change.after.data().dedicated ? tally(oDedicatedCount, 1)  : 0,
+                            pDedicatedCount: change.after.data().pDedicated ? tally(oPDedicatedCount, 1) : 0,
+                            menuCount: change.after.data().menuCount ? tally(oMenuCount, 1) : 0,
+                            labellingCount: change.after.data().oLabellingCount ? tally(oLabellingCount, 1) : 0,
+                        }, { merge: true })
+
+                        return Promise.resolve(null)
+                    })
                 })
             })
             .catch(e => {

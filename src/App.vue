@@ -147,7 +147,7 @@
     }
 	.inputLine{
 		background-color: transparent;
-		color:#555;
+		color:#333;
 		opacity: 1;
 		border: 0;
 		border-bottom: 2px solid #28A744;
@@ -155,9 +155,11 @@
 		height: 50px;
 		resize: none;
 		overflow: hidden;
+        font-size: .9em; 
 	}
 	.inputLine::placeholder {
 		opacity: 1;
+        color: #777;
 	}
 
 	.tooltip .arrow::before{

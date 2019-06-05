@@ -29,7 +29,22 @@
 								<i v-for="(x, index00) in Number(currentPlace.rating)" :key="index00 + Math.random()"><span class="star a">★</span></i><i v-for="(x, index02) in (5 - currentPlace.rating)" :key="index02 + Math.random()"><span class="star b">★</span></i>
 							</span>
 						</div>
+						<div class="w-100" style="font-size: .65em;">
+							<div class="bg-primary m-1 rounded p-1 pl-2 pr-2 d-inline-block" v-if="currentPlace.dedicatedCount">
+								Dedicated GF {{ currentPlace.dedicatedCount > 10 ? "" : "("+currentPlace.dedicatedCount+")" }}
+							</div>
+							<div class="bg-primary m-1 rounded p-1 pl-2 pr-2 d-inline-block" v-if="currentPlace.pDedicatedCount">
+								Partly Dedicated GF {{ currentPlace.pDedicatedCount > 10 ? "" : "("+currentPlace.pDedicatedCount+")" }}
+							</div>
+							<div class="bg-primary m-1 rounded p-1 pl-2 pr-2 d-inline-block" v-if="currentPlace.MenuCount">
+								GF Menu {{ currentPlace.MenuCount > 10 ? "" : "("+currentPlace.MenuCount+")" }}
+							</div>
+							<div class="bg-primary m-1 rounded p-1 pl-2 pr-2 d-inline-block" v-if="currentPlace.LabellingCount">
+								GF Labelling {{ currentPlace.LabellingCount > 10 ? "" : "("+currentPlace.LabellingCount+")" }}
+							</div>
+						</div>
 					</div>
+
 					<hr style="margin:0 0 4px 0">
 					<h5 class="clearfix m-0 mt-n2 pb-1">
 						<div class="mt-3 p-0 text-middle col-12 col-sm-4 float-left"><small>Reports</small></div>
@@ -44,23 +59,20 @@
 					</h5>
 					<div class="rounded bg-light text-dark pb-1">
 
-						<areport ref="areport"></areport><br>
+						<areport ref="areport" @fullsize="expand()"></areport><br>
 
 						<small class="text-muted pl-3 w-50 pb-2 mt-n4" v-if="reports == null || reports.length < 1">
 							Be the first to make a report!
 						</small>
 
 						<div class="border bg-white pt-2" :class="{'pb-2': report.note, 'mb-n2': !(report.note)}" 
-						v-for="(report, index) in reportsFiltered" :key="index + report.created + Math.random()">
+							v-for="(report, index) in reportsFiltered" :key="index + report.created + Math.random()">
 							<span class="col-12">
 								<span class="d-inline-block">
 									<small>
-										<span class="text-primary font-weight-bold mr-1">{{report.user.name}}</span> 
+										<span @click="toggleAfi" :title="'Additional food intolerances: '+(report.user.notes ? report.user.notes : 'none')" class="text-primary font-weight-bold mr-1 afi-ht">{{report.user.name}}</span> 
 										<span title="reputation" class="text-warning border border-warning d-inline-block font-weight-bold mr-1 rounded pl-1 pr-1"><small>{{report.user.points}}</small></span> 
-										<span @click="toggleAfi" :title="'Additional food intolerances: '+(report.user.notes ? report.user.notes : 'none')" 
-												class="text-muted d-inline-block afi-ht">
-											{{getConditionName(report.user.condition.id)}}
-										</span>
+										<span class="text-muted d-inline-block">{{getConditionName(report.user.condition.id)}}</span>
 									</small>
 								</span>
 								<span class="d-inline-block float-right mr-2 ml-3">
@@ -144,6 +156,9 @@
 			toggleExpand(e){
 					this.expanded = !this.expanded;
 			},
+			expand(){
+					this.expanded = true;
+			},
 			toggleMore(e){
 				$(e.target).toggleClass('text-truncate').toggleClass('more')
 			},
@@ -180,6 +195,7 @@
 				//close add report form
 				if(this.$refs.areport){
 					this.$refs.areport.closeAdd()
+					this.expanded = false
 					this.filterQuery = ""
 					this.rating = 0
 					this.note = ""
@@ -258,4 +274,5 @@
 		font-size: 24px;
 		line-height: 18px;
 	}
+	
 </style>

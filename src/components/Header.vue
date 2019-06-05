@@ -82,14 +82,17 @@
 				<div class="rounded">
 				<div class="modal-content bg-light">
 					<div class="row no-gutters">
-					<strong class="text-muted p-2 mt-n1"><small class="font-weight-bold">Choose account: </small></strong>
-					<button class="btn btn-sm btn-light pl-3 pr-3" @click="doLogin(2)">
-						<img width="32" height="32" class="rounded" src="src/assets/fb.png" />
+					<strong class="text-muted p-2 ml-2 mt-n1"><small class="font-weight-bold">Sign in with: </small></strong>
+					<button class="btn btn-sm btn-light pl-2 pr-2" @click="doLogin(2)">
+						<img alt="Sign in with Facebook" width="32" height="32" class="rounded" src="src/assets/fb.png" />
 					</button>
-					<button class="btn btn-sm btn-light pl-3 pr-3" @click="doLogin(1)">
-						<img width="32" height="32" class="rounded" src="src/assets/g.png" />
+					<button class="btn btn-sm btn-light pl-2 pr-2" @click="doLogin(1)">
+						<img alt="Sign in with Google" width="32" height="32" class="rounded" src="src/assets/g.png" />
+					</button>
+					<button class="btn btn-sm btn-light pl-2 pr-2" @click="doLogin(3)">
+						<img width="32" height="32" class="rounded" src="src/assets/t.png" />
 					</button><br>
-					<button class="ml-2 mt-n4 btn btn-link float-left" @click="navPrivacy"><small><small>Privacy Policy</small></small></button>
+					<button alt="Sign in with Twitter" class="ml-2 mt-n4 btn btn-link float-left" @click="navPrivacy"><small><small>Privacy Policy</small></small></button>
 			</div>
 			</div>
 			</div>
@@ -152,6 +155,9 @@
 							break;
 						case 2:
 							provider = new firebase.auth.FacebookAuthProvider()
+							break;
+						case 3:
+							provider = new firebase.auth.TwitterAuthProvider()
 							break;
 					}
 					firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)

@@ -15,15 +15,37 @@
 				</button>
 			</h6>
 			<div class="form-group row w-100">
-				<div class="col-5 mt-n4">
+				<div class="col-12 mt-n4">
 					<vue-stars v-model="rating" :value="1" shadowColor="none" inactiveColor="#ddd"></vue-stars>
-					<small v-show="rating < 1" class="text-warning font-italic ml-n2">&larr; rate it!</small>
 				</div>
-				<span class="col-12 text-success ml-2"><small>This is a report about your gluten experience and not a review of the place itself.</small></span>
+				<small class="text-success pl-3">
+					<span class="d-inline-block">&nbsp;How was your gluten experience?</span>
+					<span class="d-inline-block">&nbsp;How helpful were the staff?</span>
+					<span class="d-inline-block">&nbsp;What did you order?</span>
+				</small>
 				<div class="col-12">
-					<textarea @input="autoHeight" type="text" class="inputLine w-100 p-2" v-model="note" placeholder=" Share your gluten experience..."></textarea>
+					<textarea @input="autoHeight" type="text" class="inputLine w-100 p-2" v-model="note" 
+						placeholder="Tell us about it..."></textarea>
 				</div>
-				<div class="col-12 mb-n3">
+				<div class="col-12 tags">
+					<div class="m-1 text-white rounded p-1" @click="dedicatedGFToggle()" 
+						:class="{'bg-success border border-success': dedicatedGF,'border border-secondary text-dark': !dedicatedGF}">
+						Dedicated GF
+					</div>
+					<div class="m-1 text-white rounded p-1" @click="pDedicatedGFToggle()" 
+						:class="{'bg-success border border-success': pDedicatedGF,'border border-secondary text-dark': !pDedicatedGF}">
+						Partly Dedicated GF
+					</div>
+					<div class="m-1 text-white rounded p-1" @click="GFMenuToggle()" 
+						:class="{'bg-success border border-success': GFMenu,'border border-secondary text-dark': !GFMenu}">
+						GF Menu
+					</div>
+					<div class="m-1 text-white rounded p-1" @click="GFLabellingToggle()" 
+						:class="{'bg-success border border-success': GFLabelling,'border border-secondary text-dark': !GFLabelling}">
+						GF Labelling
+					</div>
+				</div>
+				<div class="col-12">
 						<button type="button" class="btn btn-link text-muted pl-2 pr-2" @click="closeAdd">cancel</button>
 					<button type="button" class="btn btn-sm btn-success mt-1 pl-5 pr-5 float-right" :disabled="rating < 1" @click="add">Submit</button>
 				</div>
@@ -41,6 +63,10 @@
 				rating: 0,
 				note: "",
 				opened: false,
+				dedicatedGF: false,
+				pDedicatedGF: false,
+				GFMenu: false,
+				GFLabelling: false,
 			}
 		},
 		components: {
@@ -76,11 +102,27 @@
 				'getPlace',
 				'errorMsg',
 			]),
+			dedicatedGFToggle(){
+				this.dedicatedGF = !this.dedicatedGF
+			},
+			pDedicatedGFToggle(){
+				this.pDedicatedGF = !this.pDedicatedGF
+			},
+			GFMenuToggle(){
+				this.GFMenu = !this.GFMenu
+			},
+			GFLabellingToggle(){
+				this.GFLabelling = !this.GFLabelling
+			},
 			add(){
 				var newReport = {
 					rating: this.rating,
 					note: this.note,
-					place: this.currentPlace.id
+					place: this.currentPlace.id,
+					dedicated: this.dedicatedGF,
+					pDedicated: this.pDedicatedGF,
+					menu: this.GFMenu,
+					labelling: this.GFLabelling
 				}
 				var tthis = this
 				this.addReport(newReport)
@@ -88,16 +130,25 @@
 						tthis.rating = 0
 						tthis.note = ""
 						tthis.opened = false
+						tthis.dedicatedGF = false
+						tthis.pDedicatedGF = false
+						tthis.GFMenu = false
+						tthis.GFLabelling = false
 					})
 					.catch(e => { tthis.errorMsg(e+"") } )
 			},
 			openAddAReport(){
 				this.opened = true
+				this.$emit('fullsize')
 			},
 			closeAdd(){
 				this.rating = 0
 				this.note = ""
 				this.opened = false
+				this.dedicatedGF = false
+				this.pDedicatedGF = false
+				this.GFMenu = false
+				this.GFLabelling = false
 			},
 			autoHeight(e) {
 				e.target.style.height = ""
@@ -109,4 +160,15 @@
 </script>
 
 <style scoped>
+.tags{
+	font-size: .65em;
+	font-weight: bold;
+}
+	.tags div {
+		display: inline-block;
+		cursor: pointer;
+	}
+	.tags div:hover {
+		opacity: .9;
+	}
 </style>

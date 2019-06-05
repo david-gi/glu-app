@@ -91,7 +91,7 @@ export default {
 	font-size:2em;
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 280px) {
 	.vue-stars {
 		display: inline-flex;
 		flex-flow: row nowrap;

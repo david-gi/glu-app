@@ -16,7 +16,7 @@
 							<small>
 								This is not-for-profit website and it's purpose is to provide a free gluten-free tool for true gluten-free living. 
 								<br>
-								Your privacy is important to us at Glutenous.org. <br>
+								Your privacy is important to us at Glutenous.org and this web app is specially designed to preserve it.<br>
 								<br>
 								We do not any collect information for commercial purposes, nor do we sell or share information collected with 3rd parties or affiliates.
 								<br>
@@ -24,10 +24,12 @@
 								<i>When you use this site:</i> Basic anonymous web traffic statistics are collected for site management and analytics.
 								<br>
 								<br>
-								<i>When you sign up:</i> We only collect your account name (as displayed on Google or Facebook).
+								<i>When you sign up:</i> We only collect your account name (as displayed on Twitter, Google or Facebook) and email (for Google only, for sign in purposes only). 
+								Your information is protected and secure, it will never be shared and we will never send emails of any kind.
 								<br>
 								<br>
-								<i>When you login:</i> We only save data you enter and only for the purpose of this site's operation, which exclusively includes: reports (description and rating), your 'gluten-related disorder', 'additional food intolerances' and bug reports.
+								<i>When you login:</i> We only save data you enter and only for the purpose of this site's operation, which exclusively includes: reports, your 'gluten-related disorder', 'additional food intolerances' and bug reports.
+								<br>We do not share information with Twitter, Google or Facebook and they cannot track your usage of this site beyond knowing you logged in.
 								<br>
 								<br>
 								<i>When your make a report:</i> The report description, your account name, your 'gluten-related disorder' and 'additional food intolerances' will be publicly displayed in a place's reports. This is to add legitimacy to reports and to provide relevant information for those reading the report.

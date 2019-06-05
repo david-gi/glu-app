@@ -83,7 +83,6 @@ const actions = {
 							city: pcity,
 							province: pprovince,
 							country: pcountry,
-							rating: 0
 						}
 						placeRef.set(newPlace).then(()=>{
 							context.commit("setReports", [])
@@ -159,6 +158,10 @@ const actions = {
 			rating: report.rating,
 			place: place,
 			user: user,
+			dedicated: report.dedicated,
+			pDedicated: report.pDedicated,
+			menu: report.menu,
+			labelling: report.labelling,
 			created: firebase.firestore.FieldValue.serverTimestamp()
 		}
 		repRef.add(newReport).then(()=>{

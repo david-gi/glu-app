@@ -11,7 +11,7 @@
 							<p @click="toggleExpand" class="mx-auto" title="toggle expand" :class="{expander: true, down: isExpanded}"></p>
 						</div>
 						<div class="col-12 col-sm-8">
-							<h5 class="text-break float-left ml-n3 pr-2 text-truncate" style="max-width:70%" >
+							<h5 class="text-break float-left ml-n3 pr-2 text-truncate" style="max-width:90%" >
 								<a id='name' title="Click to Open in Google Maps" class="text-white" target="blank" :href="'https://www.google.com/maps/place/?q=place_id:' + currentPlace.id">
 									{{currentPlace.name}}
 								</a>
@@ -29,18 +29,18 @@
 								<i v-for="(x, index00) in Number(currentPlace.rating)" :key="index00 + Math.random()"><span class="star a">★</span></i><i v-for="(x, index02) in (5 - currentPlace.rating)" :key="index02 + Math.random()"><span class="star b">★</span></i>
 							</span>
 						</div>
-						<div class="w-100" style="font-size: .65em;">
+						<div class="w-100 p-0 m-0 mt-n2 align-right" style="font-size: .6em;">
 							<div class="bg-primary m-1 rounded p-1 pl-2 pr-2 d-inline-block" v-if="currentPlace.dedicatedCount">
-								Dedicated GF {{ currentPlace.dedicatedCount > 10 ? "" : "("+currentPlace.dedicatedCount+")" }}
+								Dedicated GF {{ currentPlace.dedicatedCount > 10 ? "★" : "(+"+currentPlace.dedicatedCount+")" }}
 							</div>
 							<div class="bg-primary m-1 rounded p-1 pl-2 pr-2 d-inline-block" v-if="currentPlace.pDedicatedCount">
-								Partly Dedicated GF {{ currentPlace.pDedicatedCount > 10 ? "" : "("+currentPlace.pDedicatedCount+")" }}
+								Partly Dedicated GF {{ currentPlace.pDedicatedCount > 10 ? "★" : "(+"+currentPlace.pDedicatedCount+")" }}
 							</div>
 							<div class="bg-primary m-1 rounded p-1 pl-2 pr-2 d-inline-block" v-if="currentPlace.MenuCount">
-								GF Menu {{ currentPlace.MenuCount > 10 ? "" : "("+currentPlace.MenuCount+")" }}
+								GF Menu {{ currentPlace.MenuCount > 10 ? "★" : "(+"+currentPlace.MenuCount+")" }}
 							</div>
 							<div class="bg-primary m-1 rounded p-1 pl-2 pr-2 d-inline-block" v-if="currentPlace.LabellingCount">
-								GF Labelling {{ currentPlace.LabellingCount > 10 ? "" : "("+currentPlace.LabellingCount+")" }}
+								GF Labelling {{ currentPlace.LabellingCount > 10 ? "★" : "(+"+currentPlace.LabellingCount+")" }}
 							</div>
 						</div>
 					</div>

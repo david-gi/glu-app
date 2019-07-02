@@ -38,7 +38,6 @@ const actions = {
 							} catch(e) { return defaultTxt }
 						}
 						if(p.exists){
-							console.log(JSON.stringify(user))
 							var pUrl = grabNested('photoURL',"")
 							var refreshProfile = { 
 								email: '', //grabNested('email',""), 

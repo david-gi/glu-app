@@ -38,6 +38,7 @@ const actions = {
 							} catch(e) { return defaultTxt }
 						}
 						if(p.exists){
+							console.log(JSON.stringify(user))
 							var pUrl = grabNested('photoURL',"")
 							var refreshProfile = { 
 								email: '', //grabNested('email',""), 
@@ -46,7 +47,8 @@ const actions = {
 								condition: p.data().condition 
 							}
 							docRef.set(refreshProfile, { merge: true })
-							refreshProfile["photoURL"] = pUrl == "" || pUrl.endsWith("/picture") ? "/src/assets/profile.png" : pUrl, 
+							refreshProfile["photoURL"] = pUrl == "" || pUrl.endsWith("/picture") || pUrl.indexOf("twimg") 
+								? "/src/assets/profile.png" : pUrl, 
 							context.commit('setProfile', refreshProfile)
 							context.commit('setAuth', true)
 							if(p.data().condition == null){ context.commit('toggleProfile') }

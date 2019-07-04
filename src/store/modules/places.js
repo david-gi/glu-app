@@ -83,6 +83,7 @@ const actions = {
 							city: pcity,
 							province: pprovince,
 							country: pcountry,
+							rating: 0
 						}
 						placeRef.set(newPlace).then(()=>{
 							context.commit("setReports", [])

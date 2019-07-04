@@ -64,7 +64,7 @@
 						<small class="text-muted pl-3 w-50 pb-2 mt-n4" v-if="reports == null || reports.length < 1">
 							Be the first to make a report!
 						</small>
-
+						<div v-if="reportsFiltered" >
 						<div class="border bg-white pt-2" :class="{'pb-2': report.note, 'mb-n2': !(report.note)}" 
 							v-for="(report, index) in reportsFiltered" :key="index + report.created + Math.random()">
 							<span class="col-12">
@@ -86,6 +86,7 @@
 								{{report.note}}
 							</span>
 							<sponsor v-if="(index % 2) "></sponsor>
+						</div>
 						</div>
 						
 					</div>

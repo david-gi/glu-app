@@ -6,11 +6,13 @@
 			placeholder="Search map..." data-toggle="tooltip" data-placement="top" 
 			title="Search for a place <i>just like you would on Google Maps</i>">
 			
-		<div class="text-white font-weight-boldx bg-success rounded p-2" style="bottom: 2px; left: 2px; position:absolute">
-			Beta Version -  
-			<a target="_blank" href="https://igg.me/at/Glutenous"  class="text-white font-underline ht"
+		<div class="text-white bg-success rounded p-2" style="bottom: 2px; left: 2px; position:absolute">
+			<small>
+			<span class="border p-1 pr-2 pl-2">Beta Version</span> 
+			<a target="_blank" href="https://igg.me/at/Glutenous"  class="text-white d-inline-block font-underline ht"
 				data-toggle="tooltip" data-placement="top" 
 				title="<i>Keep this project alive!</i>">Join our Indiegogo Prelaunch!</a>
+			</small>
 		</div>
 
 		<div class="modal fade" id="warnModal" @keypress="closeWarn" tabindex="-1" role="dialog" 
@@ -202,7 +204,7 @@ export default {
 				document.getElementById('defaultSearch').onclick = function () {
 					var loc = window.location.hash.length > 3 
 						? decodeURIComponent(window.location.hash.substring(3))
-						: 'cafe or restaurant or store, gluten free';
+						: 'gluten free restaurant near downtown Toronto';
 					var searchEl = document.getElementById("search-input")
 					searchEl.value = loc
 					google.maps.event.trigger(searchEl, 'focus', {})
@@ -382,6 +384,7 @@ export default {
 							if (status === 'OK' && ofType) {
 								//parse address parts
 								var addr =  place.formatted_address.split(',')
+								console.log(addr)
 								var locality = addr[1] ? addr[1].trim() : ""
 								var region = addr[2] ? addr[2].split(' ')[1] :""
 								var country = addr[3] ? addr[3].trim() : ""

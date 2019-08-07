@@ -31,9 +31,6 @@
 								<a href="https://twitter.com/GlutenousMaps" target="_blank" class="nav-item ml-1">
 									<img title="twitter" src="/src/assets/tw.png"/>
 								</a>
-								<a href="https://igg.me/at/Glutenous" target="_blank" class="nav-item ml-0">
-									<img title="Indiegogo" src="/src/assets/go.png"/>
-								</a>
 		      		</div>
 
 		      		<div class="nav-link " style="cursor:pointer" >

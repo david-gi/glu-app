@@ -6,15 +6,6 @@
 			placeholder="Search map..." data-toggle="tooltip" data-placement="top" 
 			title="Search for a place <i>just like you would on Google Maps</i>">
 			
-		<div class="text-white bg-success rounded p-2" style="bottom: 2px; left: 2px; position:absolute">
-			<small>
-			<span class="border p-1 pr-2 pl-2">Beta Version</span> 
-			<a target="_blank" href="https://igg.me/at/Glutenous"  class="text-white d-inline-block font-underline ht"
-				data-toggle="tooltip" data-placement="top" 
-				title="<i>Keep this project alive!</i>">Join our Indiegogo Prelaunch!</a>
-			</small>
-		</div>
-
 		<div class="modal fade" id="warnModal" @keypress="closeWarn" tabindex="-1" role="dialog" 
 			aria-labelledby="warnModalTitle" aria-hidden="true">
 			<div class="modal-dialog modal-lg modal-dialog-centered">

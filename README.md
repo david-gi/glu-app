@@ -1,6 +1,6 @@
 # glu-app
 
-> A Vue.js, Google Maps and Firebase projec
+> A Vue.js, Google Maps and Firebase project
 
 https://glutenous.uc.r.appspot.com/
 

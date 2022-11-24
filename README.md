@@ -2,7 +2,7 @@
 
 > A Vue.js, Google Maps and Firebase project
 
-https://glutenous.uc.r.appspot.com/
+![preview img](https://github.com/david-gi/glu-app/blob/master/sample%20-%20glutenousORG.png)
 
 ## Build Setup
 

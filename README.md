@@ -4,6 +4,8 @@
 
 ![preview img](https://github.com/david-gi/glu-app/blob/master/sample%20-%20glutenousORG.png)
 
+### Project is no longer live (no longer paying for backend services)
+
 ## Build Setup
 
 ``` bash
